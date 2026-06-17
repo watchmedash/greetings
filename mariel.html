@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Mariel 🎂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --warm: #FFF8F0;
+      --orange: #C0522A;
+      --orange-light: #E07A3A;
+      --peach: #F0A875;
+      --cream: #F7D4A8;
+      --navy: #1A0E08;
+      --text: #2A1008;
+      --muted: #8A6050;
+      --light: #C0A090;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--warm); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    @keyframes fadeUp    { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes pop       { 0%{transform:scale(0.4);opacity:0;} 70%{transform:scale(1.12);} 100%{transform:scale(1);opacity:1;} }
+    @keyframes float     { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+    @keyframes bounce    { 0%,100%{transform:translateY(0) scale(1);} 40%{transform:translateY(-14px) scale(1.06);} }
+    @keyframes glow      { 0%,100%{opacity:0.5;} 50%{opacity:1;} }
+    @keyframes fall      { 0%{transform:translateY(-20px) rotate(0deg);opacity:1;} 100%{transform:translateY(110vh) rotate(720deg);opacity:0;} }
+    @keyframes slideIn   { from{transform:scaleX(0);} to{transform:scaleX(1);} }
+    @keyframes heartbeat { 0%,100%{transform:scale(1);} 14%{transform:scale(1.15);} 28%{transform:scale(1);} 42%{transform:scale(1.1);} 70%{transform:scale(1);} }
+
+    .confetti-wrap { position:fixed; inset:0; pointer-events:none; z-index:200; overflow:hidden; }
+    .piece { position:absolute; border-radius:2px; animation:fall linear forwards; }
+
+    /* TOP RIBBON */
+    .ribbon-top { height:5px; background:repeating-linear-gradient(90deg,var(--orange) 0,var(--orange) 18px,var(--peach) 18px,var(--peach) 36px,var(--cream) 36px,var(--cream) 54px,var(--orange-light) 54px,var(--orange-light) 72px); transform-origin:left; animation:slideIn 0.8s ease-out; }
+
+    /* HERO */
+    .hero { padding:3.5rem 1.5rem 2.5rem; text-align:center; }
+    .big-icon { font-size:72px; color:var(--orange); display:block; margin-bottom:1.25rem; animation:pop 0.7s cubic-bezier(.36,.07,.19,.97) 0.2s both, float 4s ease-in-out 1s infinite; }
+    .eyebrow { font-size:10px; font-weight:500; letter-spacing:4px; text-transform:uppercase; color:var(--muted); margin-bottom:0.75rem; animation:fadeUp 0.6s ease 0.5s both; display:block; }
+    .name { font-family:'Cormorant Garamond',serif; font-size:clamp(48px,12vw,72px); font-weight:500; color:var(--orange); line-height:1; letter-spacing:-1px; animation:fadeUp 0.6s ease 0.7s both; }
+    .name-tag { font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; color:var(--muted); margin-top:0.5rem; animation:fadeUp 0.6s ease 0.9s both; }
+
+    /* DIVIDER */
+    .divider { display:flex; align-items:center; gap:14px; padding:0 1.5rem; margin:1.75rem 0; animation:fadeUp 0.5s ease 1s both; }
+    .div-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--cream),transparent); }
+    .div-icon { color:var(--peach); font-size:16px; animation:glow 2.5s ease-in-out infinite; }
+
+    /* PHOTO */
+    .photo-wrap { padding:0 1.5rem; animation:fadeUp 0.6s ease 1.1s both; max-width:580px; margin:0 auto; }
+    .photo-frame { border-radius:16px; overflow:hidden; position:relative; box-shadow:0 8px 32px rgba(192,82,42,0.15); }
+    .photo-frame img { width:100%; height:240px; object-fit:cover; display:block; }
+    .photo-overlay { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent,rgba(26,14,8,0.5)); padding:1.25rem 1.25rem 1rem; }
+    .photo-caption { color:rgba(255,255,255,0.9); font-size:13px; font-style:italic; font-family:'Cormorant Garamond',serif; font-size:16px; }
+
+    /* MESSAGE */
+    .message-wrap { padding:2rem 1.5rem; animation:fadeUp 0.6s ease 1.3s both; max-width:580px; margin:0 auto; }
+    .message-card { background:#fff; border-radius:16px; padding:2rem 1.5rem; border:1px solid rgba(192,82,42,0.1); position:relative; }
+    .open-quote { font-family:'Cormorant Garamond',serif; font-size:80px; line-height:1; color:rgba(240,168,117,0.25); position:absolute; top:0; left:12px; }
+    .message-body { font-size:15px; line-height:1.9; color:var(--text); padding-top:1.5rem; position:relative; z-index:1; font-weight:300; }
+    .message-from { font-size:13px; color:var(--muted); margin-top:1.25rem; font-weight:500; display:flex; align-items:center; gap:8px; }
+    .message-from i { color:var(--orange); }
+
+    /* CANDLES */
+    .candles-wrap { padding:2rem 1.5rem; text-align:center; animation:fadeUp 0.6s ease 1.5s both; }
+    .candles { display:flex; justify-content:center; gap:12px; margin-bottom:1rem; flex-wrap:wrap; }
+    .candle { display:flex; flex-direction:column; align-items:center; }
+    .flame-icon { font-size:22px; color:var(--orange-light); animation:bounce 1.8s ease-in-out infinite; }
+    .candle:nth-child(2) .flame-icon { animation-delay:0.2s; }
+    .candle:nth-child(3) .flame-icon { animation-delay:0.4s; }
+    .candle:nth-child(4) .flame-icon { animation-delay:0.6s; }
+    .candle:nth-child(5) .flame-icon { animation-delay:0.8s; }
+    .candle:nth-child(6) .flame-icon { animation-delay:1.0s; }
+    .candle-stick { width:10px; height:40px; background:linear-gradient(180deg,var(--cream),var(--peach)); border-radius:3px 3px 2px 2px; }
+    .candle-wish { font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; color:var(--muted); }
+
+    /* WISHES */
+    .wishes-wrap { padding:0 1.5rem 2rem; animation:fadeUp 0.6s ease 1.7s both; max-width:580px; margin:0 auto; }
+    .wishes-title { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:500; color:var(--navy); text-align:center; margin-bottom:1.25rem; }
+    .wishes-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .wish { background:#fff; border-radius:14px; padding:1.25rem 1rem; text-align:center; border:1px solid rgba(192,82,42,0.1); }
+    .wish-icon { font-size:26px; color:var(--orange); margin-bottom:0.6rem; display:block; animation:float 3.5s ease-in-out infinite; }
+    .wish:nth-child(2) .wish-icon { animation-delay:0.6s; }
+    .wish:nth-child(3) .wish-icon { animation-delay:1.2s; }
+    .wish:nth-child(4) .wish-icon { animation-delay:1.8s; }
+    .wish-label { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:500; color:var(--text); }
+    .wish-sub { font-size:11px; color:var(--light); margin-top:3px; font-weight:300; }
+
+    /* PHOTO 2 */
+    .photo2-wrap { padding:0 1.5rem 2rem; animation:fadeUp 0.6s ease 1.8s both; max-width:580px; margin:0 auto; }
+    .photo2-frame { border-radius:14px; overflow:hidden; }
+    .photo2-frame img { width:100%; height:180px; object-fit:cover; display:block; }
+
+    /* HEART SIGN-OFF */
+    .signoff { padding:2.5rem 1.5rem; text-align:center; animation:fadeUp 0.6s ease 2s both; }
+    .heart-icon { font-size:36px; color:var(--orange); animation:heartbeat 2s ease-in-out infinite; display:inline-block; }
+    .signoff-msg { font-family:'Cormorant Garamond',serif; font-size:20px; font-style:italic; color:var(--muted); margin-top:1rem; }
+
+    /* BOTTOM RIBBON */
+    .ribbon-bottom { height:5px; background:repeating-linear-gradient(90deg,var(--cream) 0,var(--cream) 18px,var(--orange) 18px,var(--orange) 36px,var(--peach) 36px,var(--peach) 54px,var(--orange-light) 54px,var(--orange-light) 72px); }
+
+    @media (min-width: 600px) {
+      .hero { padding: 5rem 2rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="confetti-wrap" id="confetti"></div>
+
+  <div class="ribbon-top"></div>
+
+  <div class="hero">
+    <i class="fa-solid fa-cake-candles big-icon"></i>
+    <span class="eyebrow">Happy Birthday</span>
+    <div class="name">Mariel</div>
+    <div class="name-tag">Today is all about you ✨</div>
+  </div>
+
+  <div class="divider">
+    <div class="div-line"></div>
+    <i class="fa-solid fa-star div-icon"></i>
+    <div class="div-line"></div>
+  </div>
+
+  <div class="photo-wrap">
+    <div class="photo-frame">
+      <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=900&q=85&auto=format&fit=crop" alt="Birthday celebration" />
+      <div class="photo-overlay">
+        <div class="photo-caption">A very special day 🌸</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="message-wrap">
+    <div class="message-card">
+      <div class="open-quote">"</div>
+      <div class="message-body">
+        Mariel, from the moment we met, you've brought so much light into every room you walk into. Your laugh is contagious, your heart is enormous, and your spirit is one of a kind.<br><br>
+        On this special day, we want you to know how deeply loved and celebrated you are. May this year bring you everything you've been dreaming of — and so much more.
+      </div>
+      <div class="message-from">
+        <i class="fa-solid fa-heart"></i>
+        With all our love, the whole gang
+      </div>
+    </div>
+  </div>
+
+  <div class="candles-wrap">
+    <div class="candles">
+      <div class="candle"><i class="fa-solid fa-fire flame-icon"></i><div class="candle-stick"></div></div>
+      <div class="candle"><i class="fa-solid fa-fire flame-icon"></i><div class="candle-stick"></div></div>
+      <div class="candle"><i class="fa-solid fa-fire flame-icon"></i><div class="candle-stick"></div></div>
+      <div class="candle"><i class="fa-solid fa-fire flame-icon"></i><div class="candle-stick"></div></div>
+      <div class="candle"><i class="fa-solid fa-fire flame-icon"></i><div class="candle-stick"></div></div>
+      <div class="candle"><i class="fa-solid fa-fire flame-icon"></i><div class="candle-stick"></div></div>
+    </div>
+    <div class="candle-wish">Make a wish 🌠</div>
+  </div>
+
+  <div class="wishes-wrap">
+    <div class="wishes-title">Our wishes for you this year</div>
+    <div class="wishes-grid">
+      <div class="wish">
+        <i class="fa-solid fa-heart wish-icon"></i>
+        <div class="wish-label">More love</div>
+        <div class="wish-sub">in every form</div>
+      </div>
+      <div class="wish">
+        <i class="fa-solid fa-plane wish-icon"></i>
+        <div class="wish-label">Adventures</div>
+        <div class="wish-sub">near and far</div>
+      </div>
+      <div class="wish">
+        <i class="fa-solid fa-star wish-icon"></i>
+        <div class="wish-label">Big wins</div>
+        <div class="wish-sub">you deserve them</div>
+      </div>
+      <div class="wish">
+        <i class="fa-solid fa-face-laugh-beam wish-icon"></i>
+        <div class="wish-label">Endless laughs</div>
+        <div class="wish-sub">every single day</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="photo2-wrap">
+    <div class="photo2-frame">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85&auto=format&fit=crop" alt="Balloons" />
+    </div>
+  </div>
+
+  <div class="divider" style="padding:0 1.5rem;max-width:580px;margin:0 auto;">
+    <div class="div-line"></div>
+    <i class="fa-solid fa-balloon div-icon"></i>
+    <div class="div-line"></div>
+  </div>
+
+  <div class="signoff">
+    <i class="fa-solid fa-heart heart-icon"></i>
+    <div class="signoff-msg">Wishing you the most beautiful year yet</div>
+  </div>
+
+  <div class="ribbon-bottom"></div>
+
+  <script>
+    const colors = ['#C0522A','#F0A875','#F7D4A8','#E07A3A','#FFD700','#FF8FA3','#B5D5F5','#C8E6C9','#D4A8FF'];
+    const wrap = document.getElementById('confetti');
+
+    function burst(count) {
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        el.className = 'piece';
+        el.style.cssText = [
+          'left:' + (Math.random() * 100) + '%',
+          'top:-14px',
+          'background:' + colors[Math.floor(Math.random() * colors.length)],
+          'width:' + (Math.random() * 9 + 4) + 'px',
+          'height:' + (Math.random() * 9 + 4) + 'px',
+          'border-radius:' + (Math.random() > 0.5 ? '50%' : '2px'),
+          'animation-duration:' + (Math.random() * 3 + 2.5) + 's',
+          'animation-delay:' + (Math.random() * 1.5) + 's'
+        ].join(';');
+        wrap.appendChild(el);
+        setTimeout(() => el.remove(), 6000);
+      }
+    }
+
+    burst(55);
+    setTimeout(() => burst(40), 2800);
+    setTimeout(() => burst(35), 5500);
+  </script>
+
+</body>
+</html>

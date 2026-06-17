@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>77-36.top — Forever Pages for Special People</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --yellow: #FFE04B;
+      --yellow-dark: #F5C800;
+      --orange: #FF7A3D;
+      --pink: #FF5FA0;
+      --teal: #1EC8A0;
+      --purple: #A259FF;
+      --bg: #FFFBF4;
+      --white: #FFFFFF;
+      --ink: #1A1209;
+      --ink2: #5A4A38;
+      --ink3: #9A8A78;
+      --border: rgba(26,18,9,0.08);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Nunito',sans-serif; background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased; }
+
+    /* NAV */
+    nav {
+      background:var(--white);
+      border-bottom:2px solid var(--ink);
+      padding:0 1.25rem;
+      height:58px;
+      display:flex; align-items:center; justify-content:space-between;
+      position:sticky; top:0; z-index:50;
+    }
+    .nav-logo {
+      font-size:20px; font-weight:900; color:var(--ink);
+      display:flex; align-items:center; gap:6px;
+    }
+    .nav-logo-badge {
+      background:var(--yellow);
+      border:2px solid var(--ink);
+      border-radius:8px;
+      padding:2px 8px;
+      font-size:13px; font-weight:900;
+      transform:rotate(-2deg);
+      display:inline-block;
+    }
+    .nav-btn {
+      background:var(--orange);
+      color:var(--white);
+      border:2px solid var(--ink);
+      border-radius:50px;
+      padding:7px 18px;
+      font-size:13px; font-weight:800;
+      text-decoration:none;
+      box-shadow:3px 3px 0 var(--ink);
+      transition:transform 0.1s, box-shadow 0.1s;
+      font-family:'Nunito',sans-serif;
+    }
+    .nav-btn:hover { transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
+
+    /* HERO */
+    .hero {
+      background:var(--yellow);
+      border-bottom:3px solid var(--ink);
+      padding:3rem 1.25rem 2.5rem;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-deco {
+      position:absolute; font-size:80px; opacity:0.12; pointer-events:none;
+      animation:spin 20s linear infinite;
+    }
+    .hero-deco-1 { top:-20px; left:-20px; }
+    .hero-deco-2 { bottom:-30px; right:-10px; animation-direction:reverse; }
+    @keyframes spin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+    .hero-tag {
+      display:inline-block;
+      background:var(--white);
+      border:2px solid var(--ink);
+      border-radius:50px;
+      padding:5px 16px;
+      font-size:12px; font-weight:800;
+      letter-spacing:1px; text-transform:uppercase;
+      margin-bottom:1.25rem;
+    }
+    .hero h1 {
+      font-size:clamp(30px,8vw,48px);
+      font-weight:900;
+      line-height:1.15;
+      color:var(--ink);
+      margin-bottom:1rem;
+    }
+    .hero h1 span { color:var(--orange); }
+    .hero-sub {
+      font-size:15px; font-weight:600; color:var(--ink2);
+      max-width:340px; margin:0 auto 0.5rem; line-height:1.6;
+    }
+    .hero-mystery {
+      font-size:12px; color:var(--ink2); margin-bottom:2rem;
+      font-style:italic; opacity:0.7;
+    }
+    .hero-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+    .btn-primary {
+      background:var(--ink);
+      color:var(--yellow);
+      border:2px solid var(--ink);
+      border-radius:50px;
+      padding:13px 28px;
+      font-size:15px; font-weight:800;
+      text-decoration:none;
+      box-shadow:4px 4px 0 rgba(0,0,0,0.2);
+      transition:transform 0.1s, box-shadow 0.1s;
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:'Nunito',sans-serif;
+    }
+    .btn-primary:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 rgba(0,0,0,0.2); }
+    .hero-img {
+      margin-top:2.5rem;
+      border-radius:16px;
+      border:3px solid var(--ink);
+      overflow:hidden;
+      max-width:480px;
+      margin-left:auto; margin-right:auto;
+      box-shadow:6px 6px 0 var(--ink);
+    }
+    .hero-img img { width:100%; height:200px; object-fit:cover; display:block; }
+
+    /* SECTION BASE */
+    .section { padding:3.5rem 1.25rem; }
+    .section-inner { max-width:560px; margin:0 auto; }
+    .eyebrow {
+      display:inline-block;
+      background:var(--pink);
+      color:var(--white);
+      font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase;
+      padding:4px 12px; border-radius:50px;
+      border:2px solid var(--ink);
+      margin-bottom:1rem;
+    }
+    .eyebrow.teal { background:var(--teal); }
+    .eyebrow.purple { background:var(--purple); }
+    .eyebrow.orange { background:var(--orange); }
+    .section-h { font-size:clamp(22px,5vw,30px); font-weight:900; color:var(--ink); line-height:1.2; margin-bottom:0.5rem; }
+    .section-p { font-size:14px; font-weight:600; color:var(--ink2); line-height:1.7; margin-bottom:2rem; }
+
+    /* OCCASIONS */
+    .occasions { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .occ-card {
+      background:var(--white);
+      border:2.5px solid var(--ink);
+      border-radius:16px;
+      padding:1.25rem 1rem;
+      text-align:center;
+      box-shadow:4px 4px 0 var(--ink);
+      transition:transform 0.1s, box-shadow 0.1s;
+    }
+    .occ-card:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
+    .occ-card:nth-child(1) { background:#FFF0F5; }
+    .occ-card:nth-child(2) { background:#FFF5E0; }
+    .occ-card:nth-child(3) { background:#F0FFF8; }
+    .occ-card:nth-child(4) { background:#F0F5FF; }
+    .occ-icon { font-size:28px; margin-bottom:0.5rem; display:block; }
+    .occ-name { font-size:14px; font-weight:800; color:var(--ink); }
+    .occ-sub { font-size:11px; font-weight:600; color:var(--ink3); margin-top:2px; }
+
+    /* HOW */
+    .how-section { background:var(--white); border-top:3px solid var(--ink); border-bottom:3px solid var(--ink); }
+    .steps { display:flex; flex-direction:column; gap:0; }
+    .step { display:flex; gap:16px; padding:1.5rem 0; border-bottom:1.5px dashed var(--border); }
+    .step:last-child { border-bottom:none; }
+    .step-num {
+      width:38px; height:38px; border-radius:50%;
+      background:var(--yellow);
+      border:2px solid var(--ink);
+      display:flex; align-items:center; justify-content:center;
+      font-size:16px; font-weight:900; color:var(--ink);
+      flex-shrink:0; margin-top:2px;
+    }
+    .step h3 { font-size:15px; font-weight:800; color:var(--ink); margin-bottom:4px; }
+    .step p { font-size:13px; font-weight:600; color:var(--ink2); line-height:1.6; }
+
+    /* PACKAGE */
+    .package-section { background:var(--bg); }
+    .package-card {
+      background:var(--white);
+      border:3px solid var(--ink);
+      border-radius:20px;
+      padding:2rem 1.5rem;
+      box-shadow:6px 6px 0 var(--ink);
+      position:relative;
+      overflow:hidden;
+    }
+    .pkg-sticker {
+      position:absolute; top:16px; right:-8px;
+      background:var(--pink);
+      color:var(--white);
+      font-size:11px; font-weight:800;
+      padding:4px 20px 4px 14px;
+      border:2px solid var(--ink);
+      border-radius:4px 0 0 4px;
+      letter-spacing:0.5px;
+    }
+    .pkg-price {
+      display:flex; align-items:baseline; gap:6px;
+      margin:0.5rem 0 0.25rem;
+    }
+    .pkg-currency { font-size:18px; font-weight:900; color:var(--ink2); }
+    .pkg-amount { font-size:64px; font-weight:900; color:var(--ink); line-height:1; }
+    .pkg-period { font-size:13px; font-weight:700; color:var(--ink3); }
+    .pkg-tagline { font-size:13px; font-weight:600; color:var(--ink2); margin-bottom:1.5rem; }
+    .pkg-features { list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:1.75rem; }
+    .pkg-features li { display:flex; align-items:center; gap:10px; font-size:14px; font-weight:700; color:var(--ink); }
+    .pkg-features li i { color:var(--teal); font-size:14px; width:16px; }
+    .pkg-btn {
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      background:var(--orange);
+      color:var(--white);
+      border:2.5px solid var(--ink);
+      border-radius:50px;
+      padding:14px;
+      font-size:15px; font-weight:800;
+      text-decoration:none;
+      box-shadow:4px 4px 0 var(--ink);
+      transition:transform 0.1s, box-shadow 0.1s;
+      font-family:'Nunito',sans-serif;
+      cursor:pointer; width:100%;
+    }
+    .pkg-btn:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
+
+    /* SAMPLES */
+    .samples-section { background:var(--yellow); border-top:3px solid var(--ink); border-bottom:3px solid var(--ink); }
+    .sample-list { display:flex; flex-direction:column; gap:10px; }
+    .sample-item {
+      background:var(--white);
+      border:2px solid var(--ink);
+      border-radius:14px;
+      padding:14px 16px;
+      display:flex; align-items:center; justify-content:space-between;
+      box-shadow:3px 3px 0 var(--ink);
+    }
+    .sample-left { display:flex; align-items:center; gap:12px; }
+    .sample-icon-wrap {
+      width:40px; height:40px;
+      border-radius:10px;
+      border:2px solid var(--ink);
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px; flex-shrink:0;
+    }
+    .si-bday { background:#FFE4F0; }
+    .si-anniv { background:#FFF5E0; }
+    .si-grad { background:#E8FFF5; }
+    .si-baby { background:#E8F0FF; }
+    .sample-name { font-size:14px; font-weight:800; color:var(--ink); }
+    .sample-type { font-size:11px; font-weight:600; color:var(--ink3); margin-top:1px; }
+    .sample-url { font-size:12px; font-weight:700; color:var(--orange); }
+
+    /* CONTACT */
+    .contact-section { background:var(--bg); }
+    .contact-card {
+      background:var(--white);
+      border:3px solid var(--ink);
+      border-radius:20px;
+      padding:2rem 1.5rem;
+      box-shadow:6px 6px 0 var(--ink);
+      text-align:center;
+    }
+    .contact-card h3 { font-size:22px; font-weight:900; color:var(--ink); margin-bottom:0.5rem; }
+    .contact-card p { font-size:14px; font-weight:600; color:var(--ink2); line-height:1.6; margin-bottom:1.75rem; }
+    .email-pill {
+      display:inline-flex; align-items:center; gap:10px;
+      background:var(--yellow);
+      border:2.5px solid var(--ink);
+      border-radius:50px;
+      padding:12px 24px;
+      text-decoration:none;
+      box-shadow:4px 4px 0 var(--ink);
+      transition:transform 0.1s, box-shadow 0.1s;
+      margin-bottom:1.25rem;
+    }
+    .email-pill:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
+    .email-pill i { font-size:18px; color:var(--ink); }
+    .email-pill span { font-size:15px; font-weight:800; color:var(--ink); }
+    .contact-note { font-size:12px; font-weight:600; color:var(--ink3); line-height:1.8; }
+    .contact-note i { color:var(--teal); margin-right:4px; }
+
+    /* FOOTER */
+    footer {
+      background:var(--ink);
+      padding:2.5rem 1.25rem;
+      text-align:center;
+    }
+    .footer-logo { font-size:24px; font-weight:900; color:var(--yellow); margin-bottom:0.5rem; }
+    .footer-tagline { font-size:13px; font-weight:600; color:rgba(255,255,255,0.4); margin-bottom:1rem; }
+    .footer-mystery {
+      display:inline-block;
+      background:rgba(255,255,255,0.07);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:8px;
+      padding:8px 16px;
+      font-size:11px; font-weight:600; color:rgba(255,255,255,0.3);
+      font-style:italic;
+    }
+
+    @media(min-width:600px){
+      .hero { padding:5rem 2rem 4rem; }
+      .section { padding:4.5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-badge">77-36</div>
+    <span>.top</span>
+  </div>
+  <a href="#contact" class="nav-btn">
+    <i class="fa-regular fa-envelope"></i> Order now
+  </a>
+</nav>
+
+<section class="hero">
+  <i class="fa-solid fa-star hero-deco hero-deco-1"></i>
+  <i class="fa-solid fa-heart hero-deco hero-deco-2"></i>
+  <div class="hero-tag"><i class="fa-solid fa-lock" style="margin-right:5px"></i> Secret pages for special people</div>
+  <h1>They deserve a page<br>that lives <span>forever</span> 🎉</h1>
+  <p class="hero-sub">We build beautiful, animated greeting pages with their own permanent link — AED 20, done in 24 hours.</p>
+  <p class="hero-mystery">✨ psst — every link feels like a secret you're passing along</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-primary">
+      <i class="fa-regular fa-envelope"></i> Get one for AED 20
+    </a>
+  </div>
+  <div class="hero-img">
+    <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=900&q=85&auto=format&fit=crop" alt="Celebration" />
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <span class="eyebrow"><i class="fa-solid fa-sparkles" style="margin-right:5px"></i> What we make</span>
+    <h2 class="section-h">Any occasion.<br>One forever link.</h2>
+    <p class="section-p">We craft it, you share it. They keep it forever — no app needed, just a link.</p>
+    <div class="occasions">
+      <div class="occ-card">
+        <i class="fa-solid fa-cake-candles occ-icon" style="color:#FF5FA0"></i>
+        <div class="occ-name">Birthday</div>
+        <div class="occ-sub">Festive & animated</div>
+      </div>
+      <div class="occ-card">
+        <i class="fa-solid fa-ring occ-icon" style="color:#F5C800"></i>
+        <div class="occ-name">Anniversary</div>
+        <div class="occ-sub">Romantic & warm</div>
+      </div>
+      <div class="occ-card">
+        <i class="fa-solid fa-graduation-cap occ-icon" style="color:#1EC8A0"></i>
+        <div class="occ-name">Graduation</div>
+        <div class="occ-sub">Proud & bright</div>
+      </div>
+      <div class="occ-card">
+        <i class="fa-solid fa-baby occ-icon" style="color:#A259FF"></i>
+        <div class="occ-name">New baby</div>
+        <div class="occ-sub">Soft & precious</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section how-section">
+  <div class="section-inner">
+    <span class="eyebrow teal"><i class="fa-solid fa-map" style="margin-right:5px"></i> How it works</span>
+    <h2 class="section-h">Stupid simple,<br>genuinely beautiful.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Drop us an email</h3>
+          <p>Tell us their name, the occasion, your message, and any photos. That's it!</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h3>We build the magic</h3>
+          <p>We hand-craft an animated page at a unique link like <strong>77-36.top/mariel</strong> — ready in 24 hours.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h3>Share the secret link</h3>
+          <p>Send the link. It stays live forever. They'll come back to it every year. 🥹</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section package-section">
+  <div class="section-inner">
+    <span class="eyebrow orange"><i class="fa-solid fa-tag" style="margin-right:5px"></i> Pricing</span>
+    <h2 class="section-h">One price.<br>Everything included.</h2>
+    <p class="section-p">No tiers, no tricks. Just one beautiful page for one honest price.</p>
+    <div class="package-card">
+      <div class="pkg-sticker">Most popular 🔥</div>
+      <div class="pkg-price">
+        <span class="pkg-currency">AED</span>
+        <span class="pkg-amount">20</span>
+      </div>
+      <div class="pkg-tagline">One-time · No renewals · No surprises</div>
+      <ul class="pkg-features">
+        <li><i class="fa-solid fa-check"></i> Custom name & personal message</li>
+        <li><i class="fa-solid fa-check"></i> Animated, mobile-friendly design</li>
+        <li><i class="fa-solid fa-check"></i> Your photos added to the page</li>
+        <li><i class="fa-solid fa-check"></i> Unique link (e.g. 77-36.top/them)</li>
+        <li><i class="fa-solid fa-check"></i> Hosted forever — no expiry</li>
+        <li><i class="fa-solid fa-check"></i> Delivered within 24 hours</li>
+      </ul>
+      <a href="#contact" class="pkg-btn">
+        <i class="fa-regular fa-envelope"></i> Order for AED 20
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section samples-section">
+  <div class="section-inner">
+    <span class="eyebrow purple"><i class="fa-solid fa-link" style="margin-right:5px"></i> Live pages</span>
+    <h2 class="section-h">Real pages,<br>real people. 💛</h2>
+    <p class="section-p" style="margin-bottom:1.5rem">Every page gets its own forever link.</p>
+    <div class="sample-list">
+      <div class="sample-item">
+        <div class="sample-left">
+          <div class="sample-icon-wrap si-bday"><i class="fa-solid fa-cake-candles" style="color:#FF5FA0"></i></div>
+          <div><div class="sample-name">Mariel</div><div class="sample-type">Birthday</div></div>
+        </div>
+        <div class="sample-url">77-36.top/mariel</div>
+      </div>
+      <div class="sample-item">
+        <div class="sample-left">
+          <div class="sample-icon-wrap si-anniv"><i class="fa-solid fa-ring" style="color:#F5C800"></i></div>
+          <div><div class="sample-name">Sarah & Tom</div><div class="sample-type">Anniversary</div></div>
+        </div>
+        <div class="sample-url">77-36.top/sarah</div>
+      </div>
+      <div class="sample-item">
+        <div class="sample-left">
+          <div class="sample-icon-wrap si-grad"><i class="fa-solid fa-graduation-cap" style="color:#1EC8A0"></i></div>
+          <div><div class="sample-name">Carlos</div><div class="sample-type">Graduation</div></div>
+        </div>
+        <div class="sample-url">77-36.top/carlos</div>
+      </div>
+      <div class="sample-item">
+        <div class="sample-left">
+          <div class="sample-icon-wrap si-baby"><i class="fa-solid fa-baby" style="color:#A259FF"></i></div>
+          <div><div class="sample-name">Baby Luna</div><div class="sample-type">New arrival</div></div>
+        </div>
+        <div class="sample-url">77-36.top/luna</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section contact-section" id="contact">
+  <div class="section-inner">
+    <span class="eyebrow"><i class="fa-regular fa-envelope" style="margin-right:5px"></i> Order a page</span>
+    <h2 class="section-h">Let's make<br>their day! 🎊</h2>
+    <p class="section-p">Ready? Just send us an email with the details — we'll handle the rest.</p>
+    <div class="contact-card">
+      <h3>Send us everything 📩</h3>
+      <p>Include their name, the occasion, your message, and any photos you want on the page. We'll build it and send you the link!</p>
+      <a href="mailto:support@77-36.top" class="email-pill">
+        <i class="fa-regular fa-envelope"></i>
+        <span>support@77-36.top</span>
+      </a>
+      <div class="contact-note">
+        <i class="fa-regular fa-clock"></i> We reply fast & deliver in 24h<br>
+        <i class="fa-solid fa-shield-halved"></i> Payment details sent after confirmation<br>
+        <i class="fa-solid fa-infinity"></i> Page stays up forever once it's live
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">77-36.top</div>
+  <div class="footer-tagline">Making moments last forever, one link at a time 💛</div>
+  <div class="footer-mystery">why 77-36? some things are better as a mystery 🤫</div>
+</footer>
+
+</body>
+</html>
