@@ -121,16 +121,65 @@
       font-family:'Nunito',sans-serif;
     }
     .btn-primary:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 rgba(0,0,0,0.2); }
-    .hero-img {
-      margin-top:2.5rem;
-      border-radius:16px;
-      border:3px solid var(--ink);
-      overflow:hidden;
-      max-width:480px;
-      margin-left:auto; margin-right:auto;
-      box-shadow:6px 6px 0 var(--ink);
+    /* OCCASION DROPDOWN + PREVIEW */
+    .occ-dropdown-wrap { margin-bottom:1.5rem; }
+    .occ-select {
+      width:100%;
+      padding:12px 16px;
+      font-size:15px; font-weight:800;
+      font-family:'Nunito',sans-serif;
+      color:var(--ink);
+      background:var(--white);
+      border:2.5px solid var(--ink);
+      border-radius:14px;
+      box-shadow:4px 4px 0 var(--ink);
+      appearance:none;
+      -webkit-appearance:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231A1209' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;
+      background-position:right 14px center;
+      cursor:pointer;
+      transition:transform 0.1s, box-shadow 0.1s;
     }
-    .hero-img img { width:100%; height:200px; object-fit:cover; display:block; }
+    .occ-select:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
+    .occ-select:focus { outline:none; }
+
+    .occ-preview-label {
+      font-size:11px; font-weight:800; color:var(--ink3);
+      text-transform:uppercase; letter-spacing:1px;
+      margin-bottom:10px; display:block;
+    }
+    .occ-preview-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+    }
+    .occ-preview-card {
+      background:var(--white);
+      border:2.5px solid var(--ink);
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:4px 4px 0 var(--ink);
+      transition:transform 0.1s, box-shadow 0.1s;
+    }
+    .occ-preview-card:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
+    .occ-preview-img {
+      width:100%; aspect-ratio:4/3; object-fit:cover; display:block;
+      background:#f0ece6;
+    }
+    .occ-preview-theme {
+      font-size:11px; font-weight:800; color:var(--ink2);
+      padding:6px 10px;
+      border-top:2px solid var(--ink);
+      background:var(--white);
+    }
+
+    /* placeholder tiles when no real screenshots */
+    .occ-preview-placeholder {
+      width:100%; aspect-ratio:4/3; display:flex;
+      align-items:center; justify-content:center;
+      font-size:32px;
+    }
 
     /* SECTION BASE */
     .section { padding:3.5rem 1.25rem; }
@@ -151,24 +200,6 @@
     .section-p { font-size:14px; font-weight:600; color:var(--ink2); line-height:1.7; margin-bottom:2rem; }
 
     /* OCCASIONS */
-    .occasions { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-    .occ-card {
-      background:var(--white);
-      border:2.5px solid var(--ink);
-      border-radius:16px;
-      padding:1.25rem 1rem;
-      text-align:center;
-      box-shadow:4px 4px 0 var(--ink);
-      transition:transform 0.1s, box-shadow 0.1s;
-    }
-    .occ-card:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
-    .occ-card:nth-child(1) { background:#FFF0F5; }
-    .occ-card:nth-child(2) { background:#FFF5E0; }
-    .occ-card:nth-child(3) { background:#F0FFF8; }
-    .occ-card:nth-child(4) { background:#F0F5FF; }
-    .occ-icon { font-size:28px; margin-bottom:0.5rem; display:block; }
-    .occ-name { font-size:14px; font-weight:800; color:var(--ink); }
-    .occ-sub { font-size:11px; font-weight:600; color:var(--ink3); margin-top:2px; }
 
     /* HOW */
     .how-section { background:var(--white); border-top:3px solid var(--ink); border-bottom:3px solid var(--ink); }
@@ -196,16 +227,6 @@
       box-shadow:6px 6px 0 var(--ink);
       position:relative;
       overflow:hidden;
-    }
-    .pkg-sticker {
-      position:absolute; top:16px; right:-8px;
-      background:var(--pink);
-      color:var(--white);
-      font-size:11px; font-weight:800;
-      padding:4px 20px 4px 14px;
-      border:2px solid var(--ink);
-      border-radius:4px 0 0 4px;
-      letter-spacing:0.5px;
     }
     .pkg-price {
       display:flex; align-items:baseline; gap:6px;
@@ -329,47 +350,63 @@
 <section class="hero">
   <i class="fa-solid fa-star hero-deco hero-deco-1"></i>
   <i class="fa-solid fa-heart hero-deco hero-deco-2"></i>
-  <div class="hero-tag"><i class="fa-solid fa-lock" style="margin-right:5px"></i> Secret pages for special people</div>
-  <h1>They deserve a page<br>that lives <span>forever</span> 🎉</h1>
-  <p class="hero-sub">We build beautiful, animated greeting pages with their own permanent link — AED 20, done in 24 hours.</p>
-  <p class="hero-mystery">✨ psst — every link feels like a secret you're passing along</p>
-  <div class="hero-btns">
-    <a href="#contact" class="btn-primary">
-      <i class="fa-regular fa-envelope"></i> Get one for AED 20
-    </a>
-  </div>
-  <div class="hero-img">
-    <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=900&q=85&auto=format&fit=crop" alt="Celebration" />
-  </div>
+  <div class="hero-tag">Pages for special people</div>
+  <h1>They deserve a page<br>that's <span>truly theirs</span> 🎉</h1>
+  <p class="hero-sub">We build beautiful, animated greeting pages with their own unique link, done in 24 hours.</p>
+  <p class="hero-mystery">every link feels like a secret you're passing along</p>
 </section>
 
 <section class="section">
   <div class="section-inner">
     <span class="eyebrow"><i class="fa-solid fa-sparkles" style="margin-right:5px"></i> What we make</span>
-    <h2 class="section-h">Any occasion.<br>One forever link.</h2>
-    <p class="section-p">We craft it, you share it. They keep it forever — no app needed, just a link.</p>
-    <div class="occasions">
-      <div class="occ-card">
-        <i class="fa-solid fa-cake-candles occ-icon" style="color:#FF5FA0"></i>
-        <div class="occ-name">Birthday</div>
-        <div class="occ-sub">Festive & animated</div>
-      </div>
-      <div class="occ-card">
-        <i class="fa-solid fa-ring occ-icon" style="color:#F5C800"></i>
-        <div class="occ-name">Anniversary</div>
-        <div class="occ-sub">Romantic & warm</div>
-      </div>
-      <div class="occ-card">
-        <i class="fa-solid fa-graduation-cap occ-icon" style="color:#1EC8A0"></i>
-        <div class="occ-name">Graduation</div>
-        <div class="occ-sub">Proud & bright</div>
-      </div>
-      <div class="occ-card">
-        <i class="fa-solid fa-baby occ-icon" style="color:#A259FF"></i>
-        <div class="occ-name">New baby</div>
-        <div class="occ-sub">Soft & precious</div>
-      </div>
+    <h2 class="section-h">Any occasion.<br>One beautiful link.</h2>
+    <p class="section-p">We craft it, you share it. No app needed — just a link.</p>
+    <div class="occ-dropdown-wrap">
+      <select class="occ-select" id="occasionSelect" onchange="showOccasionPreviews(this.value)">
+        <option value="birthday">🎂 Birthday</option>
+        <option value="anniversary">💍 Anniversary</option>
+        <option value="graduation">🎓 Graduation</option>
+      </select>
     </div>
+
+    <div id="occasionPreviews" style="display:none">
+      <span class="occ-preview-label" id="previewLabel">4 theme styles</span>
+      <div class="occ-preview-grid" id="previewGrid"></div>
+    </div>
+
+    <script>
+      const themes = [
+        { name:'Warm & Bright', emoji:'🌟' },
+        { name:'Soft & Sweet',  emoji:'🌸' },
+        { name:'Bold & Fun',    emoji:'🎉' },
+        { name:'Fresh & Clean', emoji:'✨' },
+        { name:'Dark & Moody',  emoji:'🌙' },
+        { name:'Minimal',       emoji:'🤍' },
+      ];
+      const occasions = {
+        birthday:    { label:'Birthday',      imgs:['photo-1558618666-fcd25c85cd64','photo-1464349095431-e9a21285b5f3','photo-1530103862676-de8c9debad1d','photo-1513151233558-d860c5398176','photo-1587300003388-59208cc962cb','photo-1621263764928-df1444c5e859'] },
+        anniversary: { label:'Anniversary',   imgs:['photo-1522673607200-164d1b6ce486','photo-1518199266791-5375a83190b7','photo-1516589091380-5d8e87df6999','photo-1469371670807-013ccf25f16a','photo-1551836022-d5d88e9218df','photo-1474552226712-ac0f0961a954'] },
+        graduation:  { label:'Graduation',    imgs:['photo-1523050854058-8df90110c9f1','photo-1627556704302-624286467c65','photo-1461301214746-1e109215d6d3','photo-1434030216411-0b793f4b4173','photo-1541339907198-e08756dedf3f','photo-1517486808906-6ca8b3f04846'] },
+      };
+      function showOccasionPreviews(val) {
+        const wrap = document.getElementById('occasionPreviews');
+        const grid = document.getElementById('previewGrid');
+        const label = document.getElementById('previewLabel');
+        if (!val) { wrap.style.display='none'; return; }
+        const occ = occasions[val];
+        label.textContent = occ.label + ' — 6 theme styles';
+        grid.innerHTML = themes.map((t, i) => `
+          <div class="occ-preview-card">
+            <img class="occ-preview-img"
+              src="https://images.unsplash.com/${occ.imgs[i]}?w=400&h=300&q=75&auto=format&fit=crop"
+              alt="${occ.label} – ${t.name}" loading="lazy" />
+            <div class="occ-preview-theme">${t.emoji} ${t.name}</div>
+          </div>
+        `).join('');
+        wrap.style.display='block';
+      }
+      showOccasionPreviews('birthday');
+    </script>
   </div>
 </section>
 
@@ -382,7 +419,7 @@
         <div class="step-num">1</div>
         <div>
           <h3>Drop us an email</h3>
-          <p>Tell us their name, the occasion, your message, and any photos. That's it!</p>
+          <p>Tell us their name, the occasion, your message, and any photos(max 7). That's it!</p>
         </div>
       </div>
       <div class="step">
@@ -396,7 +433,7 @@
         <div class="step-num">3</div>
         <div>
           <h3>Share the secret link</h3>
-          <p>Send the link. It stays live forever. They'll come back to it every year. 🥹</p>
+          <p>Send the link. They can open it any time, on any device. 🥹</p>
         </div>
       </div>
     </div>
@@ -409,7 +446,6 @@
     <h2 class="section-h">One price.<br>Everything included.</h2>
     <p class="section-p">No tiers, no tricks. Just one beautiful page for one honest price.</p>
     <div class="package-card">
-      <div class="pkg-sticker">Most popular 🔥</div>
       <div class="pkg-price">
         <span class="pkg-currency">AED</span>
         <span class="pkg-amount">20</span>
@@ -420,7 +456,7 @@
         <li><i class="fa-solid fa-check"></i> Animated, mobile-friendly design</li>
         <li><i class="fa-solid fa-check"></i> Your photos added to the page</li>
         <li><i class="fa-solid fa-check"></i> Unique link (e.g. 77-36.top/them)</li>
-        <li><i class="fa-solid fa-check"></i> Hosted forever — no expiry</li>
+        <li><i class="fa-solid fa-check"></i> Hosted online — accessible via link</li>
         <li><i class="fa-solid fa-check"></i> Delivered within 24 hours</li>
       </ul>
       <a href="#contact" class="pkg-btn">
@@ -432,9 +468,9 @@
 
 <section class="section samples-section">
   <div class="section-inner">
-    <span class="eyebrow purple"><i class="fa-solid fa-link" style="margin-right:5px"></i> Live pages</span>
+    <span class="eyebrow purple"><i class="fa-solid fa-link" style="margin-right:5px"></i> Demo pages</span>
     <h2 class="section-h">Real pages,<br>real people. 💛</h2>
-    <p class="section-p" style="margin-bottom:1.5rem">Every page gets its own forever link.</p>
+    <p class="section-p" style="margin-bottom:1.5rem">Every page gets its own unique link.</p>
     <div class="sample-list">
       <div class="sample-item">
         <div class="sample-left">
@@ -457,13 +493,6 @@
         </div>
         <div class="sample-url">77-36.top/carlos</div>
       </div>
-      <div class="sample-item">
-        <div class="sample-left">
-          <div class="sample-icon-wrap si-baby"><i class="fa-solid fa-baby" style="color:#A259FF"></i></div>
-          <div><div class="sample-name">Baby Luna</div><div class="sample-type">New arrival</div></div>
-        </div>
-        <div class="sample-url">77-36.top/luna</div>
-      </div>
     </div>
   </div>
 </section>
@@ -483,7 +512,7 @@
       <div class="contact-note">
         <i class="fa-regular fa-clock"></i> We reply fast & deliver in 24h<br>
         <i class="fa-solid fa-shield-halved"></i> Payment details sent after confirmation<br>
-        <i class="fa-solid fa-infinity"></i> Page stays up forever once it's live
+        <i class="fa-solid fa-link"></i> Page is live and shareable via link
       </div>
     </div>
   </div>
@@ -491,8 +520,7 @@
 
 <footer>
   <div class="footer-logo">77-36.top</div>
-  <div class="footer-tagline">Making moments last forever, one link at a time 💛</div>
-  <div class="footer-mystery">why 77-36? some things are better as a mystery 🤫</div>
+  <div class="footer-tagline">Making moments memorable, one link at a time 💛</div>
 </footer>
 
 </body>
