@@ -363,47 +363,109 @@
     <p class="section-p">We craft it, you share it. No app needed — just a link.</p>
     <div class="occ-dropdown-wrap">
       <select class="occ-select" id="occasionSelect" onchange="showOccasionPreviews(this.value)">
-        <option value="birthday">🎂 Birthday</option>
-        <option value="anniversary">💍 Anniversary</option>
-        <option value="graduation">🎓 Graduation</option>
+        <option value="birthday">Birthday</option>
+        <option value="anniversary">Anniversary</option>
+        <option value="graduation">Graduation</option>
       </select>
     </div>
 
     <div id="occasionPreviews" style="display:none">
-      <span class="occ-preview-label" id="previewLabel">3 theme styles</span>
       <div class="occ-preview-grid" id="previewGrid"></div>
     </div>
 
     <script>
-      const themes = [
-        { name:'Warm & Bright', emoji:'🌟' },
-        { name:'Soft & Sweet',  emoji:'🌸' },
-        { name:'Bold & Fun',    emoji:'🎉' },
-      ];
-      const occasions = {
-        birthday:    { label:'Birthday',      imgs:['photo-1558618666-fcd25c85cd64','photo-1464349095431-e9a21285b5f3','photo-1530103862676-de8c9debad1d','photo-1513151233558-d860c5398176','photo-1587300003388-59208cc962cb','photo-1621263764928-df1444c5e859'] },
-        anniversary: { label:'Anniversary',   imgs:['photo-1522673607200-164d1b6ce486','photo-1518199266791-5375a83190b7','photo-1516589091380-5d8e87df6999','photo-1469371670807-013ccf25f16a','photo-1551836022-d5d88e9218df','photo-1474552226712-ac0f0961a954'] },
-        graduation:  { label:'Graduation',    imgs:['photo-1523050854058-8df90110c9f1','photo-1627556704302-624286467c65','photo-1461301214746-1e109215d6d3','photo-1434030216411-0b793f4b4173','photo-1541339907198-e08756dedf3f','photo-1517486808906-6ca8b3f04846'] },
-      };
-      function showOccasionPreviews(val) {
-        const wrap = document.getElementById('occasionPreviews');
-        const grid = document.getElementById('previewGrid');
-        const label = document.getElementById('previewLabel');
-        if (!val) { wrap.style.display='none'; return; }
-        const occ = occasions[val];
-        label.textContent = occ.label + ' — 3 theme styles';
-        grid.innerHTML = themes.map((t, i) => `
-          <div class="occ-preview-card">
+  const themes = [
+    { name: 'Editorial', emoji: '📰' },
+    { name: 'Fun',    emoji: '🎉' },
+    { name: 'Elegant',    emoji: '🌹' },
+    { name: 'Luxurious',    emoji: '💫' },
+    { name: 'Party',    emoji: '🎊' },
+    { name: 'Vibe',    emoji: '🍹' },
+    { name: 'Issue',    emoji: '🖤' },
+    { name: 'Light',    emoji: '💡' },
+    { name: 'Tech',    emoji: '💻' },
+  ];
+
+  const occasions = {
+    birthday: { 
+      label: 'Birthday',    
+      imgs: [
+        'images/mariel.png',
+        'images/mariel1.png',
+        'images/mariel2.png',
+        'images/mariel3.png',
+        'images/mariel4.png',
+        'images/mariel5.png',
+        'images/mariel6.png',
+        'images/mariel7.png',
+        'images/mariel8.png'
+      ] 
+    },
+    anniversary: { 
+      label: 'Anniversary', 
+      imgs: [
+        'images/sarah.png',
+        'images/sarah1.png',
+        'images/sarah2.png',
+        'images/sarah3.png',
+        'images/sarah4.png',
+        'images/sarah5.png',
+        'images/sarah6.png',
+        'images/sarah7.png',
+        'images/sarah8.png'
+      ] 
+    },
+    graduation: { 
+      label: 'Graduation',  
+      imgs: [
+        'images/carlos.png',
+        'images/carlos1.png',
+        'images/carlos2.png',
+        'images/carlos3.png',
+        'images/carlos4.png',
+        'images/carlos5.png',
+        'images/carlos6.png',
+        'images/carlos7.png',
+        'images/carlos8.png'
+      ] 
+    },
+  };
+
+  function showOccasionPreviews(val) {
+    const wrap = document.getElementById('occasionPreviews');
+    const grid = document.getElementById('previewGrid');
+    const label = document.getElementById('previewLabel');
+    
+    if (!val) { wrap.style.display = 'none'; return; }
+    
+    const occ = occasions[val];
+    
+    if (label) label.textContent = occ.label + ' — ' + themes.length + ' theme styles';
+    
+    grid.innerHTML = themes.map((t, i) => {
+      const imgPath = occ.imgs[i];
+      
+      const filename = imgPath.split('/').pop(); 
+      
+      const htmlLink = filename.replace('.png', '.html'); 
+
+      return `
+        <div class="occ-preview-card">
+          <a href="${htmlLink}">
             <img class="occ-preview-img"
-              src="https://images.unsplash.com/${occ.imgs[i]}?w=400&h=300&q=75&auto=format&fit=crop"
+              src="${imgPath}" 
               alt="${occ.label} – ${t.name}" loading="lazy" />
-            <div class="occ-preview-theme">${t.emoji} ${t.name}</div>
-          </div>
-        `).join('');
-        wrap.style.display='block';
-      }
-      showOccasionPreviews('birthday');
-    </script>
+          </a>
+          <div class="occ-preview-theme">${t.emoji} ${t.name}</div>
+        </div>
+      `;
+    }).join('');
+    
+    wrap.style.display = 'block';
+  }
+
+  showOccasionPreviews('birthday');
+</script>
   </div>
 </section>
 
@@ -423,7 +485,7 @@
         <div class="step-num">2</div>
         <div>
           <h3>We build the magic</h3>
-          <p>We hand-craft an animated page at a unique link like <strong>77-36.top/mariel</strong> — ready in 24 hours.</p>
+          <p>We hand-craft an animated page at a unique link like <strong>77-36.top/them</strong> — ready in 24 hours.</p>
         </div>
       </div>
       <div class="step">
@@ -432,63 +494,6 @@
           <h3>Share the secret link</h3>
           <p>Send the link. They can open it any time, on any device. 🥹</p>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section package-section">
-  <div class="section-inner">
-    <span class="eyebrow orange"><i class="fa-solid fa-tag" style="margin-right:5px"></i> Pricing</span>
-    <h2 class="section-h">One price.<br>Everything included.</h2>
-    <p class="section-p">No tiers, no tricks. Just one beautiful page for one honest price.</p>
-    <div class="package-card">
-      <div class="pkg-price">
-        <span class="pkg-currency">AED</span>
-        <span class="pkg-amount">20</span>
-      </div>
-      <div class="pkg-tagline">One-time · No renewals · No surprises</div>
-      <ul class="pkg-features">
-        <li><i class="fa-solid fa-check"></i> Custom name & personal message</li>
-        <li><i class="fa-solid fa-check"></i> Animated, mobile-friendly design</li>
-        <li><i class="fa-solid fa-check"></i> Your photos added to the page</li>
-        <li><i class="fa-solid fa-check"></i> Unique link (e.g. 77-36.top/them)</li>
-        <li><i class="fa-solid fa-check"></i> Hosted online — accessible via link</li>
-        <li><i class="fa-solid fa-check"></i> Delivered within 24 hours</li>
-      </ul>
-      <a href="#contact" class="pkg-btn">
-        <i class="fa-regular fa-envelope"></i> Order for AED 20
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="section samples-section">
-  <div class="section-inner">
-    <span class="eyebrow purple"><i class="fa-solid fa-link" style="margin-right:5px"></i> Demo pages</span>
-    <h2 class="section-h">Real pages,<br>real people. 💛</h2>
-    <p class="section-p" style="margin-bottom:1.5rem">Every page gets its own unique link.</p>
-    <div class="sample-list">
-      <div class="sample-item">
-        <div class="sample-left">
-          <div class="sample-icon-wrap si-bday"><i class="fa-solid fa-cake-candles" style="color:#FF5FA0"></i></div>
-          <div><div class="sample-name">Mariel</div><div class="sample-type">Birthday</div></div>
-        </div>
-        <div class="sample-url">77-36.top/mariel</div>
-      </div>
-      <div class="sample-item">
-        <div class="sample-left">
-          <div class="sample-icon-wrap si-anniv"><i class="fa-solid fa-ring" style="color:#F5C800"></i></div>
-          <div><div class="sample-name">Sarah & Tom</div><div class="sample-type">Anniversary</div></div>
-        </div>
-        <div class="sample-url">77-36.top/sarah</div>
-      </div>
-      <div class="sample-item">
-        <div class="sample-left">
-          <div class="sample-icon-wrap si-grad"><i class="fa-solid fa-graduation-cap" style="color:#1EC8A0"></i></div>
-          <div><div class="sample-name">Carlos</div><div class="sample-type">Graduation</div></div>
-        </div>
-        <div class="sample-url">77-36.top/carlos</div>
       </div>
     </div>
   </div>

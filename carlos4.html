@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carlos — AFTER HOURS LIVE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&family=Alex+Brush&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg-black: #050508;
+      --neon-cyan: #00f0ff;
+      --neon-pink: #ff0055;
+      --neon-purple: #9d00ff;
+      --text-main: #ffffff;
+      --text-muted: #6e6e80;
+    }
+    
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg-black);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #party-canvas {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none;
+    }
+
+    /* KINETIC STROKE BACKGROUND TEXT */
+    .bg-ticker {
+      position: fixed; width: 100%; top: 30%; left: 0; font-family: 'Syne', sans-serif; font-size: 15vw; font-weight: 800;
+      color: transparent; -webkit-text-stroke: 1px rgba(255, 0, 85, 0.08); text-transform: uppercase; pointer-events: none; white-space: nowrap; z-index: 1; user-select: none;
+    }
+
+    /* AUDIO-REACTIVE STYLED GLOWS */
+    .glow-sphere {
+      position: fixed; width: 45vw; height: 45vw; border-radius: 50%; z-index: 1; pointer-events: none; filter: blur(140px); opacity: 0.4;
+    }
+    .gs-1 { top: -10%; left: -10%; background: var(--neon-cyan); animation: floatGlow 8s infinite alternate; }
+    .gs-2 { bottom: -10%; right: -10%; background: var(--neon-purple); animation: floatGlow 12s infinite alternate-reverse; }
+
+    @keyframes floatGlow {
+      0% { transform: scale(1) translate(0px, 0px); opacity: 0.3; }
+      100% { transform: scale(1.2) translate(50px, 30px); opacity: 0.5; }
+    }
+
+    /* HERO LAYOUT */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 6rem 1.5rem; text-align: center; position: relative; z-index: 2;
+    }
+
+    .badge {
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple)); padding: 6px 16px; border-radius: 20px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2rem;
+      box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+    }
+
+    .glitch-title {
+      font-family: 'Syne', sans-serif; font-size: clamp(60px, 14vw, 120px); font-weight: 800; text-transform: uppercase; line-height: 0.9; letter-spacing: -0.03em; position: relative;
+    }
+    .glitch-title span { display: block; }
+    .glitch-title .cursive {
+      font-family: 'Alex Brush', cursive; font-size: clamp(45px, 9vw, 75px); text-transform: none; color: var(--neon-cyan); letter-spacing: 0; margin-top: -10px; font-weight: 400;
+      text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+    }
+
+    /* KINETIC PORTRAIT */
+    .portrait-wrap { margin-top: 4rem; perspective: 1000px; cursor: pointer; }
+    .neon-frame {
+      background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: 28px; border: 2px solid rgba(0, 240, 255, 0.2);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(0, 240, 255, 0.1);
+      transform-style: preserve-3d; transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .neon-frame:hover {
+      border-color: var(--neon-pink); box-shadow: 0 0 40px rgba(255, 0, 85, 0.3), inset 0 0 20px rgba(255, 0, 85, 0.1);
+    }
+    .inner-img-box { width: 300px; height: 380px; overflow: hidden; border-radius: 18px; transform: translateZ(20px); }
+    .inner-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .neon-frame:hover .inner-img-box img { transform: scale(1.08) rotate(1deg); }
+
+    /* PARALAX/KINETIC WORDS */
+    .party-msg-wrap { padding: 8rem 1.5rem; text-align: center; position: relative; z-index: 2; background: rgba(5,5,8,0.6); }
+    .party-msg { font-size: clamp(24px, 4vw, 36px); font-weight: 700; max-width: 850px; margin: 0 auto; line-height: 1.4; letter-spacing: -0.01em; }
+    .highlight-pink { color: var(--neon-pink); text-shadow: 0 0 10px rgba(255, 0, 85, 0.3); }
+    .highlight-cyan { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 240, 255, 0.3); }
+
+    /* MASONRY STREAM GALLERY */
+    .stream-wrap { padding: 8rem 1.5rem; position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: left; margin-bottom: 4rem; display: flex; justify-content: space-between; align-items: flex-end; }
+    .section-header h2 { font-family: 'Syne', sans-serif; font-size: clamp(32px, 6vw, 54px); text-transform: uppercase; }
+    
+    .party-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    @media (max-width: 850px) { .party-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 550px) { .party-grid { grid-template-columns: 1fr; } }
+
+    .grid-card {
+      background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 20px;
+      position: relative; overflow: hidden; transform-style: preserve-3d; transition: transform 0.4s, border-color 0.4s;
+    }
+    .grid-card::before {
+      content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent, rgba(255, 0, 85, 0.1)); opacity: 0; transition: opacity 0.3s;
+    }
+    .grid-card:hover::before { opacity: 1; }
+    .grid-card:hover { border-color: rgba(157, 0, 255, 0.4); }
+    
+    .card-frame { width: 100%; aspect-ratio: 4/5; overflow: hidden; border-radius: 12px; }
+    .grid-card img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* SHUNT FLYOUT WISHES */
+    .vibe-deck { padding: 8rem 1.5rem; position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; }
+    .deck-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    @media (max-width: 900px) { .deck-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .deck-grid { grid-template-columns: 1fr; } }
+
+    .deck-card {
+      background: #0f0f14; border: 1px solid rgba(255,255,255,0.06); padding: 3rem 2rem; border-radius: 24px;
+      position: relative; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); overflow: hidden;
+    }
+    .deck-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    }
+    .deck-card:hover {
+      transform: translateY(-10px) skewX(-2deg); background: #14141f; border-color: var(--neon-cyan);
+      box-shadow: 0 20px 40px rgba(0, 240, 255, 0.1);
+    }
+    .deck-card:hover::after { transform: scaleX(1); }
+
+    .deck-icon { font-size: 26px; color: var(--neon-pink); margin-bottom: 1.5rem; transition: transform 0.4s; }
+    .deck-card:hover .deck-icon { transform: translateY(-4px) scale(1.1); color: var(--neon-cyan); }
+    .deck-label { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .deck-sub { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+    /* FOOTER BEATBOX */
+    .stage-out { padding: 12rem 1.5rem; text-align: center; position: relative; z-index: 2; }
+    .stage-title { font-family: 'Syne', sans-serif; font-size: clamp(40px, 8vw, 80px); text-transform: uppercase; font-weight: 800; line-height: 1; }
+    .stage-sub { font-size: 13px; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--neon-pink); margin-top: 1.5rem; }
+
+    /* INTERACTION LIGHTBOX */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 500; background: rgba(3, 3, 5, 0.98);
+      display: flex; align-items: center; justify-content: center; padding: 2rem;
+      opacity: 0; visibility: hidden; transition: all 0.4s ease;
+    }
+    .lightbox-overlay.open { opacity: 1; visibility: visible; }
+    .lightbox-content { position: relative; max-width: min(550px, 92vw); transform: scale(0.9) rotate(-2deg); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .lightbox-overlay.open .lightbox-content { transform: scale(1) rotate(0deg); }
+    .lightbox-content img { width: 100%; height: auto; border-radius: 20px; border: 2px solid var(--neon-cyan); display: block; }
+    .lightbox-close { position: absolute; top: -50px; right: 0; background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <canvas id="party-canvas"></canvas>
+  <div class="bg-ticker" id="ticker-text">LEVEL UP LEVEL UP LEVEL UP</div>
+  <div class="glow-sphere gs-1"></div>
+  <div class="glow-sphere gs-2"></div>
+
+  <div class="hero">
+    <div class="badge">Live Feature // 2026</div>
+    <h1 class="glitch-title">
+      <span>Carlos</span>
+      <span class="cursive">Unlocked</span>
+    </h1>
+    
+    <div class="portrait-wrap generic-tilt">
+      <div class="neon-frame lightbox-trigger" data-full="https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=1400&q=90&auto=format&fit=crop">
+        <div class="inner-img-box">
+          <img src="https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=1400&q=90&auto=format&fit=crop" alt="Carlos Portrait" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="party-msg-wrap">
+    <div class="party-msg">
+      "Carlos, the grind was heavy but the checkout is <span class="highlight-pink">legendary</span>. No more late-night desk loops — it's time to run the scoreboard. You built the foundation, now <span class="highlight-cyan">crank the bass</span> and step into everything next!"
+    </div>
+  </div>
+
+  <div class="stream-wrap">
+    <div class="section-header">
+      <h2>The Core Memory Track</h2>
+    </div>
+    <div class="party-grid">
+      <div class="grid-card generic-tilt lightbox-trigger" data-full="https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=1400&q=90&auto=format&fit=crop">
+        <div class="card-frame"><img src="https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=500&q=85&auto=format&fit=crop" alt="Img" /></div>
+      </div>
+      <div class="grid-card generic-tilt lightbox-trigger" data-full="https://images.unsplash.com/photo-1627556592933-ffe99c1cd9eb?w=1400&q=90&auto=format&fit=crop">
+        <div class="card-frame"><img src="https://images.unsplash.com/photo-1627556592933-ffe99c1cd9eb?w=500&q=85&auto=format&fit=crop" alt="Img" /></div>
+      </div>
+      <div class="grid-card generic-tilt lightbox-trigger" data-full="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1400&q=90&auto=format&fit=crop">
+        <div class="card-frame"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&q=85&auto=format&fit=crop" alt="Img" /></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vibe-deck">
+    <div class="deck-grid">
+      <div class="deck-card">
+        <i class="fa-solid fa-bolt deck-icon"></i>
+        <div class="deck-label">Main Stage</div>
+        <div class="deck-sub">Own the room, scale the vision instantly.</div>
+      </div>
+      <div class="deck-card">
+        <i class="fa-solid fa-fire-burner deck-icon"></i>
+        <div class="deck-label">No Limits</div>
+        <div class="deck-sub">Break the metrics and traditional pacing.</div>
+      </div>
+      <div class="deck-card">
+        <i class="fa-solid fa-rocket deck-icon"></i>
+        <div class="deck-label">Next Phase</div>
+        <div class="deck-sub">Velocity mapping set to maximum capacity.</div>
+      </div>
+      <div class="deck-card">
+        <i class="fa-solid fa-crown deck-icon"></i>
+        <div class="deck-label">Top Tier</div>
+        <div class="deck-sub">Precisely what you worked to secure.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage-out">
+    <div class="stage-title">Drop The Beats</div>
+    <div class="stage-sub">Congratulations, Carlos</div>
+  </div>
+
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose"><i class="fa-solid fa-xmark"></i></button>
+      <img id="lightboxImg" src="" alt="" />
+    </div>
+  </div>
+
+  <script>
+    /* HYPER PARTY INTERACTIVE KINETIC ENGINE */
+    const canvas = document.getElementById('party-canvas');
+    const ctx = canvas.getContext('2d');
+    let nodes = [];
+    let mouse = { x: null, y: null, vX: 0, vY: 0, lastX: 0, lastY: 0 };
+
+    function sizeUp() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', sizeUp); sizeUp();
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX; mouse.y = e.clientY;
+      mouse.vX = mouse.x - mouse.lastX; mouse.vY = mouse.y - mouse.lastY;
+      mouse.lastX = mouse.x; mouse.lastY = mouse.y;
+    });
+
+    class NeonParticle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = (Math.random() - 0.5) * 2;
+        this.speedY = (Math.random() - 0.5) * 2;
+        this.color = Math.random() > 0.5 ? '#00f0ff' : '#ff0055';
+      }
+      run() {
+        this.x += this.speedX; this.y += this.speedY;
+        if(mouse.x) {
+          let dx = this.x - mouse.x; let dy = this.y - mouse.y;
+          let d = Math.sqrt(dx*dx + dy*dy);
+          if(d < 150) {
+            this.x += (dx/d) * mouse.vX * 0.5;
+            this.y += (dy/d) * mouse.vY * 0.5;
+          }
+        }
+        if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      render() {
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+        ctx.fillStyle = this.color; ctx.fill();
+      }
+    }
+
+    for(let i=0; i<60; i++) nodes.push(new NeonParticle());
+
+    function loop() {
+      ctx.fillStyle = 'rgba(5,5,8,0.2)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+      nodes.forEach(n => { n.run(); n.render(); });
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    /* KINETIC HORIZONTAL SCROLL DIRECTION TICKER */
+    window.addEventListener('scroll', () => {
+      const ticker = document.getElementById('ticker-text');
+      ticker.style.transform = `translateX(${-window.scrollY * 0.4}px)`;
+    });
+
+    /* MATRIX TILT INTERACTION */
+    document.querySelectorAll('.generic-tilt').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const box = el.getBoundingClientRect();
+        const x = e.clientX - box.left - (box.width/2);
+        const y = e.clientY - box.top - (box.height/2);
+        el.style.transform = `rotateX(${-y/(box.height/2)*14}deg) rotateY(${x/(box.width/2)*14}deg) scale(1.03)`;
+      });
+      el.addEventListener('mouseleave', () => el.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)');
+    });
+
+    /* LIGHTBOX EVENT HANDLERS */
+    const box = document.getElementById('lightbox');
+    const bImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lightbox-trigger').forEach(t => {
+      t.addEventListener('click', () => { bImg.src = t.getAttribute('data-full'); box.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', () => box.classList.remove('open'));
+  </script>
+</body>
+</html>

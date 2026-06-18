@@ -6,270 +6,187 @@
   <title>Carlos — The Commencement Horizon</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
-      --bg-pearl: #FAF8F5;
-      --text-bronze: #3D3028;
-      --text-muted: #7A6F68;
-      --glass-bg: rgba(255, 255, 255, 0.45);
-      --glass-border: rgba(255, 255, 255, 0.6);
+      --bg-dark: #0A0908;
+      --text-gold: #E6C587;
+      --text-light: #F4F1EA;
+      --text-muted: #A39B8F;
+      --glass-bg: rgba(22, 20, 18, 0.65);
+      --glass-border: rgba(230, 197, 135, 0.15);
     }
     
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
       font-family: 'Montserrat', sans-serif;
-      background: var(--bg-pearl);
-      color: var(--text-bronze);
+      background: var(--bg-dark);
+      color: var(--text-light);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       position: relative;
     }
 
-    /* BACKGROUND CANVAS FOR INTERACTIVE BUBBLES */
+    /* PARTICLES CANVAS */
     #bg-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none;
     }
 
     /* AMBIENT GLOWS */
-    .cosmic-glow {
-      position: fixed; width: 70vw; height: 70vh; z-index: 1; pointer-events: none; opacity: 0.8;
+    .ambient-glow {
+      position: fixed; width: 60vw; height: 60vh; z-index: 1; pointer-events: none; opacity: 0.3; filter: blur(100px);
     }
-    .glow-1 { top: -10%; left: -10%; background: radial-gradient(circle, rgba(255, 240, 224, 0.8) 0%, transparent 70%); }
-    .glow-2 { bottom: -10%; right: -10%; background: radial-gradient(circle, rgba(255, 249, 230, 0.9) 0%, transparent 70%); }
+    .glow-1 { top: -20%; left: -10%; background: radial-gradient(circle, rgba(230, 197, 135, 0.4) 0%, transparent 70%); }
+    .glow-2 { bottom: -20%; right: -10%; background: radial-gradient(circle, rgba(163, 155, 143, 0.3) 0%, transparent 70%); }
 
-    /* INITIAL ENTRY ANIMATIONS */
+    /* REVEAL LIFTS */
     @keyframes driftUp {
       from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
     @keyframes scaleIn {
-      from { opacity: 0; transform: scale(0.92) translateY(20px); }
+      from { opacity: 0; transform: scale(0.95) translateY(20px); }
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-    /* HERO SECTION */
+    /* HERO ARCHITECTURE */
     .hero { 
-      padding: 9rem 1.5rem 4rem; 
-      text-align: center; 
-      max-width: 900px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
+      padding: 9rem 1.5rem 4rem; text-align: center; max-width: 900px; margin: 0 auto; position: relative; z-index: 2;
     }
     
     .eyebrow { 
-      font-size: 11px; 
-      font-weight: 600; 
-      letter-spacing: 0.3em; 
-      text-transform: uppercase; 
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      display: block;
-      opacity: 0;
-      animation: driftUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--text-gold); margin-bottom: 1.5rem; display: block;
+      opacity: 0; animation: driftUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     
     .giant-title { 
-      font-family: 'Playfair Display', serif; 
-      font-size: clamp(54px, 13vw, 96px); 
-      font-weight: 400; 
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      opacity: 0;
-      animation: driftUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+      font-family: 'Playfair Display', serif; font-size: clamp(54px, 13vw, 96px); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em;
+      opacity: 0; animation: driftUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
     }
 
     .cursive-accent {
-      font-family: 'Alex Brush', cursive;
-      font-size: clamp(38px, 8vw, 54px);
-      color: #D4AF37;
-      display: block;
-      margin-top: -10px;
+      font-family: 'Alex Brush', cursive; font-size: clamp(38px, 8vw, 54px); color: var(--text-gold); display: block; margin-top: -10px;
     }
     
     .name-tag { 
-      font-size: 14px; 
-      font-weight: 500;
-      color: var(--text-muted); 
-      margin-top: 1.5rem; 
-      letter-spacing: 0.05em;
-      opacity: 0;
-      animation: driftUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+      font-size: 13px; font-weight: 500; color: var(--text-muted); margin-top: 1.5rem; letter-spacing: 0.1em; text-transform: uppercase;
+      opacity: 0; animation: driftUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
     }
 
-    /* PARALLAX HERO PHOTO INTERACTIVE */
+    /* TILT HERO PHOTO */
     .hero-photo-wrap { 
-      display: flex; 
-      justify-content: center; 
-      margin-top: 4rem;
-      perspective: 1000px;
+      display: flex; justify-content: center; margin-top: 4rem; perspective: 1200px;
     }
     .glass-panel-photo { 
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 16px;
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      box-shadow: 0 30px 60px rgba(61, 48, 40, 0.04);
-      opacity: 0;
-      animation: scaleIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
-      transform-style: preserve-3d;
-      transition: box-shadow 0.3s ease;
+      background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding: 16px; border: 1px solid var(--glass-border); border-radius: 24px;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6); opacity: 0; animation: scaleIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+      transform-style: preserve-3d; transition: box-shadow 0.4s, border-color 0.4s;
     }
     .glass-panel-photo:hover {
-      box-shadow: 0 45px 85px rgba(61, 48, 40, 0.1);
+      box-shadow: 0 50px 90px rgba(230, 197, 135, 0.1); border-color: rgba(230, 197, 135, 0.3);
     }
     .glass-panel-photo .frame { 
-      width: 290px; 
-      height: 370px; 
-      overflow: hidden; 
-      border-radius: 16px;
-      pointer-events: none;
+      width: 290px; height: 370px; overflow: hidden; border-radius: 16px; pointer-events: none; position: relative;
+    }
+    .glass-panel-photo .frame::after {
+      content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, rgba(10,9,8,0.4));
     }
     .glass-panel-photo img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-      display: block; 
+      width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(15%) contrast(105%);
     }
 
-    /* STATEMENT SECTIONS */
+    /* TEXT SECTIONS */
     .message-section {
-      max-width: 750px;
-      margin: 6rem auto 8rem;
-      padding: 0 1.5rem;
-      text-align: center;
-      position: relative;
-      z-index: 2;
+      max-width: 750px; margin: 7rem auto 9rem; padding: 0 1.5rem; text-align: center; position: relative; z-index: 2;
     }
     .message-body { 
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(20px, 4vw, 24px); 
-      font-style: italic;
-      line-height: 1.9; 
+      font-family: 'Playfair Display', serif; font-size: clamp(20px, 4vw, 24px); font-style: italic; line-height: 1.95; color: #EAE6DF;
     }
     .message-from { 
-      font-size: 11px; 
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      margin-top: 3rem; 
-      color: var(--text-muted);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; margin-top: 3.5rem; color: var(--text-gold);
     }
 
-    /* INTERACTIVE GALLERY */
+    /* PHOTO GALLERY BLOCK */
     .grid-wrap { 
-      padding: 8rem 1.5rem; 
-      background: rgba(255, 255, 255, 0.25);
-      border-top: 1px solid rgba(255, 255, 255, 0.4);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-      position: relative;
-      z-index: 2;
+      padding: 9rem 1.5rem; background: rgba(15, 14, 13, 0.7); border-top: 1px solid rgba(230, 197, 135, 0.08); border-bottom: 1px solid rgba(230, 197, 135, 0.08);
+      position: relative; z-index: 2;
     }
-    .grid-inner { max-width: 1050px; margin: 0 auto; perspective: 1000px; }
+    .grid-inner { max-width: 1050px; margin: 0 auto; perspective: 1200px; }
     .grid-header { text-align: center; margin-bottom: 5rem; }
-    .grid-title { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 400; }
-    .grid-sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-top: 0.5rem; }
+    .grid-title { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 400; letter-spacing: -0.01em; }
+    .grid-sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-gold); margin-top: 0.6rem; }
 
     .memory-grid { 
-      display: grid; 
-      grid-template-columns: repeat(3, 1fr); 
-      gap: 32px; 
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; 
     }
     @media (max-width: 850px) { .memory-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 550px) { .memory-grid { grid-template-columns: 1fr; } }
 
     .glass-card-photo {
-      background: var(--glass-bg);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      padding: 12px;
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(61, 48, 40, 0.03);
-      transform-style: preserve-3d;
-      transition: box-shadow 0.3s ease;
+      background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 12px; border: 1px solid var(--glass-border); border-radius: 20px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4); transform-style: preserve-3d; transition: border-color 0.3s;
     }
-    .glass-card-photo:hover { box-shadow: 0 25px 50px rgba(61, 48, 40, 0.08); }
+    .glass-card-photo:hover { border-color: rgba(230, 197, 135, 0.3); }
     .glass-card-photo .frame { width: 100%; aspect-ratio: 4/5; overflow: hidden; border-radius: 12px; pointer-events: none; }
-    .glass-card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .glass-card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(10%); }
 
-    /* REACTION WISH CARDS */
+    /* WISH GRIDS WITH MAGNETIC HOVER GLOWS */
     .wishes-wrap { 
-      padding: 8rem 1.5rem; 
-      max-width: 1050px; 
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
+      padding: 9rem 1.5rem; max-width: 1050px; margin: 0 auto; position: relative; z-index: 2;
     }
-    .wishes-title { font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 5rem; text-align: center; }
+    .wishes-title { font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 5rem; text-align: center; letter-spacing: -0.01em; }
     .wishes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
     @media (max-width: 900px) { .wishes-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 500px) { .wishes-grid { grid-template-columns: 1fr; } }
 
     .wish { 
-      background: var(--glass-bg);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1px solid var(--glass-border);
-      padding: 3.5rem 1.5rem; 
-      text-align: center; 
-      border-radius: 24px;
-      box-shadow: 0 15px 35px rgba(61, 48, 40, 0.02);
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+      background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border);
+      padding: 3.5rem 1.5rem; text-align: center; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s, border-color 0.3s;
     }
     .wish:hover { 
-      transform: translateY(-10px) scale(1.03); 
-      background: rgba(255, 255, 255, 0.65);
-      box-shadow: 0 30px 50px rgba(212, 175, 55, 0.08);
+      transform: translateY(-12px) scale(1.02); background: rgba(30, 27, 24, 0.85);
+      border-color: rgba(230, 197, 135, 0.4); box-shadow: 0 30px 60px rgba(230, 197, 135, 0.12);
     }
     
     .wish-icon { 
-      font-size: 20px; margin-bottom: 1.5rem; display: inline-block; color: #E2BA6E;
+      font-size: 20px; margin-bottom: 1.5rem; display: inline-block; color: var(--text-gold);
       transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .wish:hover .wish-icon { transform: scale(1.25) rotate(8deg); }
-    .wish-label { font-size: 15px; font-weight: 600; }
+    .wish-label { font-size: 15px; font-weight: 600; color: var(--text-light); }
     .wish-sub { font-size: 12px; color: var(--text-muted); margin-top: 8px; line-height: 1.5; }
 
     /* FOOTER CHAPTERSIGN */
-    .signoff { padding: 9rem 1.5rem; text-align: center; position: relative; z-index: 2; }
-    .signoff-msg { font-family: 'Playfair Display', serif; font-size: clamp(32px, 7vw, 54px); font-style: italic; }
-    .signoff-sub { font-size: 11px; font-weight: 600; color: var(--text-muted); margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 0.35em; }
+    .signoff { padding: 10rem 1.5rem; text-align: center; position: relative; z-index: 2; }
+    .signoff-msg { font-family: 'Playfair Display', serif; font-size: clamp(32px, 7vw, 54px); font-style: italic; color: var(--text-light); }
+    .signoff-sub { font-size: 11px; font-weight: 600; color: var(--text-gold); margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 0.4em; }
 
-    /* SEAMLESS LIGHTBOX MODE */
+    /* LIGHTBOX SCREEN OVERLAY */
     .lightbox-trigger { cursor: pointer; }
     .lightbox-overlay {
-      position: fixed; inset: 0; z-index: 500; background: rgba(250, 248, 245, 0.95);
+      position: fixed; inset: 0; z-index: 500; background: rgba(6, 5, 5, 0.96);
       display: flex; align-items: center; justify-content: center; padding: 2rem 1.25rem;
       opacity: 0; visibility: hidden; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s;
     }
     .lightbox-overlay.open { opacity: 1; visibility: visible; }
     .lightbox-content { 
-      position: relative; max-width: min(580px, 92vw); background: var(--glass-bg); padding: 12px; 
-      border: 1px solid var(--glass-border); border-radius: 24px; backdrop-filter: blur(25px);
+      position: relative; max-width: min(580px, 92vw); background: #12100E; padding: 12px; 
+      border: 1px solid rgba(230, 197, 135, 0.2); border-radius: 24px;
       transform: scale(0.9); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .lightbox-overlay.open .lightbox-content { transform: scale(1); }
     .lightbox-content img { display: block; width: 100%; height: auto; max-height: 75vh; object-fit: contain; border-radius: 14px; }
-    .lightbox-close { position: absolute; top: -50px; right: 0; background: none; color: var(--text-bronze); border: none; font-size: 24px; cursor: pointer; }
+    .lightbox-close { position: absolute; top: -50px; right: 0; background: none; color: var(--text-gold); border: none; font-size: 24px; cursor: pointer; }
   </style>
 </head>
 <body>
 
   <canvas id="bg-canvas"></canvas>
-  <div class="cosmic-glow glow-1"></div>
-  <div class="cosmic-glow glow-2"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
 
   <div class="hero">
     <span class="eyebrow">The Commencement Feature</span>
@@ -352,67 +269,56 @@
   </div>
 
   <script>
-    /* 1. DYNAMIC CHAMPAGNE ENGINE */
+    /* 1. LUXURIOUS DRIFT ENGINE (CANVAS) */
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
     let mouse = { x: null, y: null };
 
     function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth; canvas.height = window.innerHeight;
     }
-    window.addEventListener('resize', resize);
-    resize();
+    window.addEventListener('resize', resize); resize();
 
     window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
     window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
 
-    class Bubble {
-      constructor() {
-        this.reset();
-        this.y = Math.random() * canvas.height; 
-      }
+    class Amber {
+      constructor() { this.reset(); this.y = Math.random() * canvas.height; }
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = canvas.height + 20;
-        this.radius = Math.random() * 3.5 + 1;
-        this.speedY = Math.random() * 0.8 + 0.4;
+        this.radius = Math.random() * 2.5 + 0.8;
+        this.speedY = Math.random() * 0.5 + 0.3;
         this.wobble = Math.random() * 2;
-        this.wobbleSpeed = Math.random() * 0.02 + 0.01;
-        this.opacity = Math.random() * 0.4 + 0.15;
+        this.wobbleSpeed = Math.random() * 0.01 + 0.005;
+        this.opacity = Math.random() * 0.4 + 0.1;
       }
       update() {
         this.y -= this.speedY;
         this.wobble += this.wobbleSpeed;
-        this.x += Math.sin(this.wobble) * 0.3;
+        this.x += Math.sin(this.wobble) * 0.2;
 
-        // Interaction with mouse
         if (mouse.x !== null && mouse.y !== null) {
-          let dx = this.x - mouse.x;
-          let dy = this.y - mouse.y;
+          let dx = this.x - mouse.x; let dy = this.y - mouse.y;
           let dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            let force = (120 - dist) / 120;
-            this.x += (dx / dist) * force * 2;
+          if (dist < 130) {
+            let force = (130 - dist) / 130;
+            this.x += (dx / dist) * force * 2.5;
           }
         }
-
-        if (this.y < -20 || this.opacity <= 0) this.reset();
+        if (this.y < -20) this.reset();
       }
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+        ctx.fillStyle = `rgba(230, 197, 135, ${this.opacity})`;
         ctx.fill();
       }
     }
 
-    function initParticles() {
-      const count = Math.min(Math.floor(canvas.width / 15), 90);
-      for(let i=0; i<count; i++) particles.push(new Bubble());
-    }
-    initParticles();
+    const initCount = Math.min(Math.floor(canvas.width / 18), 85);
+    for(let i=0; i<initCount; i++) particles.push(new Amber());
 
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -421,30 +327,29 @@
     }
     animate();
 
-    /* 2. HYPER-SMOOTH PARALLAX TILT EFFECT */
+    /* 2. PERSPECTIVE PARALLAX TILT HOVER */
     document.querySelectorAll('.tilt-target').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left - (rect.width / 2);
         const y = e.clientY - rect.top - (rect.height / 2);
-        const degX = (-y / (rect.height / 2)) * 10;
-        const degY = (x / (rect.width / 2)) * 10;
-        card.style.transform = `rotateX(${degX}deg) rotateY(${degY}deg) translateY(-5px)`;
+        const degX = (-y / (rect.height / 2)) * 9;
+        const degY = (x / (rect.width / 2)) * 9;
+        card.style.transform = `rotateX(${degX}deg) rotateY(${degY}deg) translateY(-6px)`;
       });
       card.addEventListener('mouseleave', () => {
         card.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0px)';
       });
     });
 
-    /* 3. LIGHTBOX */
+    /* 3. LIGHTBOX INTERACTION */
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxClose = document.getElementById('lightboxClose');
 
     document.querySelectorAll('.lightbox-trigger').forEach(trigger => {
       trigger.addEventListener('click', () => {
-        const targetSrc = trigger.getAttribute('data-full') || trigger.querySelector('img').src;
-        lightboxImg.src = targetSrc;
+        lightboxImg.src = trigger.getAttribute('data-full');
         lightbox.classList.add('open');
       });
     });

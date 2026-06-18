@@ -6,278 +6,272 @@
   <title>Carlos — The Commencement Feature</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
-      --bg-cream: #FFFDF6;
-      --text-espresso: #201515;
-      --accent-apricot: #FFB399;
-      --accent-citron: #FFE89E;
-      --border-line: #201515;
+      --bg-dark: #0A0A0C;
+      --text-light: #F4F4F6;
+      --accent-gold: #D4AF37;
+      --accent-crimson: #6B000F;
+      --border-sharp: #F4F4F6;
     }
     
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg-cream);
-      color: var(--text-espresso);
+      background: var(--bg-dark);
+      color: var(--text-light);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* VOGUE TYPOGRAPHY & LAYOUT HERO */
     .hero { 
-      padding: 6rem 1.5rem 3rem; 
-      text-align: center; 
-      max-width: 1100px;
+      padding: 8rem 1.5rem 4rem; 
+      max-width: 1200px;
       margin: 0 auto;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
     }
     
     .eyebrow { 
-      font-size: 11px; 
-      font-weight: 800; 
-      letter-spacing: 0.4em; 
+      font-size: 12px; 
+      font-weight: 900; 
+      letter-spacing: 0.5em; 
       text-transform: uppercase; 
-      background: var(--accent-citron);
+      background: var(--accent-crimson);
+      color: white;
       display: inline-block;
-      padding: 4px 12px;
+      padding: 6px 16px;
       margin-bottom: 2rem;
-      border: 2px solid var(--border-line);
+      transform: rotate(-1deg);
     }
     
     .title-wrap {
       position: relative;
-      margin-bottom: 4rem;
+      width: 100%;
+      z-index: 2;
     }
 
     .giant-title { 
-      font-family: 'Abril+Fatface', serif; 
-      font-size: clamp(60px, 16vw, 130px); 
+      font-family: 'Abril Fatface', serif; 
+      font-size: clamp(70px, 20vw, 160px); 
       font-weight: 400; 
-      color: var(--text-espresso); 
-      line-height: 0.9;
+      color: var(--text-light); 
+      line-height: 0.8;
       text-transform: uppercase;
+      letter-spacing: -0.03em;
+      transform: skewX(-6deg);
+      text-shadow: 4px 4px 0px var(--accent-crimson);
     }
     
     .name-tag { 
-      font-size: 16px; 
-      font-weight: 600;
-      color: var(--text-espresso); 
-      margin-top: 1.5rem; 
-      letter-spacing: 0.05em;
+      font-size: 14px; 
+      font-weight: 700;
+      color: var(--accent-gold); 
+      margin-top: 2rem; 
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      border-left: 4px solid var(--accent-gold);
+      padding-left: 12px;
     }
 
-    /* LUXE POLAROID FEATURE */
     .hero-photo-wrap { 
+      width: 100%;
       display: flex; 
-      justify-content: center; 
-      margin-top: 2rem; 
+      justify-content: flex-end; 
+      margin-top: -2rem;
+      z-index: 1;
+    }
+    @media (max-width: 768px) {
+      .hero-photo-wrap { justify-content: center; margin-top: 2rem; }
     }
     .vogue-polaroid { 
-      background: #FFFFFF;
-      padding: 20px 20px 50px 20px;
-      border: 3px solid var(--border-line);
-      box-shadow: 12px 12px 0px var(--text-espresso);
+      background: #000000;
+      padding: 16px 16px 60px 16px;
+      border: 3px solid var(--border-sharp);
+      box-shadow: -16px 16px 0px var(--accent-gold);
       transform: rotate(-2deg);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     }
-    .vogue-polaroid:hover {
-      transform: rotate(1deg) scale(1.02);
-    }
+    .vogue-polaroid:hover { transform: rotate(0deg) scale(1.03); }
     .vogue-polaroid .frame { 
-      width: 300px; 
-      height: 380px; 
+      width: min(340px, 80vw); 
+      height: 420px; 
       overflow: hidden; 
-      border: 2px solid var(--border-line);
+      border: 1px solid rgba(255,255,255,0.2);
     }
     .vogue-polaroid img { 
       width: 100%; 
       height: 100%; 
       object-fit: cover; 
       display: block; 
+      filter: grayscale(10%) contrast(110%);
     }
 
-    /* ASYMMETRICAL EDITORIAL BLOCK */
     .message-section {
-      max-width: 1100px;
-      margin: 6rem auto;
+      max-width: 1200px;
+      margin: 8rem auto;
       padding: 0 1.5rem;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 5rem;
+      align-items: start;
     }
     @media (max-width: 768px) {
-      .message-section { grid-template-columns: 1fr; gap: 2.5rem; margin: 4rem auto; }
+      .message-section { grid-template-columns: 1fr; gap: 3rem; margin: 5rem auto; }
     }
 
     .editorial-label {
-      font-family: 'Abril+Fatface', serif;
-      font-size: clamp(40px, 8vw, 64px);
-      line-height: 1.0;
-      color: var(--text-espresso);
+      font-family: 'Abril Fatface', serif;
+      font-size: clamp(50px, 10vw, 85px);
+      line-height: 0.9;
+      color: var(--text-light);
       text-transform: uppercase;
+      transform: rotate(-1.5deg);
     }
     .editorial-label span {
       display: block;
-      color: var(--accent-apricot);
-      -webkit-text-stroke: 2px var(--border-line);
+      color: transparent;
+      -webkit-text-stroke: 2px var(--border-sharp);
     }
 
     .message-body { 
-      font-size: 18px; 
-      font-weight: 500;
-      line-height: 1.8; 
-      color: var(--text-espresso); 
+      font-size: 20px; 
+      font-weight: 400;
+      line-height: 1.7; 
+      color: #CBCBCF; 
     }
     .message-from { 
-      font-size: 12px; 
-      font-weight: 800;
-      letter-spacing: 0.2em;
+      font-size: 13px; 
+      font-weight: 900;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      margin-top: 2rem; 
+      margin-top: 3rem; 
       display: inline-block;
-      border-bottom: 3px solid var(--accent-apricot);
-      padding-bottom: 4px;
+      background: var(--text-light);
+      color: var(--bg-dark);
+      padding: 6px 12px;
     }
 
-    /* THE SPREAD GRID */
     .grid-wrap { 
-      padding: 6rem 1.5rem; 
-      background: var(--accent-citron);
-      border-top: 3px solid var(--border-line);
-      border-bottom: 3px solid var(--border-line);
+      padding: 8rem 1.5rem; 
+      background: #111115;
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
     }
-    .grid-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    .grid-inner { max-width: 1200px; margin: 0 auto; }
     .grid-title { 
-      font-family: 'Abril+Fatface', serif; 
-      font-size: clamp(36px, 8vw, 54px);
-      color: var(--text-espresso); 
+      font-family: 'Abril Fatface', serif; 
+      font-size: clamp(40px, 8vw, 64px);
+      color: var(--text-light); 
       text-transform: uppercase;
-      margin-bottom: 4rem;
+      margin-bottom: 5rem;
     }
     .memory-grid { 
       display: grid; 
       grid-template-columns: repeat(3, 1fr); 
-      gap: 30px; 
+      gap: 40px; 
     }
     @media (max-width: 900px) { .memory-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) { .memory-grid { grid-template-columns: 1fr; } }
 
     .grid-polaroid {
-      background: #FFFFFF;
-      padding: 14px 14px 40px 14px;
-      border: 2px solid var(--border-line);
-      box-shadow: 8px 8px 0px var(--text-espresso);
-      transition: transform 0.3s ease;
+      background: #000000;
+      padding: 12px 12px 45px 12px;
+      border: 2px solid var(--border-sharp);
+      box-shadow: 10px 10px 0px var(--accent-crimson);
+      transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.3s ease;
     }
-    .grid-polaroid:nth-child(even) { transform: rotate(1.5deg); }
-    .grid-polaroid:nth-child(odd) { transform: rotate(-1.5deg); }
-    .grid-polaroid:hover { transform: translateY(-5px) rotate(0deg); }
+    .grid-polaroid:nth-child(even) { transform: rotate(-2deg); }
+    .grid-polaroid:nth-child(odd) { transform: rotate(2deg); }
+    .grid-polaroid:hover { 
+      transform: translateY(-8px) rotate(0deg); 
+      box-shadow: 14px 14px 0px var(--accent-gold);
+    }
     
-    .grid-polaroid .frame { width: 100%; aspect-ratio: 1/1; overflow: hidden; border: 2px solid var(--border-line); }
+    .grid-polaroid .frame { width: 100%; aspect-ratio: 1/1; overflow: hidden; }
     .grid-polaroid img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* POPPING OBJECTIVES ARCHITECTURE */
     .wishes-wrap { 
-      padding: 7rem 1.5rem; 
-      max-width: 1100px; 
+      padding: 9rem 1.5rem; 
+      max-width: 1200px; 
       margin: 0 auto;
     }
     .wishes-title { 
-      font-family: 'Abril+Fatface', serif; 
-      font-size: clamp(36px, 8vw, 54px);
-      color: var(--text-espresso); 
+      font-family: 'Abril Fatface', serif; 
+      font-size: clamp(40px, 8vw, 64px);
+      color: var(--text-light); 
       text-transform: uppercase;
-      margin-bottom: 4rem; 
+      margin-bottom: 5rem; 
       text-align: center;
     }
     .wishes-grid { 
       display: grid; 
       grid-template-columns: repeat(4, 1fr); 
-      gap: 24px; 
+      gap: 30px; 
     }
     @media (max-width: 900px) { .wishes-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 500px) { .wishes-grid { grid-template-columns: 1fr; } }
 
     .wish { 
-      background: #FFFFFF;
-      border: 2px solid var(--border-line);
-      padding: 3rem 1.5rem; 
+      background: #111115;
+      border: 2px solid var(--border-sharp);
+      padding: 4rem 2rem; 
       text-align: center; 
-      box-shadow: 6px 6px 0px var(--text-espresso);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     }
-    .wish:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 8px 8px 0px var(--text-espresso);
-    }
+    .wish:hover { transform: scale(1.04); background: #16161c; }
+    
     .wish-icon { 
-      font-size: 24px; 
-      margin-bottom: 1.5rem; 
+      font-size: 20px; 
+      margin-bottom: 2rem; 
       display: inline-block; 
-      color: var(--text-espresso);
-      background: var(--accent-apricot);
-      width: 50px; height: 50px; line-height: 46px;
-      border-radius: 50%; border: 2px solid var(--border-line);
+      color: var(--bg-dark);
+      background: var(--text-light);
+      width: 54px; height: 54px; line-height: 54px;
+      border: 1px solid var(--border-sharp);
     }
-    .wish-label { 
-      font-size: 16px; 
-      font-weight: 800; 
-      color: var(--text-espresso); 
-      text-transform: uppercase;
-    }
-    .wish-sub { 
-      font-size: 13px; 
-      color: var(--text-espresso); 
-      margin-top: 8px; 
-      font-weight: 500;
-      line-height: 1.4;
-    }
+    .wish-label { font-size: 18px; font-weight: 700; color: var(--text-light); text-transform: uppercase; }
+    .wish-sub { font-size: 14px; color: #8A8A93; margin-top: 12px; font-weight: 400; line-height: 1.5; }
 
-    /* FOOTER SPREAD */
     .signoff { 
-      padding: 8rem 1.5rem; 
+      padding: 10rem 1.5rem; 
       text-align: center; 
-      background: var(--accent-apricot);
-      border-top: 3px solid var(--border-line);
+      background: var(--accent-crimson);
+      border-top: 3px solid var(--border-sharp);
     }
     .signoff-msg { 
-      font-family: 'Abril+Fatface', serif; 
-      font-size: clamp(40px, 9vw, 72px); 
-      color: var(--text-espresso); 
+      font-family: 'Abril Fatface', serif; 
+      font-size: clamp(45px, 10vw, 90px); 
+      color: var(--text-light); 
       text-transform: uppercase;
-      line-height: 1.0;
+      line-height: 0.85;
+      transform: skewX(-4deg);
     }
     .signoff-sub { 
-      font-size: 12px; 
-      font-weight: 800; 
-      color: var(--text-espresso); 
-      margin-top: 1.5rem; 
+      font-size: 13px; 
+      font-weight: 900; 
+      color: var(--accent-gold); 
+      margin-top: 2.5rem; 
       text-transform: uppercase;
-      letter-spacing: 0.3em;
+      letter-spacing: 0.4em;
     }
 
-    /* LIGHTBOX OVERLAY */
     .lightbox-trigger { cursor: pointer; }
     .lightbox-overlay {
-      position: fixed; inset: 0; z-index: 500; background: rgba(32, 21, 21, 0.95);
+      position: fixed; inset: 0; z-index: 500; background: rgba(5, 5, 7, 0.98);
       display: flex; align-items: center; justify-content: center; padding: 2rem 1.25rem;
       opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
     }
     .lightbox-overlay.open { opacity: 1; visibility: visible; }
-    .lightbox-content { position: relative; max-width: min(600px, 92vw); max-height: 85vh; background: white; padding: 12px 12px 40px 12px; border: 3px solid var(--border-line); }
-    .lightbox-content img { display: block; width: 100%; height: 100%; max-height: 75vh; object-fit: contain; border: 2px solid var(--border-line); }
-    .lightbox-close {
-      position: absolute; top: -45px; right: 0; background: none; color: white; border: none; font-size: 24px; cursor: pointer;
-    }
+    .lightbox-content { position: relative; max-width: min(650px, 92vw); max-height: 85vh; background: #000; padding: 16px 16px 50px 16px; border: 2px solid var(--border-sharp); }
+    .lightbox-content img { display: block; width: 100%; height: 100%; max-height: 70vh; object-fit: contain; }
+    .lightbox-close { position: absolute; top: -50px; right: 0; background: none; color: white; border: none; font-size: 28px; cursor: pointer; }
   </style>
 </head>
 <body>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Congratulations Carlos 🎓</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Jua&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg-light: #EFFFFB;
+      --bubble-green: #06D6A0;
+      --bubble-blue: #3A86FF;
+      --bubble-yellow: #FFD23F;
+      --bubble-pink: #FF4A75;
+      --bubble-orange: #FF9F1C;
+      --dark: #2B2D42;
+    }
+    
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: var(--bg-light);
+      color: var(--dark);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* GRADUATION FALLING STARS ANIMATION */
+    .star-stream {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 10; overflow: hidden;
+    }
+    .star-particle {
+      position: absolute; top: -30px;
+      animation: starFall linear infinite;
+    }
+    @keyframes starFall {
+      0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 1; }
+      100% { transform: translateY(105vh) rotate(360deg) scale(1.1); opacity: 0; }
+    }
+
+    /* HERO LAYOUT */
+    .hero-container {
+      text-align: center; padding: 5rem 1rem 3rem; position: relative; z-index: 2;
+    }
+    .grad-icon {
+      font-size: 3.2rem; color: var(--bubble-blue);
+      animation: spinWobble 2.5s infinite linear; display: inline-block; margin-bottom: 1rem;
+    }
+    @keyframes spinWobble {
+      0%, 100% { transform: rotate(-8deg); }
+      50% { transform: rotate(8deg); }
+    }
+    
+    .main-title {
+      font-family: 'Jua', sans-serif; font-size: clamp(3.5rem, 10vw, 7rem);
+      color: var(--bubble-green); text-shadow: 4px 4px 0px var(--bubble-yellow);
+      margin-bottom: 1rem; letter-spacing: 2px;
+    }
+    .sub-tag {
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem); font-weight: 600;
+      background: #FFF; padding: 0.6rem 1.8rem; border-radius: 50px;
+      display: inline-block; box-shadow: 0 8px 0 var(--bubble-pink); margin-bottom: 3rem;
+    }
+
+    /* STICKER PHOTO CONTAINER */
+    .avatar-wrapper { display: flex; justify-content: center; margin-bottom: 4rem; }
+    .avatar-sticker {
+      background: #FFF; padding: 15px; border-radius: 40px;
+      box-shadow: 0 12px 0 var(--bubble-blue); transform: rotate(-2deg);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
+    }
+    .avatar-sticker:hover { transform: scale(1.05) rotate(2deg); }
+    .avatar-inner { width: min(300px, 75vw); height: 320px; border-radius: 30px; overflow: hidden; }
+    .avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ORGANIC CLOUD MESSAGE BOX */
+    .cloud-card {
+      max-width: 750px; margin: 2rem auto 5rem; background: #FFF;
+      border-radius: 50px; padding: 3.5rem 2rem; box-shadow: 0 15px 0 var(--bubble-orange);
+      text-align: center; position: relative; z-index: 2;
+    }
+    .cloud-card h2 { font-family: 'Jua', sans-serif; font-size: 2.2rem; color: var(--bubble-blue); margin-bottom: 1.5rem; }
+    .cloud-card p { font-size: 1.2rem; line-height: 1.7; font-weight: 400; }
+    .cloud-signature { display: inline-block; margin-top: 2rem; background: var(--bubble-yellow); padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: 700; }
+
+    /* SCATTERED ROUND GALLERY */
+    .section-heading { font-family: 'Jua', sans-serif; font-size: 2.5rem; text-align: center; color: var(--bubble-blue); margin-bottom: 3rem; }
+    .bubble-gallery {
+      max-width: 1100px; margin: 0 auto 5rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 35px; padding: 0 1rem;
+    }
+    .gallery-bubble-item {
+      background: #FFF; padding: 12px; border-radius: 35px; box-shadow: 0 10px 0 var(--bubble-green);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
+    }
+    .gallery-bubble-item:nth-child(even) { transform: rotate(3deg); box-shadow: 0 10px 0 var(--bubble-pink); }
+    .gallery-bubble-item:nth-child(odd) { transform: rotate(-4deg); }
+    .gallery-bubble-item:hover { transform: scale(1.08) rotate(0deg) translateY(-5px); }
+    
+    .gallery-inner-box { width: 240px; height: 240px; border-radius: 25px; overflow: hidden; }
+    .gallery-inner-box img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* WISHES BUBBLES GRID */
+    .wishes-board {
+      max-width: 1100px; margin: 0 auto 6rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; padding: 0 1rem;
+    }
+    .wish-bubble-card { background: #FFF; border-radius: 35px; padding: 2.5rem 1.5rem; text-align: center; transition: transform 0.2s ease; box-shadow: 0 8px 0 var(--dark); }
+    .wish-bubble-card:hover { transform: translateY(-8px); }
+    .wish-bubble-card:nth-child(1) { background: #EAFEFA; box-shadow: 0 8px 0 var(--bubble-green); }
+    .wish-bubble-card:nth-child(2) { background: #FFF7EA; box-shadow: 0 8px 0 var(--bubble-orange); }
+    .wish-bubble-card:nth-child(3) { background: #EAF2FE; box-shadow: 0 8px 0 var(--bubble-blue); }
+    .wish-bubble-card:nth-child(4) { background: #FFEDF1; box-shadow: 0 8px 0 var(--bubble-pink); }
+
+    .bubble-icon-wrap { width: 60px; height: 60px; line-height: 60px; background: #FFF; border-radius: 50%; display: inline-block; font-size: 1.5rem; margin-bottom: 1rem; box-shadow: 0 4px 0 rgba(0,0,0,0.1); }
+    .wish-title-label { font-family: 'Jua', sans-serif; font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .wish-desc-text { font-size: 0.95rem; opacity: 0.8; line-height: 1.4; }
+
+    /* FOOTER */
+    .party-footer { background: var(--bubble-green); color: #FFF; text-align: center; padding: 5rem 1rem; border-radius: 60px 60px 0 0; }
+    .footer-title { font-family: 'Jua', sans-serif; font-size: clamp(2.3rem, 6vw, 4.5rem); margin-bottom: 1rem; }
+
+    /* LIGHTBOX OVERLAY */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 500; background: rgba(43, 45, 66, 0.85);
+      backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1rem;
+    }
+    .lightbox-overlay.open { opacity: 1; visibility: visible; }
+    .lightbox-box {
+      background: #FFF; padding: 15px; border-radius: 40px; max-width: 550px; width: 100%; position: relative; box-shadow: 0 20px 0 var(--dark); transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .lightbox-overlay.open .lightbox-box { transform: scale(1); }
+    .lightbox-box img { width: 100%; max-height: 65vh; object-fit: contain; border-radius: 25px; display: block; }
+    .lightbox-close-btn { position: absolute; top: -20px; right: -10px; width: 45px; height: 45px; background: var(--bubble-pink); color: white; border: none; border-radius: 50%; font-size: 1.2rem; cursor: pointer; box-shadow: 0 5px 0 var(--dark); }
+  </style>
+</head>
+<body>
+
+  <div class="star-stream" id="starContainer"></div>
+
+  <div class="hero-container">
+    <i class="fa-solid fa-graduation-cap grad-icon"></i>
+    <h1 class="main-title">Carlos!</h1>
+    <div class="sub-tag">Next Stop: Everything! 🎓⭐️</div>
+    
+    <div class="avatar-wrapper">
+      <div class="avatar-sticker lightbox-trigger" data-full="https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=1400&q=90&auto=format&fit=crop">
+        <div class="avatar-inner">
+          <img src="https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=1400&q=90&auto=format&fit=crop" alt="Carlos Portrait" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cloud-card">
+    <h2>The Next Big Thing! 💥</h2>
+    <p>
+      "Carlos, the late nights, the hard work, the moments you wanted to quit and didn't — it all led right here. And here is incredible.<br><br>
+      Watching you walk across that stage is one of the proudest moments we'll ever have. You've worked for this with everything you've got, and we couldn't be more excited to see what comes next. The world is genuinely lucky to have you in it."
+    </p>
+    <div class="cloud-signature">Deeply proud of you, always! ⭐️</div>
+  </div>
+
+  <h2 class="section-heading">The Blueprint // In Frame 📸</h2>
+  <div class="bubble-gallery">
+    <div class="gallery-bubble-item lightbox-trigger" data-full="https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=1400&q=90&auto=format&fit=crop">
+      <div class="gallery-inner-box"><img src="https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=500&q=85&auto=format&fit=crop" alt="Graduation Cap" /></div>
+    </div>
+    <div class="gallery-bubble-item lightbox-trigger" data-full="https://images.unsplash.com/photo-1627556592933-ffe99c1cd9eb?w=1400&q=90&auto=format&fit=crop">
+      <div class="gallery-inner-box"><img src="https://images.unsplash.com/photo-1627556592933-ffe99c1cd9eb?w=500&q=85&auto=format&fit=crop" alt="University" /></div>
+    </div>
+    <div class="gallery-bubble-item lightbox-trigger" data-full="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1400&q=90&auto=format&fit=crop">
+      <div class="gallery-inner-box"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&q=85&auto=format&fit=crop" alt="Lecture Hall" /></div>
+    </div>
+  </div>
+
+  <h2 class="section-heading">Future Intentions ✨</h2>
+  <div class="wishes-board">
+    <div class="wish-bubble-card">
+      <div class="bubble-icon-wrap" style="color: var(--bubble-green);"><i class="fa-solid fa-briefcase"></i></div>
+      <div class="wish-title-label">Dream Career</div>
+      <div class="wish-desc-text">Doing exactly what you love</div>
+    </div>
+    <div class="wish-bubble-card">
+      <div class="bubble-icon-wrap" style="color: var(--bubble-orange);"><i class="fa-solid fa-arrow-trend-up"></i></div>
+      <div class="wish-title-label">Opportunities</div>
+      <div class="wish-desc-text">Beyond your wildest imagination</div>
+    </div>
+    <div class="wish-bubble-card">
+      <div class="bubble-icon-wrap" style="color: var(--bubble-blue);"><i class="fa-solid fa-compass"></i></div>
+      <div class="wish-title-label">New Spaces</div>
+      <div class="wish-desc-text">The global canvas is yours now</div>
+    </div>
+    <div class="wish-bubble-card">
+      <div class="bubble-icon-wrap" style="color: var(--bubble-pink);"><i class="fa-solid fa-award"></i></div>
+      <div class="wish-title-label">Big Success</div>
+      <div class="wish-desc-text">You have precisely what it takes</div>
+    </div>
+  </div>
+
+  <div class="party-footer">
+    <h2 class="footer-title">Bring on the next chapter!</h2>
+    <p style="font-size: 1.3rem; font-weight: 600; opacity: 0.9;">Congratulations, Carlos 🎉</p>
+  </div>
+
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-box">
+      <button class="lightbox-close-btn" id="lightboxClose"><i class="fa-solid fa-xmark"></i></button>
+      <img id="lightboxImg" src="" alt="" />
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('starContainer');
+    const colors = ['#06D6A0', '#3A86FF', '#FFD23F', '#FF4A75', '#FF9F1C'];
+    
+    // Create floating party stars/circles
+    for (let i = 0; i < 40; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('star-particle');
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.width = particle.style.height = (Math.random() * 12 + 6) + 'px';
+      particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      particle.style.borderRadius = '50%';
+      particle.style.animationDuration = (Math.random() * 2.5 + 3) + 's';
+      particle.style.animationDelay = (Math.random() * 4) + 's';
+      container.appendChild(particle);
+    }
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    document.querySelectorAll('.lightbox-trigger').forEach(item => {
+      item.addEventListener('click', () => {
+        lightboxImg.src = item.getAttribute('data-full');
+        lightbox.classList.add('open');
+      });
+    });
+    lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+  </script>
+</body>
+</html>

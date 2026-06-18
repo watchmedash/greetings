@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Mariel 🎉</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Jua&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg-light: #FFF9E6;
+      --bubble-pink: #FF6B8B;
+      --bubble-blue: #4EA8DE;
+      --bubble-yellow: #FFD166;
+      --bubble-purple: #9B5DE5;
+      --bubble-green: #06D6A0;
+      --dark: #2B2D42;
+    }
+    
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: var(--bg-light);
+      color: var(--dark);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* CONTINUOUS FLOATING CONFETTI ANIMATION */
+    .confetti-container {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 10; overflow: hidden;
+    }
+    .confetti {
+      position: absolute; display: block;
+      top: -20px; border-radius: 50%;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* CARTOONISH BOUNCY HERO */
+    .hero-container {
+      text-align: center;
+      padding: 5rem 1rem 3rem;
+      position: relative;
+      z-index: 2;
+    }
+    .party-hat-icon {
+      font-size: 3rem;
+      color: var(--bubble-pink);
+      animation: bounceWobble 2s infinite ease-in-out;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    @keyframes bounceWobble {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+    }
+    
+    .main-title {
+      font-family: 'Jua', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      color: var(--bubble-purple);
+      text-shadow: 4px 4px 0px var(--bubble-yellow);
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+    .sub-tag {
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 600;
+      background: #FFF;
+      padding: 0.6rem 1.8rem;
+      border-radius: 50px;
+      display: inline-block;
+      box-shadow: 0 8px 0 var(--bubble-blue);
+      margin-bottom: 3rem;
+    }
+
+    /* SCATTERED ROUND STICKER PHOTO CONTAINER */
+    .avatar-wrapper {
+      display: flex; justify-content: center; margin-bottom: 4rem;
+    }
+    .avatar-sticker {
+      background: #FFF;
+      padding: 15px;
+      border-radius: 40px;
+      box-shadow: 0 12px 0 var(--bubble-pink);
+      transform: rotate(-3deg);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+    .avatar-sticker:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+    .avatar-inner {
+      width: min(300px, 75vw);
+      height: 320px;
+      border-radius: 30px;
+      overflow: hidden;
+    }
+    .avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ORGANIC CLOUD MESSAGE SPACE */
+    .cloud-card {
+      max-width: 750px;
+      margin: 2rem auto 5rem;
+      background: #FFF;
+      border-radius: 50px;
+      padding: 3.5rem 2rem;
+      box-shadow: 0 15px 0 var(--bubble-purple);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .cloud-card h2 {
+      font-family: 'Jua', sans-serif;
+      font-size: 2.2rem;
+      color: var(--bubble-pink);
+      margin-bottom: 1.5rem;
+    }
+    .cloud-card p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+    .cloud-signature {
+      display: inline-block;
+      margin-top: 2rem;
+      background: var(--bubble-yellow);
+      padding: 0.5rem 1.5rem;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    /* FLUID/BUBBLE GALLERY SECTIONS */
+    .section-heading {
+      font-family: 'Jua', sans-serif;
+      font-size: 2.5rem;
+      text-align: center;
+      color: var(--bubble-blue);
+      margin-bottom: 3rem;
+    }
+    .bubble-gallery {
+      max-width: 1100px;
+      margin: 0 auto 5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 35px;
+      padding: 0 1rem;
+    }
+    .gallery-bubble-item {
+      background: #FFF;
+      padding: 12px;
+      border-radius: 35px;
+      box-shadow: 0 10px 0 var(--bubble-green);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+    .gallery-bubble-item:nth-child(even) { transform: rotate(4deg); box-shadow: 0 10px 0 var(--bubble-yellow); }
+    .gallery-bubble-item:nth-child(odd) { transform: rotate(-3deg); }
+    .gallery-bubble-item:hover { transform: scale(1.08) rotate(0deg) translateY(-5px); }
+    
+    .gallery-inner-box {
+      width: 240px; height: 240px;
+      border-radius: 25px; overflow: hidden;
+    }
+    .gallery-inner-box img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* WISH BUBBLES GRID */
+    .wishes-board {
+      max-width: 1100px;
+      margin: 0 auto 6rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      padding: 0 1rem;
+    }
+    .wish-bubble-card {
+      background: #FFF;
+      border-radius: 35px;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      transition: transform 0.2s ease;
+      box-shadow: 0 8px 0 var(--dark);
+    }
+    .wish-bubble-card:hover { transform: translateY(-8px); }
+    .wish-bubble-card:nth-child(1) { background: #FFEDF1; box-shadow: 0 8px 0 var(--bubble-pink); }
+    .wish-bubble-card:nth-child(2) { background: #E8F7FF; box-shadow: 0 8px 0 var(--bubble-blue); }
+    .wish-bubble-card:nth-child(3) { background: #F3EAFE; box-shadow: 0 8px 0 var(--bubble-purple); }
+    .wish-bubble-card:nth-child(4) { background: #E6FBF5; box-shadow: 0 8px 0 var(--bubble-green); }
+
+    .bubble-icon-wrap {
+      width: 60px; height: 60px; line-height: 60px;
+      background: #FFF; border-radius: 50%; display: inline-block;
+      font-size: 1.5rem; margin-bottom: 1rem;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    }
+    .wish-title-label { font-family: 'Jua', sans-serif; font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .wish-desc-text { font-size: 0.95rem; opacity: 0.8; line-height: 1.4; }
+
+    /* ROUND FOOTER SIGN OFF */
+    .party-footer {
+      background: var(--bubble-purple);
+      color: #FFF;
+      text-align: center;
+      padding: 5rem 1rem;
+      border-radius: 60px 60px 0 0;
+    }
+    .footer-title {
+      font-family: 'Jua', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      margin-bottom: 1rem;
+    }
+
+    /* POP-ART LIGHTBOX OVERLAY */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 500; background: rgba(43, 45, 66, 0.85);
+      backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1rem;
+    }
+    .lightbox-overlay.open { opacity: 1; visibility: visible; }
+    .lightbox-box {
+      background: #FFF; padding: 15px; border-radius: 40px;
+      max-width: 550px; width: 100%; position: relative;
+      box-shadow: 0 20px 0 var(--dark);
+      transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .lightbox-overlay.open .lightbox-box { transform: scale(1); }
+    .lightbox-box img { width: 100%; max-height: 65vh; object-fit: contain; border-radius: 25px; display: block; }
+    .lightbox-close-btn {
+      position: absolute; top: -20px; right: -10px; width: 45px; height: 45px;
+      background: var(--bubble-pink); color: white; border: none; border-radius: 50%;
+      font-size: 1.2rem; cursor: pointer; box-shadow: 0 5px 0 var(--dark);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="confetti-container" id="confettiContainer"></div>
+
+  <div class="hero-container">
+    <i class="fa-solid fa-cake-candles party-hat-icon"></i>
+    <h1 class="main-title">Mariel!</h1>
+    <div class="sub-tag">Bringing beautiful light and energy to every single day! ⭐️</div>
+    
+    <div class="avatar-wrapper">
+      <div class="avatar-sticker lightbox-trigger" data-full="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1400&q=90&auto=format&fit=crop">
+        <div class="avatar-inner">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1400&q=90&auto=format&fit=crop" alt="Mariel" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cloud-card">
+    <h2>A Real One! ✨</h2>
+    <p>
+      "Mariel, your presence makes the world noticeably brighter. You have this incredible gift for making ordinary days feel memorable, and lifting up everyone around you simply by being exactly who you are.<br><br>
+      On your birthday, we want to remind you how deeply loved and appreciated you truly are. May this next turn around the sun bring you every single ounce of the happiness you continuously give to others."
+    </p>
+    <div class="cloud-signature">With love, admiration, and gratitude 💖</div>
+  </div>
+
+  <h2 class="section-heading">The Memory Collection 🥳</h2>
+  <div class="bubble-gallery">
+    <div class="gallery-bubble-item lightbox-trigger" data-full="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1400&q=90&auto=format&fit=crop">
+      <div class="gallery-inner-box"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=85&auto=format&fit=crop" alt="Memory" /></div>
+    </div>
+    <div class="gallery-bubble-item lightbox-trigger" data-full="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=1400&q=90&auto=format&fit=crop">
+      <div class="gallery-inner-box"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=85&auto=format&fit=crop" alt="Memory" /></div>
+    </div>
+    <div class="gallery-bubble-item lightbox-trigger" data-full="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1400&q=90&auto=format&fit=crop">
+      <div class="gallery-inner-box"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&q=85&auto=format&fit=crop" alt="Memory" /></div>
+    </div>
+  </div>
+
+  <h2 class="section-heading">Wishes For The Next Turn ✨</h2>
+  <div class="wishes-board">
+    <div class="wish-bubble-card">
+      <div class="bubble-icon-wrap" style="color: var(--bubble-pink);"><i class="fa-solid fa-sun"></i></div>
+      <div class="wish-title-label">Bright Days</div>
+      <div class="wish-desc-text">Filled with deep internal warmth</div>
+    </div>
+    <div class="wish-bubble-card">
+      <div class="bubble-icon-wrap" style="color: var(--bubble-blue);"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+      <div class="wish-title-label">Pure Joy</div>
+      <div class="wish-desc-text">In the quietest everyday moments</div>
+    </div>
+    <div class="wish-bubble-card">
+      <div class="bubble-icon-wrap" style="color: var(--bubble-purple);"><i class="fa-solid fa-map"></i></div>
+      <div class="wish-title-label">New Paths</div>
+      <div class="wish-desc-text">Just waiting to be discovered</div>
+    </div>
+    <div class="wish-bubble-card">
+      <div class="bubble-icon-wrap" style="color: var(--bubble-green);"><i class="fa-solid fa-face-smile-beam"></i></div>
+      <div class="wish-title-label">Happiness</div>
+      <div class="wish-desc-text">That stays right by your side</div>
+    </div>
+  </div>
+
+  <div class="party-footer">
+    <h2 class="footer-title">Happy Birthday, Mariel!</h2>
+    <p style="font-size: 1.3rem; font-weight: 600; opacity: 0.9;">Keep breaking the mold 💥</p>
+  </div>
+
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-box">
+      <button class="lightbox-close-btn" id="lightboxClose"><i class="fa-solid fa-xmark"></i></button>
+      <img id="lightboxImg" src="" alt="" />
+    </div>
+  </div>
+
+  <script>
+    // GENERATE LIVE PARTY CONFETTI SHARDS
+    const container = document.getElementById('confettiContainer');
+    const colors = ['#FF6B8B', '#4EA8DE', '#FFD166', '#9B5DE5', '#06D6A0'];
+    
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.width = confetti.style.height = (Math.random() * 8 + 7) + 'px';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      confetti.style.animationDelay = (Math.random() * 4) + 's';
+      container.appendChild(confetti);
+    }
+
+    // Lightbox Logic
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    document.querySelectorAll('.lightbox-trigger').forEach(item => {
+      item.addEventListener('click', () => {
+        lightboxImg.src = item.getAttribute('data-full');
+        lightbox.classList.add('open');
+      });
+    });
+    lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+  </script>
+</body>
+</html>
