@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Primary SEO -->
+  <title>Page Not Found | 77-36.top</title>
+  <meta name="description" content="This page doesn't exist or the link may have expired. Head back to 77-36.top to create a custom animated greeting page."/>
+  <meta name="robots" content="noindex, follow"/>
+  <link rel="canonical" href="https://77-36.top/"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://77-36.top/404.html"/>
+  <meta property="og:title" content="Page Not Found | 77-36.top"/>
+  <meta property="og:description" content="This page doesn't exist or the link may have expired. Head back to 77-36.top to create a custom animated greeting page."/>
+  <meta property="og:image" content="https://77-36.top/images/og-cover.png"/>
+  <meta property="og:site_name" content="77-36.top"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Page Not Found | 77-36.top"/>
+  <meta name="twitter:description" content="This page doesn't exist or the link may have expired. Head back to 77-36.top to create a custom animated greeting page."/>
+  <meta name="twitter:image" content="https://77-36.top/images/og-cover.png"/>
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      --yellow: #FFE04B;
+      --yellow-dark: #F5C800;
+      --orange: #FF7A3D;
+      --pink: #FF5FA0;
+      --teal: #1EC8A0;
+      --purple: #A259FF;
+      --bg: #FFFBF4;
+      --white: #FFFFFF;
+      --ink: #1A1209;
+      --ink2: #5A4A38;
+      --ink3: #9A8A78;
+      --border: rgba(26,18,9,0.08);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Nunito',sans-serif; background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased; }
+
+    /* NAV */
+    nav {
+      background:var(--white);
+      border-bottom:2px solid var(--ink);
+      padding:0 1.25rem;
+      height:58px;
+      display:flex; align-items:center; justify-content:space-between;
+      position:sticky; top:0; z-index:50;
+    }
+    .nav-logo {
+      font-size:20px; font-weight:900; color:var(--ink);
+      display:flex; align-items:center; gap:6px;
+      text-decoration:none;
+    }
+    .nav-logo-badge {
+      background:var(--yellow);
+      border:2px solid var(--ink);
+      border-radius:8px;
+      padding:2px 8px;
+      font-size:13px; font-weight:900;
+      transform:rotate(-2deg);
+      display:inline-block;
+    }
+    .nav-btn {
+      background:var(--orange);
+      color:var(--white);
+      border:2px solid var(--ink);
+      border-radius:50px;
+      padding:7px 18px;
+      font-size:13px; font-weight:800;
+      text-decoration:none;
+      box-shadow:3px 3px 0 var(--ink);
+      transition:transform 0.1s, box-shadow 0.1s;
+      font-family:'Nunito',sans-serif;
+    }
+    .nav-btn:hover { transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
+
+    /* HERO (reused as 404 hero) */
+    .hero {
+      background:var(--yellow);
+      border-bottom:3px solid var(--ink);
+      padding:3rem 1.25rem 2.5rem;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+      min-height:calc(100vh - 58px);
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+    }
+    .hero-deco {
+      position:absolute; font-size:80px; opacity:0.12; pointer-events:none;
+      animation:spin 20s linear infinite;
+    }
+    .hero-deco-1 { top:-20px; left:-20px; }
+    .hero-deco-2 { bottom:-30px; right:-10px; animation-direction:reverse; }
+    @keyframes spin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+    .hero-tag {
+      display:inline-block;
+      background:var(--white);
+      border:2px solid var(--ink);
+      border-radius:50px;
+      padding:5px 16px;
+      font-size:12px; font-weight:800;
+      letter-spacing:1px; text-transform:uppercase;
+      margin-bottom:1.25rem;
+    }
+    .error-code {
+      font-size:clamp(70px,22vw,140px);
+      font-weight:900;
+      line-height:0.9;
+      color:var(--ink);
+      letter-spacing:-2px;
+      margin-bottom:0.5rem;
+    }
+    .error-code span { color:var(--orange); }
+    .hero h1 {
+      font-size:clamp(24px,6vw,36px);
+      font-weight:900;
+      line-height:1.25;
+      color:var(--ink);
+      margin-bottom:1rem;
+    }
+    .hero-sub {
+      font-size:15px; font-weight:600; color:var(--ink2);
+      max-width:360px; margin:0 auto 2rem; line-height:1.6;
+    }
+    .hero-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+    .btn-primary {
+      background:var(--ink);
+      color:var(--yellow);
+      border:2px solid var(--ink);
+      border-radius:50px;
+      padding:13px 28px;
+      font-size:15px; font-weight:800;
+      text-decoration:none;
+      box-shadow:4px 4px 0 rgba(0,0,0,0.2);
+      transition:transform 0.1s, box-shadow 0.1s;
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:'Nunito',sans-serif;
+    }
+    .btn-primary:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 rgba(0,0,0,0.2); }
+
+    .btn-secondary {
+      background:var(--white);
+      color:var(--ink);
+      border:2.5px solid var(--ink);
+      border-radius:50px;
+      padding:13px 28px;
+      font-size:15px; font-weight:800;
+      text-decoration:none;
+      box-shadow:4px 4px 0 var(--ink);
+      transition:transform 0.1s, box-shadow 0.1s;
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:'Nunito',sans-serif;
+    }
+    .btn-secondary:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
+
+    /* FOOTER */
+    footer {
+      background:var(--ink);
+      padding:2.5rem 1.25rem;
+      text-align:center;
+    }
+    .footer-logo { font-size:24px; font-weight:900; color:var(--yellow); margin-bottom:0.5rem; }
+    .footer-tagline { font-size:13px; font-weight:600; color:rgba(255,255,255,0.4); margin-bottom:1rem; }
+
+    @media(min-width:600px){
+      .hero { padding:5rem 2rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-badge">77-36</div>
+    <span>.top</span>
+  </a>
+  <a href="mailto:support@77-36.top" class="nav-btn">
+    <i class="fa-regular fa-envelope"></i> Order now
+  </a>
+</nav>
+
+<section class="hero">
+  <i class="fa-solid fa-star hero-deco hero-deco-1" aria-hidden="true"></i>
+  <i class="fa-solid fa-heart hero-deco hero-deco-2" aria-hidden="true"></i>
+  <div class="hero-tag">Hmm, that link's gone quiet</div>
+  <div class="error-code">4<span>0</span>4</div>
+  <h1>This page doesn't exist<br>(yet 👀)</h1>
+  <p class="hero-sub">The link may have expired, been mistyped, or the page was never created. Let's get you back to somewhere real.</p>
+  <div class="hero-btns">
+    <a href="/" class="btn-primary">
+      <i class="fa-solid fa-house"></i> Back to homepage
+    </a>
+    <a href="mailto:support@77-36.top" class="btn-secondary">
+      <i class="fa-regular fa-envelope"></i> Contact us
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">77-36.top</div>
+  <div class="footer-tagline">Making moments memorable, one link at a time 💛</div>
+</footer>
+
+</body>
+</html>
