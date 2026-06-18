@@ -370,7 +370,7 @@
     </div>
 
     <div id="occasionPreviews" style="display:none">
-      <span class="occ-preview-label" id="previewLabel">4 theme styles</span>
+      <span class="occ-preview-label" id="previewLabel">3 theme styles</span>
       <div class="occ-preview-grid" id="previewGrid"></div>
     </div>
 
@@ -379,9 +379,6 @@
         { name:'Warm & Bright', emoji:'🌟' },
         { name:'Soft & Sweet',  emoji:'🌸' },
         { name:'Bold & Fun',    emoji:'🎉' },
-        { name:'Fresh & Clean', emoji:'✨' },
-        { name:'Dark & Moody',  emoji:'🌙' },
-        { name:'Minimal',       emoji:'🤍' },
       ];
       const occasions = {
         birthday:    { label:'Birthday',      imgs:['photo-1558618666-fcd25c85cd64','photo-1464349095431-e9a21285b5f3','photo-1530103862676-de8c9debad1d','photo-1513151233558-d860c5398176','photo-1587300003388-59208cc962cb','photo-1621263764928-df1444c5e859'] },
@@ -394,7 +391,7 @@
         const label = document.getElementById('previewLabel');
         if (!val) { wrap.style.display='none'; return; }
         const occ = occasions[val];
-        label.textContent = occ.label + ' — 6 theme styles';
+        label.textContent = occ.label + ' — 3 theme styles';
         grid.innerHTML = themes.map((t, i) => `
           <div class="occ-preview-card">
             <img class="occ-preview-img"

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Anniversary Sarah & Tom 💕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg:     #00D4FF;
+      --black:  #0D0D0D;
+      --red:    #FF2D55;
+      --yellow: #FFF740;
+      --green:  #00FF87;
+      --purple: #BF00FF;
+      --orange: #FF6B00;
+      --white:  #FFFFFF;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--black);
+      overflow-x: hidden;
+      /* Halftone dot pattern */
+      background-image: radial-gradient(circle, rgba(0,0,0,0.08) 2px, transparent 2px);
+      background-size: 24px 24px;
+    }
+
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes popIn    { 0%{transform:scale(0) rotate(-8deg);opacity:0;} 70%{transform:scale(1.18) rotate(3deg);} 100%{transform:scale(1) rotate(0);opacity:1;} }
+    @keyframes wiggle   { 0%,100%{transform:rotate(-5deg);} 50%{transform:rotate(5deg);} }
+    @keyframes bounce   { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-12px) scale(1.1);} }
+    @keyframes drift    { 0%{transform:translateY(-30px) rotate(0deg);opacity:1;} 100%{transform:translateY(115vh) rotate(540deg);opacity:0;} }
+    @keyframes pulseHeart{ 0%,100%{transform:scale(1);} 30%{transform:scale(1.3);} 60%{transform:scale(1);} 80%{transform:scale(1.15);} }
+    @keyframes spinStar { 0%{transform:rotate(0) scale(1);} 50%{transform:rotate(180deg) scale(1.2);} 100%{transform:rotate(360deg) scale(1);} }
+    @keyframes slideLeft { from{transform:translateX(60px);opacity:0;} to{transform:translateX(0);opacity:1;} }
+    @keyframes slideRight { from{transform:translateX(-60px);opacity:0;} to{transform:translateX(0);opacity:1;} }
+
+    .confetti-wrap { position:fixed; inset:0; pointer-events:none; z-index:200; overflow:hidden; }
+    .piece { position:absolute; animation:drift linear forwards; }
+
+    /* TOP BAR */
+    .ribbon-top {
+      height: 20px;
+      background: repeating-linear-gradient(90deg,
+        var(--red)    0, var(--red)    60px,
+        var(--black)  60px, var(--black)  78px,
+        var(--yellow) 78px, var(--yellow) 138px,
+        var(--black)  138px, var(--black) 156px,
+        var(--green)  156px, var(--green) 216px,
+        var(--black)  216px, var(--black) 234px,
+        var(--purple) 234px, var(--purple)294px,
+        var(--black)  294px, var(--black) 312px
+      );
+    }
+
+    /* HERO */
+    .hero {
+      padding: 2.5rem 1.5rem 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Diamond shape behind names */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 20px; left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 280px; height: 280px;
+      background: var(--yellow);
+      border: 5px solid var(--black);
+      z-index: 0;
+    }
+
+    .eyebrow {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--red);
+      border: 3px solid var(--black);
+      display: inline-block;
+      padding: 5px 16px;
+      margin-bottom: 0.6rem;
+      box-shadow: 4px 4px 0 var(--black);
+      animation: fadeUp 0.5s ease 0.3s both;
+      position: relative; z-index: 1;
+    }
+
+    .names {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: clamp(48px, 14vw, 82px);
+      color: var(--white);
+      line-height: 1;
+      -webkit-text-stroke: 4px var(--black);
+      text-shadow: 6px 6px 0 var(--black);
+      animation: popIn 0.7s cubic-bezier(.36,.07,.19,.97) 0.5s both;
+      position: relative; z-index: 1;
+      display: inline-block;
+    }
+    .names .amp {
+      color: var(--red);
+      -webkit-text-stroke: 4px var(--black);
+    }
+
+    .name-tag {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--black);
+      background: var(--green);
+      border: 3px solid var(--black);
+      display: inline-block;
+      padding: 6px 18px;
+      margin-top: 0.9rem;
+      transform: rotate(-2deg);
+      animation: fadeUp 0.5s ease 1s both;
+      position: relative; z-index: 1;
+      box-shadow: 4px 4px 0 var(--black);
+    }
+
+    /* HERO PHOTO — rotated square */
+    .hero-photo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      animation: popIn 0.6s cubic-bezier(.36,.07,.19,.97) 1.1s both;
+      position: relative; z-index: 1;
+    }
+    .hero-photo-frame {
+      width: 200px;
+      height: 200px;
+      border: 6px solid var(--black);
+      box-shadow: 10px 10px 0 var(--black);
+      transform: rotate(-5deg);
+      overflow: hidden;
+      background: var(--red);
+      position: relative;
+    }
+    .hero-photo-frame::after {
+      content: '💕';
+      position: absolute;
+      bottom: -10px; right: -10px;
+      font-size: 32px;
+      z-index: 3;
+    }
+    .hero-photo-frame img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* HEARTS DIVIDER */
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 2rem 0;
+      animation: fadeUp 0.5s ease 1.2s both;
+      flex-wrap: wrap;
+      padding: 0 1rem;
+    }
+    .div-heart {
+      font-size: 22px;
+      animation: pulseHeart 2s ease-in-out infinite;
+      filter: drop-shadow(2px 2px 0 var(--black));
+    }
+    .div-heart:nth-child(1){ color:var(--red);    animation-delay:0s; }
+    .div-heart:nth-child(2){ color:var(--yellow); animation-delay:0.2s; }
+    .div-heart:nth-child(3){ color:var(--green);  animation-delay:0.4s; }
+    .div-heart:nth-child(4){ color:var(--purple); animation-delay:0.6s; }
+    .div-heart:nth-child(5){ color:var(--orange); animation-delay:0.8s; }
+    .div-heart:nth-child(6){ color:var(--red);    animation-delay:1.0s; }
+    .div-heart:nth-child(7){ color:var(--yellow); animation-delay:1.2s; }
+
+    /* MESSAGE */
+    .message-wrap {
+      padding: 0 1.25rem 2rem;
+      max-width: 560px;
+      margin: 0 auto;
+      animation: fadeUp 0.6s ease 1.3s both;
+    }
+    .message-card {
+      background: var(--white);
+      border: 5px solid var(--black);
+      box-shadow: 8px 8px 0 var(--black);
+      padding: 1.75rem 1.5rem 1.5rem;
+      position: relative;
+    }
+    .message-card::before {
+      content: '"';
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 90px;
+      line-height: 1;
+      color: var(--bg);
+      -webkit-text-stroke: 3px var(--black);
+      position: absolute;
+      top: -26px; left: 14px;
+    }
+    .message-body {
+      font-size: 15px;
+      line-height: 1.8;
+      font-weight: 700;
+      color: var(--black);
+      padding-top: 0.5rem;
+    }
+    .message-from {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 1.25rem;
+      font-weight: 900;
+      font-size: 14px;
+      background: var(--red);
+      color: var(--white);
+      border: 3px solid var(--black);
+      padding: 8px 14px;
+      width: fit-content;
+      box-shadow: 3px 3px 0 var(--black);
+    }
+
+    /* YEARS BADGE — big loud stamp */
+    .years-wrap {
+      padding: 0 1.5rem 2rem;
+      text-align: center;
+      animation: popIn 0.7s cubic-bezier(.36,.07,.19,.97) 1.4s both;
+    }
+    .years-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 160px;
+      height: 160px;
+      background: var(--red);
+      border: 6px solid var(--black);
+      box-shadow: 8px 8px 0 var(--black);
+      transform: rotate(6deg);
+      position: relative;
+    }
+    .years-badge::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 3px dashed var(--black);
+    }
+    .years-number {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 64px;
+      color: var(--yellow);
+      -webkit-text-stroke: 3px var(--black);
+      line-height: 1;
+      position: relative; z-index: 1;
+    }
+    .years-label {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      position: relative; z-index: 1;
+    }
+
+    /* MEMORY GRID */
+    .grid-wrap {
+      padding: 0 1.25rem 2rem;
+      max-width: 620px;
+      margin: 0 auto;
+      animation: fadeUp 0.6s ease 1.5s both;
+    }
+    .grid-title {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 26px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 0.2rem;
+    }
+    .grid-sub {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+    .memory-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .memory-card { position:relative; aspect-ratio:1/1; }
+    .memory-card .frame {
+      width:100%; height:100%;
+      border:5px solid var(--black);
+      overflow:hidden;
+      box-shadow:6px 6px 0 var(--black);
+      transform:rotate(var(--rot));
+      cursor:pointer;
+      transition:transform 0.2s, box-shadow 0.2s;
+    }
+    .memory-card .frame:hover { transform:rotate(0) scale(1.04); box-shadow:10px 10px 0 var(--black); }
+    .memory-card img { width:100%; height:100%; object-fit:cover; display:block; }
+    .memory-card:nth-child(1){ --rot:-3deg; } .memory-card:nth-child(1) .frame { background:var(--red); }
+    .memory-card:nth-child(2){ --rot:4deg; }  .memory-card:nth-child(2) .frame { background:var(--purple); }
+    .memory-card:nth-child(3){ --rot:-4deg; } .memory-card:nth-child(3) .frame { background:var(--green); }
+    .memory-card:nth-child(4){ --rot:3deg; }  .memory-card:nth-child(4) .frame { background:var(--orange); }
+
+    /* WISHES */
+    .wishes-wrap {
+      padding: 1rem 1.25rem 2rem;
+      max-width: 560px;
+      margin: 0 auto;
+      animation: fadeUp 0.6s ease 1.7s both;
+    }
+    .wishes-title {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+    .wishes-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .wish {
+      border: 4px solid var(--black);
+      padding: 1.4rem 1rem;
+      text-align: center;
+      box-shadow: 5px 5px 0 var(--black);
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 100%, 0 100%);
+    }
+    .wish:nth-child(1){ background:var(--red);    color:var(--white); }
+    .wish:nth-child(2){ background:var(--yellow); color:var(--black); }
+    .wish:nth-child(3){ background:var(--purple); color:var(--white); }
+    .wish:nth-child(4){ background:var(--green);  color:var(--black); }
+    .wish-icon {
+      font-size: 28px;
+      margin-bottom: 0.5rem;
+      display: block;
+      animation: bounce 3s ease-in-out infinite;
+      filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.25));
+    }
+    .wish:nth-child(2) .wish-icon { animation-delay:0.5s; }
+    .wish:nth-child(3) .wish-icon { animation-delay:1s; }
+    .wish:nth-child(4) .wish-icon { animation-delay:1.5s; }
+    .wish-label { font-family:'Black Han Sans',sans-serif; font-size:16px; text-transform:uppercase; }
+    .wish-sub { font-size:11px; font-weight:800; margin-top:3px; text-transform:uppercase; opacity:0.85; }
+
+    /* SIGN-OFF */
+    .signoff { padding:1.5rem 1.5rem 1rem; text-align:center; animation:fadeUp 0.6s ease 1.9s both; }
+    .signoff-heart {
+      font-size: 48px;
+      color: var(--red);
+      display: inline-block;
+      filter: drop-shadow(4px 4px 0 var(--black));
+      animation: pulseHeart 1.8s ease-in-out infinite;
+      margin-bottom: 1rem;
+    }
+    .signoff-msg {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 22px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .signoff-sub {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--black);
+      background: var(--yellow);
+      border: 3px solid var(--black);
+      padding: 5px 18px;
+      margin-top: 0.6rem;
+      letter-spacing: 1px;
+      box-shadow: 3px 3px 0 var(--black);
+    }
+
+    /* BOTTOM BAR */
+    .ribbon-bottom {
+      height: 20px;
+      background: repeating-linear-gradient(90deg,
+        var(--green)  0, var(--green)  60px,
+        var(--black)  60px, var(--black)  78px,
+        var(--purple) 78px, var(--purple)138px,
+        var(--black)  138px, var(--black)156px,
+        var(--orange) 156px, var(--orange)216px,
+        var(--black)  216px, var(--black)234px,
+        var(--red)    234px, var(--red)  294px,
+        var(--black)  294px, var(--black)312px
+      );
+    }
+
+    /* LIGHTBOX */
+    .lightbox-trigger { cursor:pointer; }
+    .lightbox-overlay {
+      position:fixed; inset:0; z-index:500; background:rgba(13,13,13,0.92);
+      display:flex; align-items:center; justify-content:center; padding:2rem 1.25rem;
+      opacity:0; visibility:hidden; transition:opacity 0.2s, visibility 0.2s;
+    }
+    .lightbox-overlay.open { opacity:1; visibility:visible; }
+    .lightbox-content { position:relative; max-width:min(700px,92vw); max-height:88vh; }
+    .lightbox-content img { display:block; width:100%; max-height:88vh; object-fit:contain; border:6px solid var(--yellow); box-shadow:12px 12px 0 var(--red); }
+    .lightbox-close {
+      position:absolute; top:-18px; right:-18px; width:44px; height:44px;
+      background:var(--red); color:var(--white); border:4px solid var(--white);
+      font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-weight:900;
+    }
+    .lightbox-close:hover { background:var(--black); }
+
+    @media (min-width:600px) { .hero { padding:3.5rem 2rem 1.5rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="confetti-wrap" id="confetti"></div>
+  <div class="ribbon-top"></div>
+
+  <div class="hero">
+    <span class="eyebrow">💕 Happy Anniversary 💕</span>
+    <div class="names">Sarah <span class="amp">&amp;</span> Tom</div>
+    <div class="name-tag">still each other's favorite story</div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-frame">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90&auto=format&fit=crop" alt="Sarah and Tom" class="lightbox-trigger" data-full="https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90&auto=format&fit=crop" />
+      </div>
+    </div>
+  </div>
+
+  <div class="divider">
+    <i class="fa-solid fa-heart div-heart"></i>
+    <i class="fa-solid fa-heart div-heart"></i>
+    <i class="fa-solid fa-heart div-heart"></i>
+    <i class="fa-solid fa-heart div-heart"></i>
+    <i class="fa-solid fa-heart div-heart"></i>
+    <i class="fa-solid fa-heart div-heart"></i>
+    <i class="fa-solid fa-heart div-heart"></i>
+  </div>
+
+  <div class="message-wrap">
+    <div class="message-card">
+      <div class="message-body">
+        Sarah & Tom, watching the two of you build a life together has been one of the great joys for everyone around you. The way you laugh together, lean on each other, and choose one another, day after day, is something truly special.<br><br>
+        Here's to the years behind you and all the beautiful ones still ahead. May your love only keep growing.
+      </div>
+      <div class="message-from">
+        <i class="fa-solid fa-heart"></i>
+        With love, your family & friends
+      </div>
+    </div>
+  </div>
+
+  <div class="years-wrap">
+    <div class="years-badge">
+      <div class="years-number">10</div>
+      <div class="years-label">Years Together</div>
+    </div>
+  </div>
+
+  <div class="grid-wrap">
+    <div class="grid-title">A Few Favourite Moments</div>
+    <div class="grid-sub">ten years, so much love 💕</div>
+    <div class="memory-grid">
+      <div class="memory-card"><div class="frame lightbox-trigger" data-full="https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=90&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=85&auto=format&fit=crop" alt="Wedding moment" /></div></div>
+      <div class="memory-card"><div class="frame lightbox-trigger" data-full="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1400&q=90&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=500&q=85&auto=format&fit=crop" alt="Couple walking" /></div></div>
+      <div class="memory-card"><div class="frame lightbox-trigger" data-full="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1400&q=90&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500&q=85&auto=format&fit=crop" alt="Couple celebrating" /></div></div>
+      <div class="memory-card"><div class="frame lightbox-trigger" data-full="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1400&q=90&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500&q=85&auto=format&fit=crop" alt="Couple toasting" /></div></div>
+    </div>
+  </div>
+
+  <div class="wishes-wrap">
+    <div class="wishes-title">Wishing You Both</div>
+    <div class="wishes-grid">
+      <div class="wish"><i class="fa-solid fa-heart wish-icon"></i><div class="wish-label">Deeper Love</div><div class="wish-sub">with every year</div></div>
+      <div class="wish"><i class="fa-solid fa-champagne-glasses wish-icon"></i><div class="wish-label">More Toasts</div><div class="wish-sub">to many more</div></div>
+      <div class="wish"><i class="fa-solid fa-suitcase-rolling wish-icon"></i><div class="wish-label">New Adventures</div><div class="wish-sub">side by side</div></div>
+      <div class="wish"><i class="fa-solid fa-house-chimney wish-icon"></i><div class="wish-label">A Home Full</div><div class="wish-sub">of warmth</div></div>
+    </div>
+  </div>
+
+  <div class="signoff">
+    <div class="signoff-heart">❤️</div>
+    <div class="signoff-msg">Happy Anniversary, Sarah & Tom</div>
+    <div class="signoff-sub">here's to forever 💕</div>
+  </div>
+
+  <div class="ribbon-bottom"></div>
+
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose"><i class="fa-solid fa-xmark"></i></button>
+      <img id="lightboxImg" src="" alt="" />
+    </div>
+  </div>
+
+  <script>
+    const colors = ['#FF2D55','#FFF740','#00FF87','#BF00FF','#FF6B00','#FFFFFF'];
+    const wrap = document.getElementById('confetti');
+    function burst(count) {
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        el.className = 'piece';
+        const isHeart = Math.random() > 0.7;
+        const size = Math.random() * 12 + 6;
+        el.style.cssText = [
+          'left:' + (Math.random() * 100) + '%',
+          'top:-14px',
+          'background:' + colors[Math.floor(Math.random() * colors.length)],
+          'width:' + size + 'px',
+          'height:' + (Math.random() > 0.4 ? size * 2 : size) + 'px',
+          'border-radius:' + (isHeart ? '50%' : '1px'),
+          'border:2px solid #0D0D0D',
+          'animation-duration:' + (Math.random() * 3 + 2) + 's',
+          'animation-delay:' + (Math.random() * 1.2) + 's'
+        ].join(';');
+        wrap.appendChild(el);
+        setTimeout(() => el.remove(), 6000);
+      }
+    }
+    burst(60); setTimeout(() => burst(45), 2800); setTimeout(() => burst(35), 5500);
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lightbox-trigger').forEach(t => {
+      t.addEventListener('click', () => {
+        const full = t.getAttribute('data-full') || (t.tagName === 'IMG' ? t.src : t.querySelector('img')?.src);
+        lightboxImg.src = full;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', () => { lightbox.classList.remove('open'); document.body.style.overflow=''; });
+    lightbox.addEventListener('click', e => { if(e.target===lightbox){lightbox.classList.remove('open');document.body.style.overflow='';} });
+    document.addEventListener('keydown', e => { if(e.key==='Escape'){lightbox.classList.remove('open');document.body.style.overflow='';} });
+  </script>
+</body>
+</html>
