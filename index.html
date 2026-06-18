@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <!-- Primary SEO -->
-  <title>77-36</title>
+  <title>Custom Animated Greeting Pages for Birthdays, Anniversaries & More | 77-36.top</title>
   <meta name="description" content="Get a personalized, animated greeting page with its own unique link — made for birthdays, anniversaries, and graduations. Hand-crafted and delivered in 24 hours."/>
   <meta name="keywords" content="custom greeting page, personalized birthday page, digital birthday card, anniversary website gift, graduation greeting page, animated greeting card, custom link gift"/>
   <meta name="author" content="77-36.top"/>
@@ -339,6 +339,10 @@
     }
     .contact-card h3 { font-size:22px; font-weight:900; color:var(--ink); margin-bottom:0.5rem; }
     .contact-card p { font-size:14px; font-weight:600; color:var(--ink2); line-height:1.6; margin-bottom:1.75rem; }
+    .contact-pills {
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+      margin-bottom:0.25rem;
+    }
     .email-pill {
       display:inline-flex; align-items:center; gap:10px;
       background:var(--yellow);
@@ -353,6 +357,8 @@
     .email-pill:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
     .email-pill i { font-size:18px; color:var(--ink); }
     .email-pill span { font-size:15px; font-weight:800; color:var(--ink); }
+    .whatsapp-pill { background:#E7FBF0; margin-bottom:0; }
+    .whatsapp-pill i { color:#25D366; }
     .contact-note { font-size:12px; font-weight:600; color:var(--ink3); line-height:1.8; }
     .contact-note i { color:var(--teal); margin-right:4px; }
 
@@ -436,8 +442,8 @@
   ];
 
   const occasions = {
-    birthday: { 
-      label: 'Birthday',    
+    birthday: {
+      label: 'Birthday',
       imgs: [
         'images/mariel.png',
         'images/mariel1.png',
@@ -448,10 +454,10 @@
         'images/mariel6.png',
         'images/mariel7.png',
         'images/mariel8.png'
-      ] 
+      ]
     },
-    anniversary: { 
-      label: 'Anniversary', 
+    anniversary: {
+      label: 'Anniversary',
       imgs: [
         'images/sarah.png',
         'images/sarah1.png',
@@ -462,10 +468,10 @@
         'images/sarah6.png',
         'images/sarah7.png',
         'images/sarah8.png'
-      ] 
+      ]
     },
-    graduation: { 
-      label: 'Graduation',  
+    graduation: {
+      label: 'Graduation',
       imgs: [
         'images/carlos.png',
         'images/carlos1.png',
@@ -476,7 +482,7 @@
         'images/carlos6.png',
         'images/carlos7.png',
         'images/carlos8.png'
-      ] 
+      ]
     },
   };
 
@@ -484,32 +490,32 @@
     const wrap = document.getElementById('occasionPreviews');
     const grid = document.getElementById('previewGrid');
     const label = document.getElementById('previewLabel');
-    
+
     if (!val) { wrap.style.display = 'none'; return; }
-    
+
     const occ = occasions[val];
-    
+
     if (label) label.textContent = occ.label + ' — ' + themes.length + ' theme styles';
-    
+
     grid.innerHTML = themes.map((t, i) => {
       const imgPath = occ.imgs[i];
-      
-      const filename = imgPath.split('/').pop(); 
-      
-      const htmlLink = filename.replace('.png', '.html'); 
+
+      const filename = imgPath.split('/').pop();
+
+      const htmlLink = filename.replace('.png', '.html');
 
       return `
         <div class="occ-preview-card">
           <a href="${htmlLink}">
             <img class="occ-preview-img"
-              src="${imgPath}" 
+              src="${imgPath}"
               alt="${occ.label} – ${t.name}" loading="lazy" />
           </a>
           <div class="occ-preview-theme">${t.emoji} ${t.name}</div>
         </div>
       `;
     }).join('');
-    
+
     wrap.style.display = 'block';
   }
 
@@ -553,10 +559,16 @@
     <div class="contact-card">
       <h3>Send us everything 📩</h3>
       <p>Include their name, the occasion, your message, and any photos you want on the page. We'll build it and send you the link!</p>
-      <a href="mailto:support@77-36.top" class="email-pill">
-        <i class="fa-regular fa-envelope"></i>
-        <span>support@77-36.top</span>
-      </a>
+      <div class="contact-pills">
+        <a href="https://wa.me/971509275404" class="email-pill whatsapp-pill" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>Whatsapp</span>
+        </a>
+        <a href="mailto:support@77-36.top" class="email-pill">
+          <i class="fa-regular fa-envelope"></i>
+          <span>support@77-36.top</span>
+        </a>
+      </div>
       <div class="contact-note">
         <i class="fa-regular fa-clock"></i> We reply fast & deliver in 24h<br>
         <i class="fa-solid fa-shield-halved"></i> Payment details sent after confirmation<br>
