@@ -166,64 +166,87 @@
       font-family:'Nunito',sans-serif;
     }
     .btn-primary:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 rgba(0,0,0,0.2); }
-    /* OCCASION DROPDOWN + PREVIEW */
-    .occ-dropdown-wrap { margin-bottom:1.5rem; }
-    .occ-select {
-      width:100%;
-      padding:12px 16px;
-      font-size:15px; font-weight:800;
-      font-family:'Nunito',sans-serif;
-      color:var(--ink);
-      background:var(--white);
-      border:2.5px solid var(--ink);
-      border-radius:14px;
-      box-shadow:4px 4px 0 var(--ink);
-      appearance:none;
-      -webkit-appearance:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231A1209' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-      background-repeat:no-repeat;
-      background-position:right 14px center;
-      cursor:pointer;
-      transition:transform 0.1s, box-shadow 0.1s;
-    }
-    .occ-select:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
-    .occ-select:focus { outline:none; }
-
-    .occ-preview-label {
-      font-size:11px; font-weight:800; color:var(--ink3);
-      text-transform:uppercase; letter-spacing:1px;
-      margin-bottom:10px; display:block;
-    }
-    .occ-preview-grid {
+    /* THEMES GRID */
+    .themes-grid {
       display:grid;
-      grid-template-columns:1fr 1fr 1fr;
+      grid-template-columns:repeat(2,1fr);
       gap:12px;
+      margin-top:1.5rem;
     }
-    .occ-preview-card {
+    @media(min-width:480px){ .themes-grid{ grid-template-columns:repeat(3,1fr); } }
+    @media(min-width:720px){ .themes-grid{ grid-template-columns:repeat(4,1fr); } }
+
+    .theme-card {
       background:var(--white);
       border:2.5px solid var(--ink);
       border-radius:14px;
       overflow:hidden;
       box-shadow:4px 4px 0 var(--ink);
+      cursor:pointer;
       transition:transform 0.1s, box-shadow 0.1s;
     }
-    .occ-preview-card:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
-    .occ-preview-img {
-      width:100%; aspect-ratio:4/3; object-fit:cover; display:block;
-      background:#f0ece6;
+    .theme-card:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
+    .theme-card img {
+      width:100%; aspect-ratio:3/4; object-fit:cover; object-position:top;
+      display:block; background:#f0ece6;
     }
-    .occ-preview-theme {
+    .theme-card-label {
       font-size:11px; font-weight:800; color:var(--ink2);
       padding:6px 10px;
       border-top:2px solid var(--ink);
-      background:var(--white);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
 
-    /* placeholder tiles when no real screenshots */
-    .occ-preview-placeholder {
-      width:100%; aspect-ratio:4/3; display:flex;
-      align-items:center; justify-content:center;
-      font-size:32px;
+    /* MODAL */
+    .modal-overlay {
+      position:fixed; inset:0;
+      background:rgba(10,8,6,0.92);
+      z-index:200;
+      display:flex; flex-direction:column;
+      opacity:0; pointer-events:none;
+      transition:opacity 0.2s;
+    }
+    .modal-overlay.open { opacity:1; pointer-events:all; }
+    .modal-bar {
+      width:100%; background:var(--ink);
+      display:flex; align-items:center; gap:8px;
+      padding:10px 14px; flex-shrink:0;
+    }
+    .modal-title { flex:1; font-size:14px; font-weight:800; color:var(--yellow); min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .modal-icon-btn {
+      background:rgba(255,255,255,0.1);
+      border:1px solid rgba(255,255,255,0.18);
+      border-radius:7px; color:#fff;
+      width:32px; height:32px;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; font-size:14px; font-family:inherit;
+      flex-shrink:0; transition:background 0.15s;
+    }
+    .modal-icon-btn:hover { background:rgba(255,255,255,0.22); }
+    .modal-demo-btn {
+      background:var(--orange);
+      border:2px solid rgba(255,255,255,0.25);
+      border-radius:50px; color:#fff;
+      font-size:12px; font-weight:800;
+      padding:6px 13px; cursor:pointer;
+      text-decoration:none; font-family:'Nunito',sans-serif;
+      display:inline-flex; align-items:center; gap:5px;
+      flex-shrink:0; transition:opacity 0.15s;
+    }
+    .modal-demo-btn:hover { opacity:0.85; }
+    .modal-body {
+      flex:1; overflow:auto; width:100%;
+      display:flex; justify-content:center; align-items:flex-start;
+      padding:24px;
+    }
+    .modal-img-wrap {
+      flex-shrink:0; width:80vw; max-width:860px;
+    }
+    .modal-img-wrap img {
+      width:100%; display:block;
+      border-radius:12px;
+      border:3px solid rgba(255,255,255,0.12);
+      box-shadow:0 12px 60px rgba(0,0,0,0.7);
     }
 
     /* SECTION BASE */
@@ -407,122 +430,81 @@
 </section>
 
 <section class="section">
-  <div class="section-inner">
+  <div class="section-inner" style="max-width:960px">
     <span class="eyebrow"><i class="fa-solid fa-sparkles" style="margin-right:5px"></i> What we make</span>
-    <h2 class="section-h">Any occasion.<br>One beautiful link.</h2>
-    <div class="occ-dropdown-wrap">
-      <select class="occ-select" id="occasionSelect" onchange="showOccasionPreviews(this.value)">
-        <option value="birthday">Birthday</option>
-        <option value="anniversary">Anniversary</option>
-        <option value="graduation">Graduation</option>
-      </select>
-    </div>
-
-    <div id="occasionPreviews" style="display:none">
-      <div class="occ-preview-grid" id="previewGrid"></div>
-    </div>
-
-    <noscript>
-      <p style="font-size:13px;font-weight:700;color:var(--ink2);margin-top:1rem;">
-        We design custom pages for birthdays, anniversaries, and graduations — each available in 9 styles including Editorial, Fun, Elegant, Luxurious, Party, Vibe, Issue, Light, and Tech.
-      </p>
-    </noscript>
-
-    <script>
-  const themes = [
-    { name: 'Editorial', emoji: '📰' },
-    { name: 'Fun',    emoji: '🎉' },
-    { name: 'Elegant',    emoji: '🌹' },
-    { name: 'Luxurious',    emoji: '💫' },
-    { name: 'Party',    emoji: '🎊' },
-    { name: 'Vibe',    emoji: '🍹' },
-    { name: 'Issue',    emoji: '🖤' },
-    { name: 'Light',    emoji: '💡' },
-    { name: 'Tech',    emoji: '💻' },
-  ];
-
-  const occasions = {
-    birthday: {
-      label: 'Birthday',
-      imgs: [
-        'images/mariel.png',
-        'images/mariel1.png',
-        'images/mariel2.png',
-        'images/mariel3.png',
-        'images/mariel4.png',
-        'images/mariel5.png',
-        'images/mariel6.png',
-        'images/mariel7.png',
-        'images/mariel8.png'
-      ]
-    },
-    anniversary: {
-      label: 'Anniversary',
-      imgs: [
-        'images/sarah.png',
-        'images/sarah1.png',
-        'images/sarah2.png',
-        'images/sarah3.png',
-        'images/sarah4.png',
-        'images/sarah5.png',
-        'images/sarah6.png',
-        'images/sarah7.png',
-        'images/sarah8.png'
-      ]
-    },
-    graduation: {
-      label: 'Graduation',
-      imgs: [
-        'images/carlos.png',
-        'images/carlos1.png',
-        'images/carlos2.png',
-        'images/carlos3.png',
-        'images/carlos4.png',
-        'images/carlos5.png',
-        'images/carlos6.png',
-        'images/carlos7.png',
-        'images/carlos8.png'
-      ]
-    },
-  };
-
-  function showOccasionPreviews(val) {
-    const wrap = document.getElementById('occasionPreviews');
-    const grid = document.getElementById('previewGrid');
-    const label = document.getElementById('previewLabel');
-
-    if (!val) { wrap.style.display = 'none'; return; }
-
-    const occ = occasions[val];
-
-    if (label) label.textContent = occ.label + ' — ' + themes.length + ' theme styles';
-
-    grid.innerHTML = themes.map((t, i) => {
-      const imgPath = occ.imgs[i];
-
-      const filename = imgPath.split('/').pop();
-
-      const htmlLink = filename.replace('.png', '.html');
-
-      return `
-        <div class="occ-preview-card">
-          <a href="${htmlLink}">
-            <img class="occ-preview-img"
-              src="${imgPath}"
-              alt="${occ.label} – ${t.name}" loading="lazy" />
-          </a>
-          <div class="occ-preview-theme">${t.emoji} ${t.name}</div>
-        </div>
-      `;
-    }).join('');
-
-    wrap.style.display = 'block';
-  }
-
-  showOccasionPreviews('birthday');
-</script>
+    <h2 class="section-h">18 themes.<br>One beautiful link.</h2>
+    <p class="section-p">Click any style to preview it full size — then hit "View Demo" to see it live.</p>
+    <div class="themes-grid" id="themesGrid"></div>
   </div>
 </section>
+
+<!-- Modal -->
+<div class="modal-overlay" id="themeModal" onclick="onModalBgClick(event)">
+  <div class="modal-bar">
+    <span class="modal-title" id="modalTitle"></span>
+    <a class="modal-demo-btn" id="modalDemoBtn" href="#" target="_blank" rel="noopener">
+      View Demo <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    </a>
+    <button class="modal-icon-btn" onclick="closeModal()" title="Close"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="modal-body" id="modalBody">
+    <div class="modal-img-wrap" id="modalImgWrap">
+      <img id="modalImg" src="" alt=""/>
+    </div>
+  </div>
+</div>
+
+<script>
+const THEMES = [
+  { key:'editorial',  name:'Editorial',        emoji:'📰' },
+  { key:'fun',        name:'Fun',               emoji:'🎉' },
+  { key:'elegant',    name:'Elegant',           emoji:'🌹' },
+  { key:'luxurious',  name:'Luxurious',         emoji:'💫' },
+  { key:'party',      name:'Party',             emoji:'🎊' },
+  { key:'vibe',       name:'Vibe',              emoji:'🍹' },
+  { key:'issue',      name:'Issue',             emoji:'🖤' },
+  { key:'light',      name:'Light',             emoji:'💡' },
+  { key:'tech',       name:'Tech',              emoji:'💻' },
+  { key:'noir',       name:'Electric Pop',      emoji:'⚡' },
+  { key:'postcard',   name:'Vintage Postcard',  emoji:'📮' },
+  { key:'arcade',     name:'Arcade Pixel',      emoji:'🕹️' },
+  { key:'luxe',       name:'Golden Luxe',       emoji:'✨' },
+  { key:'cottage',    name:'Cottagecore',       emoji:'🌿' },
+  { key:'comic',      name:'Comic Pop',         emoji:'💥' },
+  { key:'romance',    name:'Rose Garden',       emoji:'🌺' },
+  { key:'memphis',    name:'Memphis Rave',      emoji:'🔊' },
+  { key:'cinema',     name:'Cinematic',         emoji:'🎬' },
+];
+
+document.getElementById('themesGrid').innerHTML = THEMES.map(t =>
+  `<div class="theme-card" onclick="openModal('${t.key}','${t.name}','${t.emoji}')">
+    <img src="screenshots/${t.key}.png" alt="${t.name}" loading="lazy"/>
+    <div class="theme-card-label">${t.emoji} ${t.name}</div>
+  </div>`
+).join('');
+
+function openModal(key, name, emoji) {
+  document.getElementById('modalTitle').textContent = emoji + ' ' + name;
+  document.getElementById('modalImg').src = 'screenshots/' + key + '.png';
+  document.getElementById('modalImg').alt = name;
+  document.getElementById('modalDemoBtn').href = 'html/' + key + '.html';
+  document.getElementById('themeModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('themeModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function onModalBgClick(e) {
+  if (e.target === document.getElementById('themeModal') || e.target === document.getElementById('modalBody')) {
+    closeModal();
+  }
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
 
 <section class="section how-section">
   <div class="section-inner">

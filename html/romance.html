@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mariel — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root{--rose:#5C0A23;--rose-mid:#A0284A;--blush:#FFD6E0;--soft:#FFF0F5;--sage:#4A6C51;--ink:#1A0810;--cream:#FFFBF8;--white:#FFFFFF;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'DM Sans',sans-serif;background:var(--soft);color:var(--ink);overflow-x:hidden;}
+
+    /* ── HERO: full-bleed photo with dark rose overlay ── */
+    .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;}
+    .hero-bg img{width:100%;height:100%;object-fit:cover;display:block;}
+    /* multi-layer overlay: bottom-heavy gradient + light overall tint */
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(92,10,35,.8) 0%,rgba(92,10,35,.4) 40%,rgba(92,10,35,.1) 100%);}
+    .hero-content{position:relative;z-index:2;text-align:center;padding:5rem 2rem 7rem;width:100%;}
+    .hero-eyebrow{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;letter-spacing:.18em;color:var(--blush);display:block;margin-bottom:1.75rem;}
+    .name{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,15vw,140px);font-weight:600;line-height:.88;color:var(--white);letter-spacing:.02em;}
+    .hero-rule{width:100px;height:1px;background:rgba(255,214,224,.5);margin:2rem auto;}
+    .hero-sub{font-size:13px;font-weight:300;letter-spacing:.18em;color:rgba(255,214,224,.75);text-transform:uppercase;}
+    /* scroll indicator */
+    .scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,214,224,.6);font-size:12px;letter-spacing:.12em;display:flex;flex-direction:column;align-items:center;gap:8px;animation:bounce 2s ease-in-out infinite;}
+    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+    .scroll-hint i{font-size:16px;}
+
+    /* ── EDITORIAL MESSAGE: cream bg, big pull quote ── */
+    .message-section{background:var(--cream);padding:6rem 2rem;}
+    .message-inner{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start;}
+    @media(max-width:660px){.message-inner{grid-template-columns:1fr;gap:2.5rem;}}
+    .pull-quote-col{border-right:2px solid var(--blush);padding-right:3rem;}
+    @media(max-width:660px){.pull-quote-col{border-right:none;border-bottom:2px solid var(--blush);padding-right:0;padding-bottom:1.5rem;}}
+    .pull-quote-label{font-size:10px;font-weight:500;letter-spacing:.38em;text-transform:uppercase;color:var(--rose-mid);margin-bottom:1.25rem;display:block;}
+    .pull-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(26px,4vw,38px);font-weight:300;color:var(--rose);line-height:1.3;}
+    .msg-col{}
+    .msg-from-label{font-size:10px;font-weight:500;letter-spacing:.38em;text-transform:uppercase;color:var(--sage);margin-bottom:1.25rem;display:block;}
+    .msg-body{font-size:16px;font-weight:300;line-height:2;color:var(--ink);}
+    .msg-from{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:var(--rose-mid);margin-top:1.5rem;}
+
+    /* ── PHOTO GRID ── */
+    .editorial-grid{background:var(--soft);padding:5rem 2rem;}
+    .grid-inner{max-width:1000px;margin:0 auto;}
+    .grid-hed{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,48px);font-weight:600;color:var(--rose);margin-bottom:.5rem;}
+    .grid-rule{width:80px;height:1px;background:rgba(92,10,35,.2);margin:1rem 0 2.5rem;}
+    .grid-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px;}
+    .grid-cell{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3;}
+    .grid-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+    .grid-cell:hover img{transform:scale(1.05);}
+    .grid-cell::after{content:'';position:absolute;inset:0;border:2px solid rgba(255,214,224,0);transition:border-color .3s;pointer-events:none;}
+    .grid-cell:hover::after{border-color:rgba(255,214,224,.7);}
+
+    /* ── MILESTONE: blush strip ── */
+    .milestone-wrap{background:var(--blush);text-align:center;padding:5rem 2rem;}
+    .milestone-seal{display:inline-flex;flex-direction:column;align-items:center;gap:6px;}
+    .seal-ring{width:180px;height:180px;border-radius:50%;border:3px solid var(--rose-mid);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative;}
+    .seal-ring::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px dashed rgba(160,40,74,.35);}
+    .milestone-num{font-family:'Cormorant Garamond',serif;font-size:62px;font-weight:600;color:var(--rose);line-height:1;}
+    .milestone-lbl{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--rose-mid);}
+
+    /* ── WISHES: warm blush section, readable dark text ── */
+    .wishes-wrap{background:var(--blush);padding:6rem 2rem;}
+    .wishes-inner{max-width:1000px;margin:0 auto;}
+    .wishes-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,64px);font-weight:600;color:var(--rose);margin-bottom:.5rem;}
+    .wishes-rule{width:80px;height:1px;background:rgba(92,10,35,.25);margin:1rem 0 3rem;}
+    .wishes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;}
+    .wish{background:#FFFFFF;border:1px solid rgba(160,40,74,.15);padding:2.25rem 1.75rem;position:relative;overflow:hidden;transition:box-shadow .3s,transform .3s;}
+    .wish:hover{box-shadow:0 8px 24px rgba(160,40,74,.18);transform:translateY(-3px);}
+    /* top rose border */
+    .wish::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--rose-mid);}
+    .wish i{font-size:22px;color:var(--rose-mid);margin-bottom:1rem;display:block;}
+    .wish-label{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--rose);margin-bottom:4px;}
+    .wish-sub{font-size:12px;font-weight:300;color:rgba(92,10,35,.6);line-height:1.6;}
+
+    /* ── SIGNOFF: cream with rose motif ── */
+    .signoff{background:var(--cream);padding:8rem 2rem;text-align:center;position:relative;overflow:hidden;}
+    /* large watermark rose behind */
+    .signoff-bg-rose{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:380px;color:var(--rose);opacity:.04;pointer-events:none;line-height:1;}
+    .signoff-msg{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,10vw,96px);font-weight:600;color:var(--rose);line-height:.95;position:relative;z-index:1;}
+    .signoff-rule{width:80px;height:1px;background:var(--rose-mid);margin:2rem auto;opacity:.4;}
+    .signoff-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--rose-mid);opacity:.7;position:relative;z-index:1;}
+
+    .lightbox-overlay{position:fixed;inset:0;z-index:500;background:rgba(26,8,16,.95);display:flex;align-items:center;justify-content:center;padding:2rem 1.25rem;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;}
+    .lightbox-overlay.open{opacity:1;visibility:visible;}
+    .lightbox-content{position:relative;max-width:min(700px,92vw);max-height:88vh;overflow:hidden;border:1px solid rgba(255,214,224,.3);}
+    .lightbox-content img{display:block;width:100%;height:100%;max-height:85vh;object-fit:contain;}
+    .lightbox-close{position:absolute;top:-44px;right:0;background:none;color:var(--blush);border:none;font-size:22px;cursor:pointer;}
+
+    @media(prefers-reduced-motion:no-preference){
+      .nl{display:inline-block;opacity:0;animation:rise-in .7s cubic-bezier(.22,1,.36,1) var(--d,0s) both;}
+      @keyframes rise-in{0%{opacity:0;transform:translateY(24px);}100%{opacity:1;transform:none;}}
+      [data-r]{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1) var(--rd,0ms);}
+      [data-r].vis{opacity:1;transform:none;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-bg lb" data-full="https://picsum.photos/seed/greet1/600/600"><img src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">With Love</span>
+    <h1 class="name"><span class="nl" style="--d:0.00s">M</span><span class="nl" style="--d:0.08s">a</span><span class="nl" style="--d:0.16s">r</span><span class="nl" style="--d:0.24s">i</span><span class="nl" style="--d:0.32s">e</span><span class="nl" style="--d:0.40s">l</span></h1>
+    <div class="hero-rule"></div>
+    <div class="hero-sub">Wishing you all the best</div>
+  </div>
+  <div class="scroll-hint"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+
+<div class="message-section" data-r>
+  <div class="message-inner">
+    <div class="pull-quote-col">
+      <span class="pull-quote-label">The Birthday Issue</span>
+      <div class="pull-quote">&ldquo;Happy Birthday!&rdquo;</div>
+    </div>
+    <div class="msg-col">
+      <span class="msg-from-label">Vol. 1 · Special Edition</span>
+      <div class="msg-body">Happy birthday! Wishing you a day full of joy, laughter, and everything you love. You deserve all the happiness in the world.</div>
+      <div class="msg-from">— Your friends</div>
+    </div>
+  </div>
+</div>
+
+<div class="editorial-grid" data-r>
+  <div class="grid-inner">
+    <h2 class="grid-hed">Our Favourite Memories</h2>
+    <div class="grid-rule"></div>
+    <div class="grid-photos">
+      <div class="grid-cell lb" data-full="https://picsum.photos/seed/greet2/600/450"><img src="https://picsum.photos/seed/greet2/600/450" alt="memory 1" loading="lazy"/></div>
+      <div class="grid-cell lb" data-full="https://picsum.photos/seed/greet3/600/450"><img src="https://picsum.photos/seed/greet3/600/450" alt="memory 2" loading="lazy"/></div>
+      <div class="grid-cell lb" data-full="https://picsum.photos/seed/greet4/600/450"><img src="https://picsum.photos/seed/greet4/600/450" alt="memory 3" loading="lazy"/></div>
+      <div class="grid-cell lb" data-full="https://picsum.photos/seed/greet5/600/450"><img src="https://picsum.photos/seed/greet5/600/450" alt="memory 4" loading="lazy"/></div>
+      <div class="grid-cell lb" data-full="https://picsum.photos/seed/greet6/600/450"><img src="https://picsum.photos/seed/greet6/600/450" alt="memory 5" loading="lazy"/></div>
+      <div class="grid-cell lb" data-full="https://picsum.photos/seed/greet7/600/450"><img src="https://picsum.photos/seed/greet7/600/450" alt="memory 6" loading="lazy"/></div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="wishes-wrap">
+  <div class="wishes-inner">
+    <h2 class="wishes-title" data-r>Our Wishes For You</h2>
+    <div class="wishes-rule"></div>
+    <div class="wishes-grid">
+      <div class="wish" data-r style="--rd:0ms"><i class="fa-solid fa-sun"></i><div class="wish-label">Joy</div><div class="wish-sub">Every single day</div></div>
+      <div class="wish" data-r style="--rd:80ms"><i class="fa-solid fa-wand-magic-sparkles"></i><div class="wish-label">Magic</div><div class="wish-sub">In everything you do</div></div>
+      <div class="wish" data-r style="--rd:160ms"><i class="fa-solid fa-map"></i><div class="wish-label">Adventure</div><div class="wish-sub">Around every corner</div></div>
+      <div class="wish" data-r style="--rd:240ms"><i class="fa-solid fa-face-smile-beam"></i><div class="wish-label">Laughter</div><div class="wish-sub">Always and forever</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="signoff" data-r>
+  <div class="signoff-bg-rose"><i class="fa-solid fa-heart"></i></div>
+  <div class="signoff-msg">Happy Birthday!</div>
+  <div class="signoff-rule"></div>
+  <div class="signoff-sub">With all our love</div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt=""/>
+    </div>
+  </div>
+<script>
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lb').forEach(function(el){
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ img.src = el.dataset.full || ''; lb.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) lb.classList.remove('open'); });
+  })();
+  </script>
+<script>
+(function(){
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('vis');io.unobserve(en.target);}});},{threshold:.1});
+    document.querySelectorAll('[data-r]').forEach(function(el){io.observe(el);});
+  } else document.querySelectorAll('[data-r]').forEach(function(el){el.classList.add('vis');});
+  /* falling petals */
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced)return;
+  var c=document.createElement('canvas');
+  c.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9000;';
+  document.body.appendChild(c);
+  var ctx=c.getContext('2d'),W=window.innerWidth,H=window.innerHeight,dpr=Math.min(window.devicePixelRatio||1,2);
+  c.width=W*dpr;c.height=H*dpr;c.style.width=W+'px';c.style.height=H+'px';ctx.scale(dpr,dpr);
+  var N=W<600?16:26;
+  var petals=[];
+  var colors=['rgba(255,182,193,.7)','rgba(255,150,170,.6)','rgba(255,214,224,.8)','rgba(220,100,120,.5)'];
+  for(var i=0;i<N;i++) petals.push({x:Math.random()*W,y:Math.random()*H-H,vy:.6+Math.random()*1.2,vx:(Math.random()-.5)*.4,rot:Math.random()*360,rs:.5+Math.random()*.8,r:4+Math.random()*6,col:colors[Math.floor(Math.random()*colors.length)],sw:Math.random()*Math.PI*2,sp:.01+Math.random()*.015});
+  var t0=Date.now(),dur=9000;
+  function tick(){
+    var el=Date.now()-t0,fade=el>dur?Math.max(0,1-(el-dur)/3000):1;
+    if(fade<=0){c.remove();return;}
+    ctx.clearRect(0,0,W,H);
+    ctx.globalAlpha=fade;
+    petals.forEach(function(p){
+      p.y+=p.vy;p.sw+=p.sp;p.x+=Math.sin(p.sw)*.8+p.vx;p.rot+=p.rs;
+      if(p.y>H+20){p.y=-20;p.x=Math.random()*W;}
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);
+      ctx.beginPath();
+      ctx.ellipse(0,0,p.r,p.r*.55,0,0,Math.PI*2);
+      ctx.fillStyle=p.col;ctx.fill();
+      ctx.restore();
+    });
+    ctx.globalAlpha=1;
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+</body>
+</html>

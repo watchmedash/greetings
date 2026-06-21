@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mariel — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #FFFDF6;
+      --ink: #201515;
+      --apricot: #FFB399;
+      --citron: #FFE89E;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    /* ── Hero ── */
+    .hero { padding: 6rem 1.5rem 3rem; text-align: center; max-width: 1100px; margin: 0 auto; }
+    .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.4em; text-transform: uppercase; background: var(--citron); display: inline-block; padding: 4px 12px; margin-bottom: 2rem; border: 2px solid var(--ink); animation: eyebrow-in 0.5s ease 0.05s both; }
+    @keyframes eyebrow-in { from { opacity:0; transform:scaleX(0); } to { opacity:1; transform:none; } }
+    .name { font-family: 'Abril Fatface', serif; font-size: clamp(60px, 16vw, 130px); font-weight: 400; color: var(--ink); line-height: 0.9; text-transform: uppercase; }
+    .name-tag { font-size: 15px; font-weight: 600; color: var(--ink); margin-top: 1.5rem; letter-spacing: 0.05em; text-transform: uppercase; animation: fadeup 0.6s ease 1s both; }
+    .hero-photo-wrap { display: flex; justify-content: center; margin-top: 2rem; animation: fadeup 0.7s ease 0.55s both; }
+    .polaroid { background: #fff; padding: 20px 20px 50px; border: 3px solid var(--ink); box-shadow: 12px 12px 0 var(--ink); transform: rotate(-1.5deg); transition: box-shadow 0.3s ease; cursor: pointer; transform-style: preserve-3d; }
+    .polaroid:hover { box-shadow: 18px 18px 0 var(--ink); }
+    .polaroid .frame { width: 300px; height: 380px; overflow: hidden; border: 2px solid var(--ink); }
+    .polaroid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .polaroid:hover img { transform: scale(1.05); }
+
+    /* ── Ticker ── */
+    .ticker { border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); background: var(--ink); color: var(--bg); overflow: hidden; white-space: nowrap; padding: 8px 0; }
+    .ticker-inner { display: inline-block; animation: scroll-ticker 18s linear infinite; }
+    .ticker-inner span { padding: 0 2.5rem; font-size: 12px; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase; }
+    @keyframes scroll-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── Message ── */
+    .message-section { max-width: 1100px; margin: 6rem auto; padding: 0 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    @media (max-width: 768px) { .message-section { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .ed-label { font-family: 'Abril Fatface', serif; font-size: clamp(40px, 8vw, 64px); line-height: 1.0; color: var(--ink); text-transform: uppercase; }
+    .ed-label span { display: block; color: var(--apricot); -webkit-text-stroke: 2px var(--ink); }
+    .msg-body { font-size: 18px; font-weight: 500; line-height: 1.8; color: var(--ink); }
+    .msg-from { font-size: 12px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 2rem; display: inline-block; border-bottom: 3px solid var(--apricot); padding-bottom: 4px; }
+
+    /* ── Milestone ── */
+    .milestone-wrap { padding: 4rem 1.5rem; text-align: center; }
+    .milestone-box { display: inline-flex; align-items: center; gap: 20px; border: 3px solid var(--ink); background: #fff; padding: 1.5rem 4rem; box-shadow: 8px 8px 0 var(--ink); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .milestone-box:hover { transform: translate(-3px,-3px); box-shadow: 11px 11px 0 var(--ink); }
+    .milestone-num { font-family: 'Abril Fatface', serif; font-size: 72px; color: var(--ink); }
+    .milestone-lbl { font-size: 13px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; text-align: left; }
+
+    /* ── Grid ── */
+    .grid-wrap { padding: 6rem 1.5rem; background: var(--citron); border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); }
+    .grid-inner { max-width: 1100px; margin: 0 auto; }
+    .grid-title { font-family: 'Abril Fatface', serif; font-size: clamp(36px, 8vw, 54px); color: var(--ink); text-transform: uppercase; margin-bottom: 4rem; }
+    .memory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
+    .grid-polaroid { background: #fff; padding: 14px 14px 40px; border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); cursor: pointer; transition: box-shadow 0.25s ease; transform-style: preserve-3d; }
+    .grid-polaroid:hover { box-shadow: 13px 13px 0 var(--ink); }
+    .grid-polaroid .frame { width: 100%; aspect-ratio: 1/1; overflow: hidden; border: 2px solid var(--ink); }
+    .grid-polaroid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .grid-polaroid:hover img { transform: scale(1.07); }
+
+    /* ── Wishes ── */
+    .wishes-wrap { padding: 7rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+    .wishes-title { font-family: 'Abril Fatface', serif; font-size: clamp(36px, 8vw, 54px); color: var(--ink); text-transform: uppercase; margin-bottom: 4rem; text-align: center; }
+    .wishes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    @media (max-width: 900px) { .wishes-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .wishes-grid { grid-template-columns: 1fr; } }
+    .wish { background: #fff; border: 2px solid var(--ink); padding: 3rem 1.5rem; text-align: center; box-shadow: 6px 6px 0 var(--ink); transition: transform 0.2s ease, box-shadow 0.2s ease; cursor: default; }
+    .wish:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--ink); }
+    .wish-icon { font-size: 24px; margin-bottom: 1.5rem; display: inline-flex; align-items: center; justify-content: center; color: var(--ink); background: var(--apricot); width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--ink); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+    .wish:hover .wish-icon { transform: scale(1.2) rotate(-5deg); }
+    .wish-label { font-size: 16px; font-weight: 800; color: var(--ink); text-transform: uppercase; }
+    .wish-sub { font-size: 13px; color: var(--ink); margin-top: 8px; font-weight: 500; line-height: 1.4; }
+
+    /* ── Signoff ── */
+    .signoff { padding: 8rem 1.5rem; text-align: center; background: var(--apricot); border-top: 3px solid var(--ink); position: relative; overflow: hidden; }
+    .signoff-bg-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Abril Fatface', serif; font-size: 20vw; color: rgba(32,21,21,0.04); text-transform: uppercase; pointer-events: none; user-select: none; white-space: nowrap; }
+    .signoff-msg { font-family: 'Abril Fatface', serif; font-size: clamp(40px, 9vw, 72px); color: var(--ink); text-transform: uppercase; line-height: 1.0; position: relative; }
+    .signoff-sub { font-size: 12px; font-weight: 800; color: var(--ink); margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 0.3em; position: relative; }
+
+    /* ── Lightbox ── */
+    .lightbox-overlay { position: fixed; inset: 0; z-index: 500; background: rgba(32,21,21,0.95); display: flex; align-items: center; justify-content: center; padding: 2rem 1.25rem; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+    .lightbox-overlay.open { opacity: 1; visibility: visible; }
+    .lightbox-content { position: relative; max-width: min(600px, 92vw); max-height: 85vh; background: #fff; padding: 12px 12px 40px; border: 3px solid var(--ink); }
+    .lightbox-content img { display: block; width: 100%; height: 100%; max-height: 75vh; object-fit: contain; border: 2px solid var(--ink); }
+    .lightbox-close { position: absolute; top: -45px; right: 0; background: none; color: #fff; border: none; font-size: 24px; cursor: pointer; }
+
+    /* ── Reveal animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .nl { display: inline-block; opacity: 0; animation: ink-in 0.5s ease var(--d, 0s) both; }
+      @keyframes ink-in { from { opacity:0; transform:translateY(-28px) scaleY(1.8); filter:blur(3px); } to { opacity:1; transform:none; filter:none; } }
+      @keyframes fadeup { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:none; } }
+      [data-r] { opacity:0; transform:translateY(32px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1) var(--rd,0ms); }
+      [data-r].vis { opacity:1; transform:none; }
+      [data-r="left"] { transform:translateX(-42px) rotate(-1.5deg); }
+      [data-r="left"].vis { transform:none; }
+      [data-r="right"] { transform:translateX(42px) rotate(1.5deg); }
+      [data-r="right"].vis { transform:none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="eyebrow">With Love</span>
+  <h1 class="name"><span class="nl" style="--d:0.00s">M</span><span class="nl" style="--d:0.06s">a</span><span class="nl" style="--d:0.12s">r</span><span class="nl" style="--d:0.18s">i</span><span class="nl" style="--d:0.24s">e</span><span class="nl" style="--d:0.30s">l</span></h1>
+  <div class="name-tag">— Wishing you all the best</div>
+  <div class="hero-photo-wrap">
+    <div class="polaroid tilt-card lb" data-full="https://picsum.photos/seed/greet1/600/600">
+      <div class="frame"><img src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/></div>
+    </div>
+  </div>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span>With Love</span><span>Mariel</span><span>★</span><span>With Love</span><span>Mariel</span><span>★</span><span>With Love</span><span>Mariel</span><span>★</span><span>With Love</span><span>Mariel</span><span>★</span><span>With Love</span><span>Mariel</span><span>★</span><span>With Love</span><span>Mariel</span><span>★</span>
+  </div>
+</div>
+
+<div class="message-section">
+  <h2 class="ed-label" data-r="left">The Birthday Issue <span>Vol. 1 · Special Edition</span></h2>
+  <div data-r="right">
+    <div class="msg-body">Happy birthday! Wishing you a day full of joy, laughter, and everything you love. You deserve all the happiness in the world.</div>
+    <div class="msg-from">Your friends</div>
+  </div>
+</div>
+
+
+
+<div class="grid-wrap" data-r>
+  <div class="grid-inner">
+    <h2 class="grid-title">Our Favourite Memories</h2>
+    <div class="memory-grid">
+      <div class="grid-polaroid tilt-card lb" data-r style="--rd:0ms" data-full="https://picsum.photos/seed/greet2/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet2/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="grid-polaroid tilt-card lb" data-r style="--rd:80ms" data-full="https://picsum.photos/seed/greet3/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet3/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="grid-polaroid tilt-card lb" data-r style="--rd:160ms" data-full="https://picsum.photos/seed/greet4/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet4/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="grid-polaroid tilt-card lb" data-r style="--rd:240ms" data-full="https://picsum.photos/seed/greet5/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet5/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="grid-polaroid tilt-card lb" data-r style="--rd:320ms" data-full="https://picsum.photos/seed/greet6/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet6/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="grid-polaroid tilt-card lb" data-r style="--rd:400ms" data-full="https://picsum.photos/seed/greet7/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet7/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wishes-wrap">
+  <h2 class="wishes-title" data-r>Our Wishes For You</h2>
+  <div class="wishes-grid">
+    <div class="wish" data-r style="--rd:0ms">
+      <span class="wish-icon"><i class="fa-solid fa-sun"></i></span>
+      <div class="wish-label">Joy</div>
+      <div class="wish-sub">Every single day</div>
+    </div>
+    <div class="wish" data-r style="--rd:100ms">
+      <span class="wish-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+      <div class="wish-label">Magic</div>
+      <div class="wish-sub">In everything you do</div>
+    </div>
+    <div class="wish" data-r style="--rd:200ms">
+      <span class="wish-icon"><i class="fa-solid fa-map"></i></span>
+      <div class="wish-label">Adventure</div>
+      <div class="wish-sub">Around every corner</div>
+    </div>
+    <div class="wish" data-r style="--rd:300ms">
+      <span class="wish-icon"><i class="fa-solid fa-face-smile-beam"></i></span>
+      <div class="wish-label">Laughter</div>
+      <div class="wish-sub">Always and forever</div>
+    </div>
+  </div>
+</div>
+
+<div class="signoff" data-r>
+  <div class="signoff-bg-text" aria-hidden="true">Happy Birthday!</div>
+  <div class="signoff-msg">Happy Birthday!</div>
+  <div class="signoff-sub">With all our love</div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt=""/>
+    </div>
+  </div>
+<script>
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lb').forEach(function(el){
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ img.src = el.dataset.full || ''; lb.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) lb.classList.remove('open'); });
+  })();
+  </script>
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── Scroll reveals ── */
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting) { en.target.classList.add('vis'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-r]').forEach(function(el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-r]').forEach(function(el) { el.classList.add('vis'); });
+  }
+
+  /* ── 3D polaroid tilt (desktop only) ── */
+  if (!reduced && !('ontouchstart' in window)) {
+    document.querySelectorAll('.tilt-card').forEach(function(card) {
+      var baseRot = card.classList.contains('grid-polaroid')
+        ? (Array.prototype.indexOf.call(card.parentNode.children, card) % 2 === 0 ? -1.5 : 1.5)
+        : -1.5;
+      card.addEventListener('mousemove', function(ev) {
+        var r = card.getBoundingClientRect();
+        var x = ((ev.clientX - r.left) / r.width - 0.5) * 14;
+        var y = ((ev.clientY - r.top) / r.height - 0.5) * -14;
+        card.style.transform = 'perspective(700px) rotateX('+y+'deg) rotateY('+x+'deg) scale(1.02)';
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.transform = card.classList.contains('polaroid') ? 'rotate('+baseRot+'deg)' : '';
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>

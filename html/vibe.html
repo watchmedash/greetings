@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mariel — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Space+Grotesk:wght@500;700&family=Alex+Brush&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-festive: #120111;
+      --primary-yellow: #ffe600;
+      --accent-magenta: #ff00a0;
+      --bright-orange: #ff5e00;
+      --electric-lime: #00ff66;
+      --text-white: #ffffff;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-festive); color: var(--text-white); overflow-x: hidden; }
+
+    #festive-canvas { position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:0; pointer-events:none; }
+    .bg-ticker {
+      position:fixed; width:200%; top:30%; left:-50%;
+      font-family:'Syne',sans-serif; font-size:14vw; font-weight:800;
+      color:transparent; -webkit-text-stroke:2px rgba(255,0,160,0.12);
+      text-transform:uppercase; pointer-events:none; white-space:nowrap; z-index:1;
+      transform:rotate(-5deg); user-select:none;
+    }
+    .party-glow { position:fixed; width:60vw; height:60vw; border-radius:50%; z-index:1; filter:blur(140px); opacity:0.48; }
+    .pg-1 { top:-10%; left:-10%; background:var(--bright-orange); }
+    .pg-2 { bottom:-10%; right:-10%; background:var(--primary-yellow); }
+
+    /* ── Hero ── */
+    .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:8rem 1.5rem; text-align:center; position:relative; z-index:2; }
+    .badge {
+      background:linear-gradient(135deg, var(--accent-magenta), var(--bright-orange));
+      padding:8px 24px; font-size:12px; font-weight:700; letter-spacing:0.3em;
+      text-transform:uppercase; margin-bottom:2.5rem; transform:rotate(-4deg);
+      box-shadow:-5px 5px 0px var(--electric-lime);
+    }
+    .festive-title { font-family:'Syne',sans-serif; font-size:clamp(65px,15vw,130px); font-weight:800; text-transform:uppercase; line-height:0.85; letter-spacing:-0.04em; }
+    .festive-title .cursive { font-family:'Alex Brush',cursive; font-size:clamp(55px,10vw,85px); text-transform:none; color:var(--electric-lime); display:block; margin-top:-10px; font-weight:400; text-shadow:4px 4px 0px var(--accent-magenta); transform:rotate(3deg); }
+    .portrait-wrap { margin-top:5rem; perspective:1200px; cursor:pointer; }
+    .festive-frame {
+      background:var(--text-white); padding:16px; transform:rotate(5deg);
+      box-shadow:15px 15px 0px var(--accent-magenta), -15px -15px 0px var(--primary-yellow);
+      transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); transform-style:preserve-3d;
+    }
+    .festive-frame:hover { transform:rotate(-3deg) scale(1.06); box-shadow:-20px 20px 0px var(--electric-lime), 20px -20px 0px var(--bright-orange); }
+    .inner-img-box { width:310px; height:390px; overflow:hidden; }
+    .inner-img-box img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* ── Message ── */
+    .party-msg-wrap { padding:10rem 1.5rem; text-align:center; position:relative; z-index:2; background:rgba(18,1,17,0.92); }
+    .party-msg { font-size:clamp(18px,3vw,28px); font-weight:700; max-width:950px; margin:0 auto; line-height:1.4; }
+    .msg-from { margin-top:2rem; font-size:13px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--electric-lime); }
+
+    /* ── Milestone ── */
+    .milestone-wrap { padding:4rem 1.5rem; text-align:center; position:relative; z-index:2; }
+    .milestone-vibe {
+      display:inline-flex; flex-direction:column; align-items:center; gap:8px;
+      border:3px dashed var(--bright-orange); padding:2rem 4rem;
+      box-shadow:-10px 10px 0px var(--primary-yellow);
+    }
+    .milestone-num { font-family:'Syne',sans-serif; font-size:80px; font-weight:800; color:var(--primary-yellow); line-height:1; }
+    .milestone-lbl { font-size:12px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--electric-lime); }
+
+    /* ── Grid ── */
+    .stream-wrap { padding:8rem 1.5rem; position:relative; z-index:2; max-width:1200px; margin:0 auto; }
+    .grid-title { font-family:'Syne',sans-serif; font-size:clamp(24px,4vw,36px); font-weight:800; text-transform:uppercase; margin-bottom:3rem; color:var(--primary-yellow); }
+    .party-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:45px; }
+    @media (max-width:850px) { .party-grid { grid-template-columns:1fr; gap:60px; } }
+    .grid-card { background:var(--text-white); padding:12px; transition:all 0.4s; cursor:pointer; }
+    .grid-card:nth-child(1) { transform:rotate(-4deg) translateY(40px); box-shadow:14px 14px 0px var(--electric-lime); }
+    .grid-card:nth-child(2) { transform:rotate(5deg) translateY(-30px); box-shadow:-14px 14px 0px var(--primary-yellow); }
+    .grid-card:nth-child(3) { transform:rotate(-2deg) translateY(50px); box-shadow:14px -14px 0px var(--bright-orange); }
+    .grid-card:hover { transform:scale(1.07) translateY(0) rotate(0deg) !important; box-shadow:0 30px 60px rgba(0,255,102,0.3); z-index:6; }
+    .card-frame { width:100%; aspect-ratio:4/5; overflow:hidden; }
+    .grid-card img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* ── Wishes ── */
+    .vibe-deck { padding:12rem 1.5rem 8rem; position:relative; z-index:2; max-width:1200px; margin:0 auto; }
+    .wishes-title { font-family:'Syne',sans-serif; font-size:clamp(24px,4vw,36px); font-weight:800; text-transform:uppercase; margin-bottom:3rem; color:var(--primary-yellow); }
+    .deck-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+    @media (max-width:900px) { .deck-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:500px) { .deck-grid { grid-template-columns:1fr; } }
+    .deck-card {
+      background:rgba(255,255,255,0.04); border:3px dashed var(--bright-orange);
+      padding:4rem 2rem; transition:all 0.3s; cursor:default;
+    }
+    .deck-card:hover { background:var(--electric-lime); border-style:solid; border-color:#000; transform:translateY(-15px) scale(1.04); box-shadow:-15px 15px 0px var(--primary-yellow); }
+    .wish-icon { font-size:32px; color:var(--primary-yellow); margin-bottom:1.5rem; display:block; }
+    .deck-card:hover .wish-icon { color:#000; }
+    .wish-label { font-size:20px; font-weight:700; margin-bottom:12px; text-transform:uppercase; }
+    .deck-card:hover .wish-label { color:#000; }
+    .wish-sub { font-size:14px; color:#ccb9cb; line-height:1.5; }
+    .deck-card:hover .wish-sub { color:#000; font-weight:500; }
+
+    /* ── Signoff ── */
+    .stage-out { padding:14rem 1.5rem; text-align:center; position:relative; z-index:2; }
+    .signoff-msg { font-family:'Syne',sans-serif; font-size:clamp(45px,9vw,95px); text-transform:uppercase; font-weight:800; color:var(--primary-yellow); text-shadow:5px 5px 0px var(--accent-magenta); }
+    .signoff-sub { font-size:14px; font-weight:700; letter-spacing:0.5em; text-transform:uppercase; color:var(--electric-lime); margin-top:2rem; }
+
+    /* ── Lightbox ── */
+    .lightbox-overlay {
+      position:fixed; inset:0; z-index:500; background:rgba(18,1,17,0.98);
+      display:flex; align-items:center; justify-content:center; padding:2rem;
+      opacity:0; visibility:hidden; transition:all 0.4s ease;
+    }
+    .lightbox-overlay.open { opacity:1; visibility:visible; }
+    .lightbox-content { position:relative; max-width:min(550px,92vw); }
+    .lightbox-content img { width:100%; height:auto; border:8px solid var(--accent-magenta); box-shadow:20px 20px 0px var(--primary-yellow); display:block; }
+    .lightbox-close { position:absolute; top:-50px; right:0; background:none; border:none; color:#fff; font-size:32px; cursor:pointer; }
+
+    /* ── Reveal animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .nl { display:inline-block; opacity:0; animation:nl-wild 0.6s cubic-bezier(0.34,1.56,0.64,1) var(--d,0s) both; }
+      @keyframes nl-wild { from { opacity:0; transform:translateY(-50px) rotate(15deg) scale(0.5); } to { opacity:1; transform:none; } }
+      [data-r] { opacity:0; transform:translateY(32px); transition:opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1) var(--rd,0ms); }
+      [data-r].vis { opacity:1; transform:none; }
+      .pg-1 { animation: wildPulse 7s infinite alternate; }
+      .pg-2 { animation: wildPulse 11s infinite alternate-reverse; }
+      @keyframes wildPulse { 0% { transform:scale(1) translate(0px,0px); } 100% { transform:scale(1.3) translate(40px,-40px); } }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="festive-canvas"></canvas>
+<div class="bg-ticker" id="ticker-text">With Love &nbsp;&nbsp; Mariel &nbsp;&nbsp; With Love &nbsp;&nbsp; Mariel</div>
+<div class="party-glow pg-1"></div>
+<div class="party-glow pg-2"></div>
+
+<div class="hero">
+  <div class="badge">With Love</div>
+  <h1 class="festive-title">
+    <span><span class="nl" style="--d:0.00s">M</span><span class="nl" style="--d:0.06s">a</span><span class="nl" style="--d:0.12s">r</span><span class="nl" style="--d:0.18s">i</span><span class="nl" style="--d:0.24s">e</span><span class="nl" style="--d:0.30s">l</span></span>
+    <span class="cursive">The Birthday Issue</span>
+  </h1>
+  <div class="portrait-wrap generic-tilt">
+    <div class="festive-frame lb" data-full="https://picsum.photos/seed/greet1/600/600">
+      <div class="inner-img-box">
+        <img src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="party-msg-wrap" data-r>
+  <div class="party-msg">Happy birthday! Wishing you a day full of joy, laughter, and everything you love. You deserve all the happiness in the world.</div>
+  <div class="msg-from">Your friends</div>
+</div>
+
+
+
+<div class="stream-wrap" data-r>
+  <div class="grid-title">Our Favourite Memories</div>
+  <div class="party-grid">
+    <div class="grid-card lb" data-r style="--rd:0ms" data-full="https://picsum.photos/seed/greet2/600/450">
+      <div class="card-frame"><img src="https://picsum.photos/seed/greet2/600/450" alt="memory" loading="lazy"/></div>
+    </div>
+    <div class="grid-card lb" data-r style="--rd:80ms" data-full="https://picsum.photos/seed/greet3/600/450">
+      <div class="card-frame"><img src="https://picsum.photos/seed/greet3/600/450" alt="memory" loading="lazy"/></div>
+    </div>
+    <div class="grid-card lb" data-r style="--rd:160ms" data-full="https://picsum.photos/seed/greet4/600/450">
+      <div class="card-frame"><img src="https://picsum.photos/seed/greet4/600/450" alt="memory" loading="lazy"/></div>
+    </div>
+    <div class="grid-card lb" data-r style="--rd:240ms" data-full="https://picsum.photos/seed/greet5/600/450">
+      <div class="card-frame"><img src="https://picsum.photos/seed/greet5/600/450" alt="memory" loading="lazy"/></div>
+    </div>
+    <div class="grid-card lb" data-r style="--rd:320ms" data-full="https://picsum.photos/seed/greet6/600/450">
+      <div class="card-frame"><img src="https://picsum.photos/seed/greet6/600/450" alt="memory" loading="lazy"/></div>
+    </div>
+    <div class="grid-card lb" data-r style="--rd:400ms" data-full="https://picsum.photos/seed/greet7/600/450">
+      <div class="card-frame"><img src="https://picsum.photos/seed/greet7/600/450" alt="memory" loading="lazy"/></div>
+    </div>
+  </div>
+</div>
+
+<div class="vibe-deck" data-r>
+  <div class="wishes-title">Our Wishes For You</div>
+  <div class="deck-grid">
+    <div class="deck-card" data-r style="--rd:0ms">
+      <i class="fa-solid fa-sun wish-icon"></i>
+      <div class="wish-label">Joy</div>
+      <div class="wish-sub">Every single day</div>
+    </div>
+    <div class="deck-card" data-r style="--rd:90ms">
+      <i class="fa-solid fa-wand-magic-sparkles wish-icon"></i>
+      <div class="wish-label">Magic</div>
+      <div class="wish-sub">In everything you do</div>
+    </div>
+    <div class="deck-card" data-r style="--rd:180ms">
+      <i class="fa-solid fa-map wish-icon"></i>
+      <div class="wish-label">Adventure</div>
+      <div class="wish-sub">Around every corner</div>
+    </div>
+    <div class="deck-card" data-r style="--rd:270ms">
+      <i class="fa-solid fa-face-smile-beam wish-icon"></i>
+      <div class="wish-label">Laughter</div>
+      <div class="wish-sub">Always and forever</div>
+    </div>
+  </div>
+</div>
+
+<div class="stage-out" data-r>
+  <div class="signoff-msg">Happy Birthday!</div>
+  <div class="signoff-sub">With all our love</div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt=""/>
+    </div>
+  </div>
+<script>
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lb').forEach(function(el){
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ img.src = el.dataset.full || ''; lb.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) lb.classList.remove('open'); });
+  })();
+  </script>
+<script>
+(function(){
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting) { en.target.classList.add('vis'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-r]').forEach(function(el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-r]').forEach(function(el) { el.classList.add('vis'); });
+  }
+
+  window.addEventListener('scroll', function() {
+    var t = document.getElementById('ticker-text');
+    if (t) t.style.transform = 'rotate(-5deg) translateX(' + (-window.scrollY * 0.4) + 'px)';
+  });
+
+  /* ── 3D tilt ── */
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced && !('ontouchstart' in window)) {
+    document.querySelectorAll('.generic-tilt').forEach(function(el) {
+      el.addEventListener('mousemove', function(ev) {
+        var box = el.getBoundingClientRect();
+        var x = (ev.clientX - box.left - box.width/2) / (box.width/2) * 15;
+        var y = (ev.clientY - box.top - box.height/2) / (box.height/2) * -15;
+        el.style.transform = 'rotateX('+y+'deg) rotateY('+x+'deg) scale(1.05) rotateZ(3deg)';
+      });
+      el.addEventListener('mouseleave', function() { el.style.transform = 'rotateZ(5deg)'; });
+    });
+  }
+
+  /* ── Canvas falling confetti ── */
+  var canvas = document.getElementById('festive-canvas');
+  var ctx = canvas.getContext('2d');
+  var confetti = [];
+  var mouse = { x: null, y: null, vX: 0, vY: 0, lastX: 0, lastY: 0, speed: 0 };
+  function sizeUp() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  window.addEventListener('resize', sizeUp); sizeUp();
+  window.addEventListener('mousemove', function(ev) {
+    mouse.x = ev.clientX; mouse.y = ev.clientY;
+    mouse.vX = mouse.x - mouse.lastX; mouse.vY = mouse.y - mouse.lastY;
+    mouse.speed = Math.min(Math.sqrt(mouse.vX*mouse.vX + mouse.vY*mouse.vY), 50);
+    mouse.lastX = mouse.x; mouse.lastY = mouse.y;
+  });
+  var palette = ['#ffe600','#ff00a0','#ff5e00','#00ff66'];
+  for (var i = 0; i < 80; i++) {
+    confetti.push({
+      x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+      size: Math.random() * 6 + 4,
+      speedX: (Math.random()-0.5) * 3.5, speedY: Math.random() * 2 + 1.2,
+      rotation: Math.random() * 360, rotationSpeed: (Math.random()-0.5) * 5.5,
+      color: palette[Math.floor(Math.random() * palette.length)],
+    });
+  }
+  function loop() {
+    ctx.fillStyle = 'rgba(18,1,17,0.2)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+    confetti.forEach(function(p) {
+      p.y += p.speedY + (mouse.speed * 0.11); p.x += p.speedX + (mouse.vX * 0.05);
+      p.rotation += p.rotationSpeed;
+      if (p.y > canvas.height) { p.y = -20; p.x = Math.random() * canvas.width; }
+      if (p.x < -20) p.x = canvas.width + 20;
+      if (p.x > canvas.width + 20) p.x = -20;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rotation * Math.PI / 180);
+      ctx.fillStyle = p.color; ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size); ctx.restore();
+    });
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+</script>
+</body>
+</html>

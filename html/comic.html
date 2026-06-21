@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mariel — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root { --yellow:#FFE600; --red:#FF1744; --blue:#1565C0; --black:#111; --white:#FFF; --halftone:rgba(17,17,17,.08); }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Comic Neue',cursive;background:var(--yellow);color:var(--black);overflow-x:hidden;}
+    /* halftone bg utility */
+    .halftone{background-image:radial-gradient(circle,var(--halftone) 1px,transparent 1px);background-size:8px 8px;}
+
+    /* thick border utility */
+    .panel{border:4px solid var(--black);box-shadow:6px 6px 0 var(--black);}
+
+    /* HERO: yellow splash-page, comic panel */
+    .hero{background:var(--yellow);padding:4rem 2rem;text-align:center;position:relative;border-bottom:4px solid var(--black);overflow:hidden;}
+    .hero .halftone{position:absolute;inset:0;}
+    .hero-content{position:relative;z-index:1;}
+    .eyebrow{font-family:'Bangers',cursive;font-size:16px;letter-spacing:.2em;color:var(--red);margin-bottom:1rem;display:block;text-transform:uppercase;}
+    /* starburst behind name */
+    .starburst-wrap{position:relative;display:inline-block;margin-bottom:1rem;}
+    .name{font-family:'Bangers',cursive;font-size:clamp(60px,16vw,140px);line-height:.9;color:var(--black);text-shadow:6px 6px 0 var(--red);letter-spacing:.04em;position:relative;z-index:1;}
+    .name-sub{font-family:'Bangers',cursive;font-size:18px;letter-spacing:.1em;color:var(--blue);margin-top:.5rem;}
+    /* POW burst */
+    .pow{position:absolute;top:-20px;right:-30px;font-family:'Bangers',cursive;font-size:60px;color:var(--red);transform:rotate(12deg);opacity:.9;text-shadow:3px 3px 0 var(--black);z-index:2;}
+    @media(max-width:500px){.pow{font-size:40px;right:-10px;}}
+    /* hero photo in thick panel */
+    .hero-photo-panel{display:inline-block;margin-top:2rem;padding:8px;background:var(--white);}
+    .hero-photo-panel img{display:block;width:240px;height:280px;object-fit:cover;border:4px solid var(--black);}
+    @media(max-width:500px){.hero-photo-panel img{width:180px;height:210px;}}
+
+    /* message: speech bubble */
+    .message-section{max-width:860px;margin:0 auto;padding:4rem 2rem;}
+    .bubble-wrap{display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;}
+    @media(max-width:600px){.bubble-wrap{grid-template-columns:1fr;}}
+    .bubble-photo{position:relative;}
+    .bubble-photo img{width:120px;height:140px;object-fit:cover;display:block;border:4px solid var(--black);}
+    @media(max-width:600px){.bubble-photo{display:none;}}
+    .bubble{background:var(--white);border:4px solid var(--black);padding:2rem;position:relative;border-radius:8px;}
+    .bubble::before{content:'';position:absolute;left:-28px;top:30px;width:0;height:0;border-top:14px solid transparent;border-bottom:14px solid transparent;border-right:28px solid var(--black);}
+    .bubble::after{content:'';position:absolute;left:-20px;top:33px;width:0;height:0;border-top:11px solid transparent;border-bottom:11px solid transparent;border-right:22px solid var(--white);}
+    @media(max-width:600px){.bubble::before,.bubble::after{display:none;}}
+    .msg-heading{font-family:'Bangers',cursive;font-size:22px;color:var(--red);margin-bottom:1rem;letter-spacing:.05em;}
+    .msg-body{font-size:16px;font-weight:700;line-height:1.7;color:var(--black);}
+    .msg-from{font-family:'Bangers',cursive;font-size:16px;color:var(--blue);margin-top:1rem;letter-spacing:.08em;}
+
+    /* milestone: starburst shape */
+    .milestone-wrap{background:var(--red);padding:5rem 2rem;text-align:center;border-top:4px solid var(--black);border-bottom:4px solid var(--black);position:relative;overflow:hidden;}
+    .milestone-burst-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.1) 1px,transparent 1px);background-size:10px 10px;}
+    .milestone-burst{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:1;gap:4px;}
+    .burst-label{font-family:'Bangers',cursive;font-size:14px;color:var(--yellow);letter-spacing:.15em;margin-bottom:.5rem;}
+    .milestone-num{font-family:'Bangers',cursive;font-size:clamp(80px,20vw,160px);color:var(--yellow);line-height:1;text-shadow:6px 6px 0 var(--black);}
+    .milestone-lbl{font-family:'Bangers',cursive;font-size:22px;color:var(--white);letter-spacing:.1em;text-shadow:3px 3px 0 var(--black);}
+
+    /* grid: comic panels varying sizes */
+    .grid-wrap{padding:4rem 2rem;background:var(--white);border-bottom:4px solid var(--black);}
+    .grid-title{font-family:'Bangers',cursive;font-size:clamp(28px,7vw,54px);color:var(--black);margin-bottom:2rem;letter-spacing:.05em;}
+    .comic-panels{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:8px;}
+    @media(max-width:600px){.comic-panels{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:380px){.comic-panels{grid-template-columns:1fr;}}
+    .comic-panel{border:4px solid var(--black);overflow:hidden;cursor:pointer;position:relative;}
+    .comic-panel:first-child{grid-row:span 2;grid-column:1;}
+    .comic-panel img{width:100%;height:100%;min-height:160px;object-fit:cover;display:block;transition:transform .3s;}
+    .comic-panel:hover img{transform:scale(1.05);}
+    .panel-badge{position:absolute;top:8px;left:8px;background:var(--yellow);border:2px solid var(--black);font-family:'Bangers',cursive;font-size:12px;padding:2px 8px;letter-spacing:.05em;}
+
+    /* wishes: action cards */
+    .wishes-wrap{max-width:960px;margin:0 auto;padding:4rem 2rem;}
+    .wishes-title{font-family:'Bangers',cursive;font-size:clamp(28px,6vw,50px);color:var(--black);margin-bottom:2rem;letter-spacing:.05em;}
+    .wish-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+    @media(max-width:800px){.wish-cards{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:440px){.wish-cards{grid-template-columns:1fr;}}
+    .wish{background:var(--white);border:4px solid var(--black);padding:1.5rem 1rem;text-align:center;position:relative;box-shadow:5px 5px 0 var(--black);transition:transform .2s,box-shadow .2s;}
+    .wish:nth-child(2n){background:var(--blue);color:var(--white);}
+    .wish:nth-child(3n){background:var(--red);color:var(--white);}
+    .wish:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--black);}
+    .wish i{font-size:22px;display:block;margin-bottom:.75rem;}
+    .wish:nth-child(2n) i,.wish:nth-child(3n) i{color:var(--yellow);}
+    .wish-label{font-family:'Bangers',cursive;font-size:16px;letter-spacing:.04em;margin-bottom:4px;}
+    .wish-sub{font-size:11px;line-height:1.5;}
+    .wish:nth-child(2n) .wish-sub,.wish:nth-child(3n) .wish-sub{opacity:.85;}
+
+    /* signoff: halftone yellow */
+    .signoff{background:var(--yellow);padding:6rem 2rem;text-align:center;border-top:4px solid var(--black);position:relative;overflow:hidden;}
+    .signoff .halftone{position:absolute;inset:0;}
+    .signoff-msg{font-family:'Bangers',cursive;font-size:clamp(40px,11vw,100px);color:var(--black);text-shadow:6px 6px 0 var(--red);line-height:.95;position:relative;z-index:1;letter-spacing:.04em;}
+    .signoff-sub{font-family:'Bangers',cursive;font-size:20px;color:var(--blue);margin-top:1.5rem;letter-spacing:.1em;position:relative;z-index:1;}
+
+    .lightbox-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;padding:2rem 1.25rem;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;}
+    .lightbox-overlay.open{opacity:1;visibility:visible;}
+    .lightbox-content{position:relative;max-width:min(700px,92vw);max-height:88vh;border:4px solid var(--yellow);}
+    .lightbox-content img{display:block;width:100%;height:100%;max-height:85vh;object-fit:contain;}
+    .lightbox-close{position:absolute;top:-44px;right:0;background:none;color:var(--yellow);border:none;font-size:22px;cursor:pointer;}
+
+    @media(prefers-reduced-motion:no-preference){
+      .nl{display:inline-block;opacity:0;animation:pop-in .3s cubic-bezier(.34,1.7,.64,1) var(--d,0s) both;}
+      @keyframes pop-in{0%{opacity:0;transform:scale(0) rotate(-20deg);}80%{transform:scale(1.08) rotate(2deg);}100%{opacity:1;transform:none;}}
+      [data-r]{opacity:0;transform:scale(.9);transition:opacity .5s ease,transform .5s cubic-bezier(.34,1.56,.64,1) var(--rd,0ms);}
+      [data-r].vis{opacity:1;transform:none;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="halftone"></div>
+  <div class="hero-content">
+    <span class="eyebrow">With Love</span>
+    <div class="starburst-wrap">
+      <h1 class="name"><span class="nl" style="--d:0.00s">M</span><span class="nl" style="--d:0.05s">a</span><span class="nl" style="--d:0.10s">r</span><span class="nl" style="--d:0.15s">i</span><span class="nl" style="--d:0.20s">e</span><span class="nl" style="--d:0.25s">l</span></h1>
+      <div class="pow">POW!</div>
+    </div>
+    <div class="name-sub">Wishing you all the best</div>
+    <div class="hero-photo-panel lb" data-full="https://picsum.photos/seed/greet1/600/600">
+      <img src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/>
+    </div>
+  </div>
+</div>
+
+<div class="message-section" data-r>
+  <div class="bubble-wrap">
+    <div class="bubble-photo lb" data-full="https://picsum.photos/seed/greet1/600/600">
+      <img src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/>
+    </div>
+    <div class="bubble">
+      <div class="msg-heading">The Birthday Issue, Mariel!</div>
+      <div class="msg-body">Happy birthday! Wishing you a day full of joy, laughter, and everything you love. You deserve all the happiness in the world.</div>
+      <div class="msg-from">— Your friends</div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="grid-wrap" data-r>
+  <h2 class="grid-title">Our Favourite Memories</h2>
+  <div class="comic-panels">
+    <div class="comic-panel lb" data-full="https://picsum.photos/seed/greet2/600/450"><img src="https://picsum.photos/seed/greet2/600/450" alt="memory" loading="lazy"/><div class="panel-badge">#1</div></div>
+    <div class="comic-panel lb" data-full="https://picsum.photos/seed/greet3/600/450"><img src="https://picsum.photos/seed/greet3/600/450" alt="memory" loading="lazy"/><div class="panel-badge">#2</div></div>
+    <div class="comic-panel lb" data-full="https://picsum.photos/seed/greet4/600/450"><img src="https://picsum.photos/seed/greet4/600/450" alt="memory" loading="lazy"/><div class="panel-badge">#3</div></div>
+    <div class="comic-panel lb" data-full="https://picsum.photos/seed/greet5/600/450"><img src="https://picsum.photos/seed/greet5/600/450" alt="memory" loading="lazy"/><div class="panel-badge">#4</div></div>
+    <div class="comic-panel lb" data-full="https://picsum.photos/seed/greet6/600/450"><img src="https://picsum.photos/seed/greet6/600/450" alt="memory" loading="lazy"/><div class="panel-badge">#5</div></div>
+    <div class="comic-panel lb" data-full="https://picsum.photos/seed/greet7/600/450"><img src="https://picsum.photos/seed/greet7/600/450" alt="memory" loading="lazy"/><div class="panel-badge">#6</div></div>
+  </div>
+</div>
+
+<div class="wishes-wrap">
+  <h2 class="wishes-title" data-r>Our Wishes For You</h2>
+  <div class="wish-cards">
+    <div class="wish" data-r style="--rd:0ms"><i class="fa-solid fa-sun"></i><div class="wish-label">Joy</div><div class="wish-sub">Every single day</div></div>
+    <div class="wish" data-r style="--rd:70ms"><i class="fa-solid fa-wand-magic-sparkles"></i><div class="wish-label">Magic</div><div class="wish-sub">In everything you do</div></div>
+    <div class="wish" data-r style="--rd:140ms"><i class="fa-solid fa-map"></i><div class="wish-label">Adventure</div><div class="wish-sub">Around every corner</div></div>
+    <div class="wish" data-r style="--rd:210ms"><i class="fa-solid fa-face-smile-beam"></i><div class="wish-label">Laughter</div><div class="wish-sub">Always and forever</div></div>
+  </div>
+</div>
+
+<div class="signoff" data-r>
+  <div class="halftone"></div>
+  <div class="signoff-msg">Happy Birthday!</div>
+  <div class="signoff-sub">With all our love</div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt=""/>
+    </div>
+  </div>
+<script>
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lb').forEach(function(el){
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ img.src = el.dataset.full || ''; lb.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) lb.classList.remove('open'); });
+  })();
+  </script>
+<script>
+(function(){
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('vis');io.unobserve(en.target);}});},{threshold:.1});
+    document.querySelectorAll('[data-r]').forEach(function(el){io.observe(el);});
+  } else document.querySelectorAll('[data-r]').forEach(function(el){el.classList.add('vis');});
+})();
+</script>
+</body>
+</html>

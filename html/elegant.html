@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mariel — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-pearl: #FAF8F5;
+      --text-bronze: #3D3028;
+      --text-muted: #7A6F68;
+      --glass-bg: rgba(255,255,255,0.45);
+      --glass-border: rgba(255,255,255,0.6);
+      --gold: #D4AF37;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg-pearl);
+      color: var(--text-bronze);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #bg-canvas { position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:0; pointer-events:none; }
+    .cosmic-glow { position:fixed; width:65vw; height:65vh; z-index:1; pointer-events:none; }
+    .glow-1 { top:-10%; left:-10%; background:radial-gradient(circle, rgba(255,240,224,0.85) 0%, transparent 70%); }
+    .glow-2 { bottom:-10%; right:-10%; background:radial-gradient(circle, rgba(255,249,230,0.85) 0%, transparent 70%); }
+
+    /* ── Hero ── */
+    .hero { padding: 9rem 1.5rem 4rem; text-align: center; max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+    .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; display: block; }
+    .name { font-family: 'Playfair Display', serif; font-size: clamp(54px, 14vw, 96px); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; }
+    .cursive-accent { font-family: 'Alex Brush', cursive; font-size: clamp(42px, 8vw, 58px); color: var(--gold); display: block; margin-top: -10px; }
+    .name-tag { font-size: 14px; font-weight: 500; color: var(--text-muted); margin-top: 1.5rem; letter-spacing: 0.05em; }
+    .hero-photo-wrap { display: flex; justify-content: center; margin-top: 4rem; perspective: 1000px; }
+    .glass-panel-photo {
+      background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      padding: 16px; border: 1px solid var(--glass-border); border-radius: 24px;
+      box-shadow: 0 30px 60px rgba(61,48,40,0.04); transform-style: preserve-3d;
+      cursor: pointer;
+    }
+    .glass-panel-photo .frame { width: 290px; height: 370px; overflow: hidden; border-radius: 16px; pointer-events: none; }
+    .glass-panel-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── Message ── */
+    .message-section { max-width: 750px; margin: 6rem auto 8rem; padding: 0 1.5rem; text-align: center; position: relative; z-index: 2; }
+    .message-body { font-family: 'Playfair Display', serif; font-size: clamp(20px, 4vw, 24px); font-style: italic; line-height: 1.9; }
+    .message-from { font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 3rem; color: var(--text-muted); }
+
+    /* ── Milestone ── */
+    .milestone-wrap { padding: 4rem 1.5rem; text-align: center; border-top: 1px solid rgba(212,175,55,0.2); border-bottom: 1px solid rgba(212,175,55,0.2); position: relative; z-index: 2; }
+    .milestone-box { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; }
+    .milestone-num { font-family: 'Playfair Display', serif; font-size: 80px; font-weight: 400; font-style: italic; color: var(--gold); line-height: 1; }
+    .milestone-lbl { font-size: 11px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); }
+
+    /* ── Grid ── */
+    .grid-wrap { padding: 8rem 1.5rem; background: rgba(255,255,255,0.25); border-top: 1px solid rgba(255,255,255,0.4); border-bottom: 1px solid rgba(255,255,255,0.4); position: relative; z-index: 2; }
+    .grid-inner { max-width: 1050px; margin: 0 auto; perspective: 1000px; }
+    .grid-title { font-family: 'Playfair Display', serif; font-size: 32px; text-align: center; margin-bottom: 5rem; }
+    .memory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    @media (max-width: 850px) { .memory-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 550px) { .memory-grid { grid-template-columns: 1fr; } }
+    .glass-card-photo {
+      background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      padding: 12px; border: 1px solid var(--glass-border); border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(61,48,40,0.03); transform-style: preserve-3d; cursor: pointer;
+    }
+    .glass-card-photo .frame { width: 100%; aspect-ratio: 4/5; overflow: hidden; border-radius: 12px; pointer-events: none; }
+    .glass-card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── Wishes ── */
+    .wishes-wrap { padding: 8rem 1.5rem; max-width: 1050px; margin: 0 auto; position: relative; z-index: 2; }
+    .wishes-title { font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 5rem; text-align: center; }
+    .wishes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    @media (max-width: 900px) { .wishes-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .wishes-grid { grid-template-columns: 1fr; } }
+    .wish {
+      background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border); padding: 3.5rem 1.5rem;
+      text-align: center; border-radius: 24px; box-shadow: 0 15px 35px rgba(61,48,40,0.02);
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), background-color 0.3s; cursor: default;
+    }
+    .wish:hover { transform: translateY(-10px) scale(1.03); background: rgba(255,255,255,0.6); }
+    .wish-icon { font-size: 20px; margin-bottom: 1.5rem; display: inline-block; color: var(--gold); transition: transform 0.5s ease; }
+    .wish:hover .wish-icon { transform: scale(1.3) rotate(12deg); }
+    .wish-label { font-size: 15px; font-weight: 600; }
+    .wish-sub { font-size: 12px; color: var(--text-muted); margin-top: 8px; line-height: 1.5; }
+
+    /* ── Signoff ── */
+    .signoff { padding: 9rem 1.5rem; text-align: center; position: relative; z-index: 2; }
+    .signoff-msg { font-family: 'Playfair Display', serif; font-size: clamp(32px, 7vw, 54px); font-style: italic; }
+    .signoff-sub { font-size: 11px; font-weight: 600; color: var(--text-muted); margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 0.35em; }
+
+    /* ── Lightbox ── */
+    .lightbox-overlay {
+      position:fixed; inset:0; z-index:500; background:rgba(250,248,245,0.95);
+      display:flex; align-items:center; justify-content:center; padding:2rem 1.25rem;
+      opacity:0; visibility:hidden; transition:opacity 0.5s, visibility 0.5s;
+    }
+    .lightbox-overlay.open { opacity:1; visibility:visible; }
+    .lightbox-content {
+      position:relative; max-width:min(580px,92vw);
+      background:var(--glass-bg); padding:12px;
+      border:1px solid var(--glass-border); border-radius:24px;
+    }
+    .lightbox-content img { display:block; width:100%; height:auto; border-radius:14px; }
+    .lightbox-close { position:absolute; top:-50px; right:0; background:none; color:var(--text-bronze); border:none; font-size:24px; cursor:pointer; }
+
+    /* ── Reveal animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .nl { display: inline-block; opacity: 0; animation: nl-rise 0.9s cubic-bezier(0.16,1,0.3,1) var(--d,0s) both; }
+      @keyframes nl-rise { from { opacity:0; transform:translateY(30px); filter:blur(4px); } to { opacity:1; transform:none; filter:none; } }
+      [data-r] { opacity:0; transform:translateY(28px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16,1,0.3,1) var(--rd,0ms); }
+      [data-r].vis { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<div class="cosmic-glow glow-1"></div>
+<div class="cosmic-glow glow-2"></div>
+
+<div class="hero">
+  <span class="eyebrow">With Love</span>
+  <h1 class="name"><span class="nl" style="--d:0.00s">M</span><span class="nl" style="--d:0.07s">a</span><span class="nl" style="--d:0.14s">r</span><span class="nl" style="--d:0.21s">i</span><span class="nl" style="--d:0.28s">e</span><span class="nl" style="--d:0.35s">l</span> <span class="cursive-accent">The Birthday Issue</span></h1>
+  <div class="name-tag">Wishing you all the best</div>
+  <div class="hero-photo-wrap">
+    <div class="glass-panel-photo tilt-target lb" data-full="https://picsum.photos/seed/greet1/600/600">
+      <div class="frame">
+        <img src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="message-section" data-r>
+  <div class="message-body">Happy birthday! Wishing you a day full of joy, laughter, and everything you love. You deserve all the happiness in the world.</div>
+  <div class="message-from">Your friends</div>
+</div>
+
+
+
+<div class="grid-wrap" data-r>
+  <div class="grid-inner">
+    <h2 class="grid-title">Our Favourite Memories</h2>
+    <div class="memory-grid">
+      <div class="glass-card-photo tilt-target lb" data-r style="--rd:0ms" data-full="https://picsum.photos/seed/greet2/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet2/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="glass-card-photo tilt-target lb" data-r style="--rd:100ms" data-full="https://picsum.photos/seed/greet3/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet3/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="glass-card-photo tilt-target lb" data-r style="--rd:200ms" data-full="https://picsum.photos/seed/greet4/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet4/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="glass-card-photo tilt-target lb" data-r style="--rd:300ms" data-full="https://picsum.photos/seed/greet5/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet5/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="glass-card-photo tilt-target lb" data-r style="--rd:400ms" data-full="https://picsum.photos/seed/greet6/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet6/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="glass-card-photo tilt-target lb" data-r style="--rd:500ms" data-full="https://picsum.photos/seed/greet7/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet7/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wishes-wrap" data-r>
+  <h2 class="wishes-title">Our Wishes For You</h2>
+  <div class="wishes-grid">
+    <div class="wish" data-r style="--rd:0ms">
+      <i class="fa-solid fa-sun wish-icon"></i>
+      <div class="wish-label">Joy</div>
+      <div class="wish-sub">Every single day</div>
+    </div>
+    <div class="wish" data-r style="--rd:110ms">
+      <i class="fa-solid fa-wand-magic-sparkles wish-icon"></i>
+      <div class="wish-label">Magic</div>
+      <div class="wish-sub">In everything you do</div>
+    </div>
+    <div class="wish" data-r style="--rd:220ms">
+      <i class="fa-solid fa-map wish-icon"></i>
+      <div class="wish-label">Adventure</div>
+      <div class="wish-sub">Around every corner</div>
+    </div>
+    <div class="wish" data-r style="--rd:330ms">
+      <i class="fa-solid fa-face-smile-beam wish-icon"></i>
+      <div class="wish-label">Laughter</div>
+      <div class="wish-sub">Always and forever</div>
+    </div>
+  </div>
+</div>
+
+<div class="signoff" data-r>
+  <div class="signoff-msg">Happy Birthday!</div>
+  <div class="signoff-sub">With all our love</div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt=""/>
+    </div>
+  </div>
+<script>
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lb').forEach(function(el){
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ img.src = el.dataset.full || ''; lb.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) lb.classList.remove('open'); });
+  })();
+  </script>
+<script>
+(function(){
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting) { en.target.classList.add('vis'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-r]').forEach(function(el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-r]').forEach(function(el) { el.classList.add('vis'); });
+  }
+
+  /* ── Canvas rising bubbles ── */
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canvas = document.getElementById('bg-canvas');
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  var mouse = { x: null, y: null };
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
+  window.addEventListener('mousemove', function(ev) { mouse.x = ev.clientX; mouse.y = ev.clientY; });
+  window.addEventListener('mouseout', function() { mouse.x = null; mouse.y = null; });
+
+  function mkBubble() {
+    return {
+      x: Math.random() * canvas.width, y: canvas.height + 20,
+      radius: Math.random() * 3 + 1, speedY: Math.random() * 0.7 + 0.3,
+      wobble: Math.random() * 2, wobbleSpeed: Math.random() * 0.02 + 0.005,
+      opacity: Math.random() * 0.35 + 0.15,
+    };
+  }
+  var count = Math.min(Math.floor(canvas.width / 20), 80);
+  for (var i = 0; i < count; i++) {
+    var b = mkBubble(); b.y = Math.random() * canvas.height; particles.push(b);
+  }
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(function(p) {
+      p.y -= p.speedY; p.wobble += p.wobbleSpeed; p.x += Math.sin(p.wobble) * 0.25;
+      if (mouse.x !== null && mouse.y !== null) {
+        var dx = p.x - mouse.x, dy = p.y - mouse.y, dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 100) { p.x += (dx/dist) * ((100-dist)/100) * 2; }
+      }
+      if (p.y < -20) { var n = mkBubble(); Object.assign(p, n); }
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(212,175,55,' + p.opacity + ')'; ctx.fill();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  /* ── 3D tilt ── */
+  if (!reduced && !('ontouchstart' in window)) {
+    document.querySelectorAll('.tilt-target').forEach(function(card) {
+      card.addEventListener('mousemove', function(ev) {
+        var r = card.getBoundingClientRect();
+        var x = (ev.clientX - r.left - r.width/2) / (r.width/2) * 8;
+        var y = (ev.clientY - r.top - r.height/2) / (r.height/2) * -8;
+        card.style.transform = 'rotateX('+y+'deg) rotateY('+x+'deg) translateY(-4px)';
+      });
+      card.addEventListener('mouseleave', function() { card.style.transform = ''; });
+    });
+  }
+})();
+</script>
+</body>
+</html>

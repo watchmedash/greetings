@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mariel — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Inter:wght@400;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-dark: #0A0A0C;
+      --text-light: #F4F4F6;
+      --accent-gold: #D4AF37;
+      --accent-crimson: #6B000F;
+      --border-sharp: #F4F4F6;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 8rem 1.5rem 4rem; max-width: 1200px; margin: 0 auto;
+      position: relative; display: flex; flex-direction: column; align-items: flex-start; text-align: left;
+    }
+    .eyebrow {
+      font-size: 12px; font-weight: 900; letter-spacing: 0.5em; text-transform: uppercase;
+      background: var(--accent-crimson); color: white; display: inline-block;
+      padding: 6px 16px; margin-bottom: 2rem; transform: rotate(-1deg);
+    }
+    .name {
+      font-family: 'Abril Fatface', serif; font-size: clamp(70px, 20vw, 160px); font-weight: 400;
+      color: var(--text-light); line-height: 0.8; text-transform: uppercase;
+      letter-spacing: -0.03em; transform: skewX(-6deg); text-shadow: 4px 4px 0px var(--accent-crimson);
+    }
+    .name-tag {
+      font-size: 14px; font-weight: 700; color: var(--accent-gold); margin-top: 2rem;
+      letter-spacing: 0.2em; text-transform: uppercase; border-left: 4px solid var(--accent-gold); padding-left: 12px;
+    }
+    .hero-photo-wrap { width: 100%; display: flex; justify-content: flex-end; margin-top: -2rem; z-index: 1; }
+    @media (max-width: 768px) { .hero-photo-wrap { justify-content: center; margin-top: 2rem; } }
+    .vogue-polaroid {
+      background: #000000; padding: 16px 16px 60px 16px;
+      border: 3px solid var(--border-sharp); box-shadow: -16px 16px 0px var(--accent-gold);
+      transform: rotate(3deg); transition: transform 0.3s cubic-bezier(0.19,1,0.22,1); cursor: pointer;
+    }
+    .vogue-polaroid:hover { transform: rotate(0deg) scale(1.03); }
+    .vogue-polaroid .frame { width: min(340px, 80vw); height: 420px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); }
+    .vogue-polaroid img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(10%) contrast(110%); }
+
+    /* ── Message ── */
+    .message-section {
+      max-width: 1200px; margin: 8rem auto; padding: 0 1.5rem;
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start;
+    }
+    @media (max-width: 768px) { .message-section { grid-template-columns: 1fr; gap: 3rem; margin: 5rem auto; } }
+    .editorial-label {
+      font-family: 'Abril Fatface', serif; font-size: clamp(50px, 10vw, 85px);
+      line-height: 0.9; color: var(--text-light); text-transform: uppercase; transform: rotate(-1.5deg);
+    }
+    .editorial-label span { display: block; color: transparent; -webkit-text-stroke: 2px var(--border-sharp); }
+    .message-body { font-size: 20px; font-weight: 400; line-height: 1.7; color: #CBCBCF; }
+    .message-from {
+      font-size: 13px; font-weight: 900; letter-spacing: 0.25em; text-transform: uppercase;
+      margin-top: 3rem; display: inline-block; background: var(--text-light);
+      color: var(--bg-dark); padding: 6px 12px;
+    }
+
+    /* ── Milestone ── */
+    .milestone-wrap { padding: 5rem 1.5rem; text-align: center; border-top: 1px solid #222; border-bottom: 1px solid #222; }
+    .milestone-dark { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; }
+    .milestone-num { font-family: 'Abril Fatface', serif; font-size: 88px; font-weight: 400; color: var(--accent-gold); line-height: 1; }
+    .milestone-lbl { font-size: 12px; font-weight: 900; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-light); opacity: 0.6; }
+
+    /* ── Grid ── */
+    .grid-wrap { padding: 8rem 1.5rem; background: #111115; border-top: 1px solid #222; border-bottom: 1px solid #222; }
+    .grid-inner { max-width: 1200px; margin: 0 auto; }
+    .grid-title { font-family: 'Abril Fatface', serif; font-size: clamp(40px, 8vw, 64px); color: var(--text-light); text-transform: uppercase; margin-bottom: 5rem; }
+    .memory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    @media (max-width: 900px) { .memory-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .memory-grid { grid-template-columns: 1fr; } }
+    .grid-polaroid {
+      background: #000000; padding: 12px 12px 45px 12px;
+      border: 2px solid var(--border-sharp); box-shadow: 10px 10px 0px var(--accent-crimson);
+      transition: transform 0.3s cubic-bezier(0.19,1,0.22,1), box-shadow 0.3s ease; cursor: pointer;
+    }
+    .grid-polaroid:nth-child(even) { transform: rotate(-2deg); }
+    .grid-polaroid:nth-child(odd) { transform: rotate(2deg); }
+    .grid-polaroid:hover { transform: translateY(-8px) rotate(0deg); box-shadow: 14px 14px 0px var(--accent-gold); }
+    .grid-polaroid .frame { width: 100%; aspect-ratio: 1/1; overflow: hidden; }
+    .grid-polaroid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── Wishes ── */
+    .wishes-wrap { padding: 9rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+    .wishes-title { font-family: 'Abril Fatface', serif; font-size: clamp(40px, 8vw, 64px); color: var(--text-light); text-transform: uppercase; margin-bottom: 5rem; text-align: center; }
+    .wishes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+    @media (max-width: 900px) { .wishes-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .wishes-grid { grid-template-columns: 1fr; } }
+    .wish { background: #111115; border: 2px solid var(--border-sharp); padding: 4rem 2rem; text-align: center; transition: transform 0.3s cubic-bezier(0.19,1,0.22,1); cursor: default; }
+    .wish:hover { transform: scale(1.04); background: #16161c; }
+    .wish-icon { font-size: 20px; margin-bottom: 2rem; display: inline-flex; align-items: center; justify-content: center; color: var(--bg-dark); background: var(--text-light); width: 54px; height: 54px; border: 1px solid var(--border-sharp); }
+    .wish-label { font-size: 18px; font-weight: 700; color: var(--text-light); text-transform: uppercase; }
+    .wish-sub { font-size: 14px; color: #8A8A93; margin-top: 12px; font-weight: 400; line-height: 1.5; }
+
+    /* ── Signoff ── */
+    .signoff { padding: 10rem 1.5rem; text-align: center; background: var(--accent-crimson); border-top: 3px solid var(--border-sharp); }
+    .signoff-msg { font-family: 'Abril Fatface', serif; font-size: clamp(45px, 10vw, 90px); color: var(--text-light); text-transform: uppercase; line-height: 0.85; transform: skewX(-4deg); }
+    .signoff-sub { font-size: 13px; font-weight: 900; color: var(--accent-gold); margin-top: 2.5rem; text-transform: uppercase; letter-spacing: 0.4em; }
+
+    /* ── Lightbox ── */
+    .lightbox-overlay {
+      position:fixed; inset:0; z-index:500; background:rgba(5,5,7,0.98);
+      display:flex; align-items:center; justify-content:center; padding:2rem 1.25rem;
+      opacity:0; visibility:hidden; transition:opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .lightbox-overlay.open { opacity:1; visibility:visible; }
+    .lightbox-content { position:relative; max-width:min(650px,92vw); max-height:85vh; background:#000; padding:16px 16px 50px; border:2px solid var(--border-sharp); }
+    .lightbox-content img { display:block; width:100%; height:100%; max-height:70vh; object-fit:contain; }
+    .lightbox-close { position:absolute; top:-50px; right:0; background:none; color:white; border:none; font-size:28px; cursor:pointer; }
+
+    /* ── Reveal animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .nl { display:inline-block; opacity:0; animation:nl-skew 0.6s ease var(--d,0s) both; }
+      @keyframes nl-skew { from { opacity:0; transform:skewX(-15deg) translateY(-20px); } to { opacity:1; transform:none; } }
+      [data-r] { opacity:0; transform:translateY(28px); transition:opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1) var(--rd,0ms); }
+      [data-r].vis { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="eyebrow">With Love</span>
+  <h1 class="name"><span class="nl" style="--d:0.00s">M</span><span class="nl" style="--d:0.06s">a</span><span class="nl" style="--d:0.12s">r</span><span class="nl" style="--d:0.18s">i</span><span class="nl" style="--d:0.24s">e</span><span class="nl" style="--d:0.30s">l</span></h1>
+  <div class="name-tag">Wishing you all the best</div>
+  <div class="hero-photo-wrap">
+    <div class="vogue-polaroid lb" data-full="https://picsum.photos/seed/greet1/600/600">
+      <div class="frame">
+        <img src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="message-section">
+  <h2 class="editorial-label" data-r="left">The Birthday Issue <span>Vol. 1 · Special Edition</span></h2>
+  <div data-r="right">
+    <div class="message-body">Happy birthday! Wishing you a day full of joy, laughter, and everything you love. You deserve all the happiness in the world.</div>
+    <div class="message-from">Your friends</div>
+  </div>
+</div>
+
+
+
+<div class="grid-wrap" data-r>
+  <div class="grid-inner">
+    <h2 class="grid-title">Our Favourite Memories</h2>
+    <div class="memory-grid">
+      <div class="grid-polaroid lb" data-r style="--rd:0ms" data-full="https://picsum.photos/seed/greet2/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet2/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="grid-polaroid lb" data-r style="--rd:80ms" data-full="https://picsum.photos/seed/greet3/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet3/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="grid-polaroid lb" data-r style="--rd:160ms" data-full="https://picsum.photos/seed/greet4/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet4/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="grid-polaroid lb" data-r style="--rd:240ms" data-full="https://picsum.photos/seed/greet5/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet5/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="grid-polaroid lb" data-r style="--rd:320ms" data-full="https://picsum.photos/seed/greet6/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet6/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+      <div class="grid-polaroid lb" data-r style="--rd:400ms" data-full="https://picsum.photos/seed/greet7/600/450">
+        <div class="frame"><img src="https://picsum.photos/seed/greet7/600/450" alt="memory" loading="lazy"/></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wishes-wrap">
+  <h2 class="wishes-title" data-r>Our Wishes For You</h2>
+  <div class="wishes-grid">
+    <div class="wish" data-r style="--rd:0ms">
+      <span class="wish-icon"><i class="fa-solid fa-sun"></i></span>
+      <div class="wish-label">Joy</div>
+      <div class="wish-sub">Every single day</div>
+    </div>
+    <div class="wish" data-r style="--rd:100ms">
+      <span class="wish-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+      <div class="wish-label">Magic</div>
+      <div class="wish-sub">In everything you do</div>
+    </div>
+    <div class="wish" data-r style="--rd:200ms">
+      <span class="wish-icon"><i class="fa-solid fa-map"></i></span>
+      <div class="wish-label">Adventure</div>
+      <div class="wish-sub">Around every corner</div>
+    </div>
+    <div class="wish" data-r style="--rd:300ms">
+      <span class="wish-icon"><i class="fa-solid fa-face-smile-beam"></i></span>
+      <div class="wish-label">Laughter</div>
+      <div class="wish-sub">Always and forever</div>
+    </div>
+  </div>
+</div>
+
+<div class="signoff" data-r>
+  <div class="signoff-msg">Happy Birthday!</div>
+  <div class="signoff-sub">With all our love</div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt=""/>
+    </div>
+  </div>
+<script>
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lb').forEach(function(el){
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ img.src = el.dataset.full || ''; lb.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) lb.classList.remove('open'); });
+  })();
+  </script>
+<script>
+(function(){
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting) { en.target.classList.add('vis'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-r]').forEach(function(el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-r]').forEach(function(el) { el.classList.add('vis'); });
+  }
+})();
+</script>
+</body>
+</html>

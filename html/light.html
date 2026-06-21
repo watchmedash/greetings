@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mariel — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Jua&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-light: #FFF9E6;
+      --bubble-pink: #FF6B8B;
+      --bubble-blue: #4EA8DE;
+      --bubble-yellow: #FFD166;
+      --bubble-purple: #9B5DE5;
+      --bubble-green: #06D6A0;
+      --dark: #2B2D42;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: var(--bg-light);
+      color: var(--dark);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ── Hero ── */
+    .hero-container { text-align: center; padding: 5rem 1rem 3rem; position: relative; z-index: 2; }
+    .party-hat-icon { font-size: 3rem; color: var(--bubble-pink); display: inline-block; margin-bottom: 1rem; }
+    .eyebrow-tag {
+      display: inline-block; background: var(--bubble-yellow); padding: 6px 20px;
+      border-radius: 50px; font-size: 13px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; margin-bottom: 1.5rem; box-shadow: 0 4px 0 var(--dark);
+    }
+    .main-title {
+      font-family: 'Jua', sans-serif; font-size: clamp(3.5rem, 10vw, 7rem);
+      color: var(--bubble-purple); text-shadow: 4px 4px 0px var(--bubble-yellow);
+      margin-bottom: 1rem; letter-spacing: 2px;
+    }
+    .sub-tag {
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem); font-weight: 600;
+      background: #FFF; padding: 0.6rem 1.8rem; border-radius: 50px;
+      display: inline-block; box-shadow: 0 8px 0 var(--bubble-blue); margin-bottom: 3rem;
+    }
+    .avatar-wrapper { display: flex; justify-content: center; margin-bottom: 4rem; }
+    .avatar-sticker {
+      background: #FFF; padding: 15px; border-radius: 40px;
+      box-shadow: 0 12px 0 var(--bubble-pink); transform: rotate(-3deg);
+      transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275); cursor: pointer;
+    }
+    .avatar-sticker:hover { transform: scale(1.05) rotate(2deg); }
+    .avatar-inner { width: min(300px, 75vw); height: 320px; border-radius: 30px; overflow: hidden; }
+    .avatar-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── Message ── */
+    .cloud-card {
+      max-width: 750px; margin: 2rem auto 5rem; background: #FFF;
+      border-radius: 50px; padding: 3.5rem 2rem; box-shadow: 0 15px 0 var(--bubble-purple);
+      text-align: center; position: relative; z-index: 2;
+    }
+    .cloud-card h2 { font-family: 'Jua', sans-serif; font-size: 2.2rem; color: var(--bubble-pink); margin-bottom: 1.5rem; }
+    .cloud-card p { font-size: 1.2rem; line-height: 1.7; font-weight: 400; }
+    .cloud-signature {
+      display: inline-block; margin-top: 2rem; background: var(--bubble-yellow);
+      padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: 700;
+    }
+
+    /* ── Milestone ── */
+    .milestone-wrap { padding: 3rem 1rem; text-align: center; position: relative; z-index: 2; }
+    .milestone-bubble {
+      display: inline-flex; flex-direction: column; align-items: center; gap: 8px;
+      background: #FFF; padding: 2rem 4rem; border-radius: 50px;
+      box-shadow: 0 12px 0 var(--bubble-green);
+    }
+    .milestone-num { font-family: 'Jua', sans-serif; font-size: 80px; color: var(--bubble-purple); line-height: 1; }
+    .milestone-lbl { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dark); }
+
+    /* ── Grid ── */
+    .section-heading { font-family: 'Jua', sans-serif; font-size: 2.5rem; text-align: center; color: var(--bubble-blue); margin-bottom: 3rem; }
+    .bubble-gallery {
+      max-width: 1100px; margin: 0 auto 5rem;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 35px; padding: 0 1rem;
+    }
+    .gallery-bubble-item {
+      background: #FFF; padding: 12px; border-radius: 35px;
+      box-shadow: 0 10px 0 var(--bubble-green);
+      transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275); cursor: pointer;
+    }
+    .gallery-bubble-item:nth-child(even) { transform: rotate(4deg); box-shadow: 0 10px 0 var(--bubble-yellow); }
+    .gallery-bubble-item:nth-child(odd) { transform: rotate(-3deg); }
+    .gallery-bubble-item:hover { transform: scale(1.08) rotate(0deg) translateY(-5px); }
+    .gallery-inner-box { width: 240px; height: 240px; border-radius: 25px; overflow: hidden; }
+    .gallery-inner-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── Wishes ── */
+    .wishes-board {
+      max-width: 1100px; margin: 0 auto 6rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px; padding: 0 1rem;
+    }
+    .wish-bubble-card {
+      background: #FFF; border-radius: 35px; padding: 2.5rem 1.5rem;
+      text-align: center; transition: transform 0.2s ease; cursor: default;
+    }
+    .wish-bubble-card:hover { transform: translateY(-8px); }
+    .wish-bubble-card:nth-child(1) { background: #FFEDF1; box-shadow: 0 8px 0 var(--bubble-pink); }
+    .wish-bubble-card:nth-child(2) { background: #E8F7FF; box-shadow: 0 8px 0 var(--bubble-blue); }
+    .wish-bubble-card:nth-child(3) { background: #F3EAFE; box-shadow: 0 8px 0 var(--bubble-purple); }
+    .wish-bubble-card:nth-child(4) { background: #E6FBF5; box-shadow: 0 8px 0 var(--bubble-green); }
+    .bubble-icon-wrap { width: 60px; height: 60px; line-height: 60px; background: #FFF; border-radius: 50%; display: inline-block; font-size: 1.5rem; margin-bottom: 1rem; box-shadow: 0 4px 0 rgba(0,0,0,0.1); }
+    .wish-title-label { font-family: 'Jua', sans-serif; font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .wish-desc-text { font-size: 0.95rem; opacity: 0.8; line-height: 1.4; }
+
+    /* ── Signoff ── */
+    .party-footer { background: var(--bubble-purple); color: #FFF; text-align: center; padding: 5rem 1rem; border-radius: 60px 60px 0 0; }
+    .footer-title { font-family: 'Jua', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 1rem; }
+    .footer-sub { font-size: 1.3rem; font-weight: 600; opacity: 0.9; }
+
+    /* ── Lightbox ── */
+    .lightbox-overlay {
+      position:fixed; inset:0; z-index:500; background:rgba(43,45,66,0.85);
+      backdrop-filter:blur(5px); display:flex; align-items:center; justify-content:center;
+      opacity:0; visibility:hidden; transition:all 0.3s ease; padding:1rem;
+    }
+    .lightbox-overlay.open { opacity:1; visibility:visible; }
+    .lightbox-content {
+      background:#FFF; padding:15px; border-radius:40px;
+      max-width:550px; width:100%; position:relative;
+      box-shadow:0 20px 0 var(--dark);
+    }
+    .lightbox-content img { width:100%; max-height:65vh; object-fit:contain; border-radius:25px; display:block; }
+    .lightbox-close { position:absolute; top:-20px; right:-10px; width:45px; height:45px; background:var(--bubble-pink); color:white; border:none; border-radius:50%; font-size:1.2rem; cursor:pointer; box-shadow:0 5px 0 var(--dark); }
+
+    /* ── Reveal animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .nl { display:inline-block; opacity:0; animation:nl-bounce 0.6s cubic-bezier(0.34,1.56,0.64,1) var(--d,0s) both; }
+      @keyframes nl-bounce { from { opacity:0; transform:translateY(-40px) rotate(-10deg) scale(0.5); } to { opacity:1; transform:none; } }
+      .party-hat-icon { animation: bounceWobble 2s infinite ease-in-out; }
+      @keyframes bounceWobble { 0%,100%{ transform:translateY(0) rotate(-5deg); } 50%{ transform:translateY(-15px) rotate(5deg); } }
+      [data-r] { opacity:0; transform:translateY(30px); transition:opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1) var(--rd,0ms); }
+      [data-r].vis { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero-container">
+  <i class="fa-solid fa-cake-candles party-hat-icon" aria-hidden="true"></i>
+  <div class="eyebrow-tag">With Love</div>
+  <h1 class="main-title"><span class="nl" style="--d:0.00s">M</span><span class="nl" style="--d:0.07s">a</span><span class="nl" style="--d:0.14s">r</span><span class="nl" style="--d:0.21s">i</span><span class="nl" style="--d:0.28s">e</span><span class="nl" style="--d:0.35s">l</span></h1>
+  <div class="sub-tag">Wishing you all the best</div>
+  <div class="avatar-wrapper">
+    <div class="avatar-sticker lb" data-full="https://picsum.photos/seed/greet1/600/600">
+      <div class="avatar-inner">
+        <img src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cloud-card" data-r>
+  <h2>The Birthday Issue</h2>
+  <p>Happy birthday! Wishing you a day full of joy, laughter, and everything you love. You deserve all the happiness in the world.</p>
+  <div class="cloud-signature">Your friends</div>
+</div>
+
+
+
+<h2 class="section-heading" data-r>Our Favourite Memories</h2>
+<div class="bubble-gallery" data-r>
+  <div class="gallery-bubble-item lb" data-r style="--rd:0ms" data-full="https://picsum.photos/seed/greet2/600/450">
+    <div class="gallery-inner-box"><img src="https://picsum.photos/seed/greet2/600/450" alt="memory" loading="lazy"/></div>
+  </div>
+  <div class="gallery-bubble-item lb" data-r style="--rd:80ms" data-full="https://picsum.photos/seed/greet3/600/450">
+    <div class="gallery-inner-box"><img src="https://picsum.photos/seed/greet3/600/450" alt="memory" loading="lazy"/></div>
+  </div>
+  <div class="gallery-bubble-item lb" data-r style="--rd:160ms" data-full="https://picsum.photos/seed/greet4/600/450">
+    <div class="gallery-inner-box"><img src="https://picsum.photos/seed/greet4/600/450" alt="memory" loading="lazy"/></div>
+  </div>
+  <div class="gallery-bubble-item lb" data-r style="--rd:240ms" data-full="https://picsum.photos/seed/greet5/600/450">
+    <div class="gallery-inner-box"><img src="https://picsum.photos/seed/greet5/600/450" alt="memory" loading="lazy"/></div>
+  </div>
+  <div class="gallery-bubble-item lb" data-r style="--rd:320ms" data-full="https://picsum.photos/seed/greet6/600/450">
+    <div class="gallery-inner-box"><img src="https://picsum.photos/seed/greet6/600/450" alt="memory" loading="lazy"/></div>
+  </div>
+  <div class="gallery-bubble-item lb" data-r style="--rd:400ms" data-full="https://picsum.photos/seed/greet7/600/450">
+    <div class="gallery-inner-box"><img src="https://picsum.photos/seed/greet7/600/450" alt="memory" loading="lazy"/></div>
+  </div>
+</div>
+
+<h2 class="section-heading" data-r>Our Wishes For You</h2>
+<div class="wishes-board" data-r>
+  <div class="wish-bubble-card" data-r style="--rd:0ms">
+    <div class="bubble-icon-wrap"><i class="fa-solid fa-sun"></i></div>
+    <div class="wish-title-label">Joy</div>
+    <div class="wish-desc-text">Every single day</div>
+  </div>
+  <div class="wish-bubble-card" data-r style="--rd:90ms">
+    <div class="bubble-icon-wrap"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+    <div class="wish-title-label">Magic</div>
+    <div class="wish-desc-text">In everything you do</div>
+  </div>
+  <div class="wish-bubble-card" data-r style="--rd:180ms">
+    <div class="bubble-icon-wrap"><i class="fa-solid fa-map"></i></div>
+    <div class="wish-title-label">Adventure</div>
+    <div class="wish-desc-text">Around every corner</div>
+  </div>
+  <div class="wish-bubble-card" data-r style="--rd:270ms">
+    <div class="bubble-icon-wrap"><i class="fa-solid fa-face-smile-beam"></i></div>
+    <div class="wish-title-label">Laughter</div>
+    <div class="wish-desc-text">Always and forever</div>
+  </div>
+</div>
+
+<div class="party-footer" data-r>
+  <h2 class="footer-title">Happy Birthday!</h2>
+  <p class="footer-sub">With all our love</p>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt=""/>
+    </div>
+  </div>
+<script>
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lb').forEach(function(el){
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ img.src = el.dataset.full || ''; lb.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) lb.classList.remove('open'); });
+  })();
+  </script>
+<script>
+(function(){
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting) { en.target.classList.add('vis'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-r]').forEach(function(el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-r]').forEach(function(el) { el.classList.add('vis'); });
+  }
+
+  /* ── CSS confetti ── */
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return;
+  var container = document.createElement('div');
+  container.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:10;overflow:hidden;';
+  document.body.appendChild(container);
+  var colors = ['#FF6B8B','#4EA8DE','#FFD166','#9B5DE5','#06D6A0'];
+  for (var i = 0; i < 50; i++) {
+    var dot = document.createElement('div');
+    var sz = Math.random() * 8 + 7;
+    dot.style.cssText = [
+      'position:absolute', 'border-radius:50%',
+      'left:' + (Math.random() * 100) + 'vw',
+      'top:-14px',
+      'width:' + sz + 'px', 'height:' + sz + 'px',
+      'background:' + colors[Math.floor(Math.random() * colors.length)],
+      'animation:confFall ' + (Math.random() * 3 + 3) + 's linear ' + (Math.random() * 4) + 's infinite',
+    ].join(';');
+    container.appendChild(dot);
+  }
+  var style = document.createElement('style');
+  style.textContent = '@keyframes confFall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(105vh) rotate(360deg);opacity:0;}}';
+  document.head.appendChild(style);
+})();
+</script>
+</body>
+</html>

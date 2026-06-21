@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mariel — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&family=Alex+Brush&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-black: #040407;
+      --neon-cyan: #00f0ff;
+      --neon-pink: #ff0055;
+      --neon-purple: #9d00ff;
+      --text-main: #ffffff;
+      --text-muted: #69697d;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-black); color: var(--text-main); overflow-x: hidden; }
+
+    #party-canvas { position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:0; pointer-events:none; }
+    .bg-ticker {
+      position:fixed; width:100%; top:25%; left:0;
+      font-family:'Syne',sans-serif; font-size:15vw; font-weight:800;
+      color:transparent; -webkit-text-stroke:1px rgba(157,0,255,0.08);
+      text-transform:uppercase; pointer-events:none; white-space:nowrap; z-index:1; user-select:none;
+    }
+    .glow-sphere { position:fixed; width:45vw; height:45vw; border-radius:50%; z-index:1; filter:blur(130px); opacity:0.38; }
+    .gs-1 { top:-15%; left:-10%; background:var(--neon-purple); }
+    .gs-2 { bottom:-15%; right:-10%; background:var(--neon-pink); }
+
+    /* ── Hero ── */
+    .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:6rem 1.5rem; text-align:center; position:relative; z-index:2; }
+    .badge {
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+      padding: 6px 16px; border-radius: 20px; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2rem;
+      box-shadow: 0 0 20px rgba(255,0,85,0.3);
+    }
+    .glitch-title { font-family:'Syne',sans-serif; font-size:clamp(60px,14vw,120px); font-weight:800; text-transform:uppercase; line-height:0.9; letter-spacing:-0.03em; }
+    .glitch-title .cursive { font-family:'Alex Brush',cursive; font-size:clamp(45px,9vw,75px); text-transform:none; color:var(--neon-cyan); display:block; margin-top:-10px; font-weight:400; text-shadow:0 0 15px rgba(0,240,255,0.5); }
+    .portrait-wrap { margin-top:4rem; perspective:1000px; }
+    .neon-frame {
+      background:rgba(255,255,255,0.02); padding:12px; border-radius:28px;
+      border:2px solid rgba(157,0,255,0.25); box-shadow:0 30px 60px rgba(0,0,0,0.8);
+      transition:all 0.3s; transform-style:preserve-3d; cursor:pointer;
+    }
+    .neon-frame:hover { border-color:var(--neon-pink); box-shadow:0 0 40px rgba(255,0,85,0.35); }
+    .inner-img-box { width:300px; height:380px; overflow:hidden; border-radius:18px; }
+    .inner-img-box img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .neon-frame:hover .inner-img-box img { transform:scale(1.07); }
+
+    /* ── Message ── */
+    .party-msg-wrap { padding:8rem 1.5rem; text-align:center; position:relative; z-index:2; background:rgba(4,4,7,0.7); }
+    .party-msg { font-size:clamp(18px,3vw,28px); font-weight:700; max-width:850px; margin:0 auto; line-height:1.5; }
+    .msg-from { margin-top:2rem; font-size:13px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--neon-cyan); }
+
+    /* ── Milestone ── */
+    .milestone-wrap { padding:4rem 1.5rem; text-align:center; position:relative; z-index:2; }
+    .milestone-rave {
+      display:inline-flex; flex-direction:column; align-items:center; gap:8px;
+      border:2px solid var(--neon-cyan); padding:2rem 4rem; border-radius:16px;
+      box-shadow:0 0 30px rgba(0,240,255,0.2);
+    }
+    .milestone-num { font-family:'Syne',sans-serif; font-size:80px; font-weight:800; color:var(--neon-cyan); line-height:1; }
+    .milestone-lbl { font-size:12px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-muted); }
+
+    /* ── Grid ── */
+    .stream-wrap { padding:8rem 1.5rem; position:relative; z-index:2; max-width:1200px; margin:0 auto; }
+    .grid-title { font-family:'Syne',sans-serif; font-size:clamp(24px,4vw,36px); font-weight:800; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:3rem; }
+    .party-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    @media (max-width:850px) { .party-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:550px) { .party-grid { grid-template-columns:1fr; } }
+    .grid-card {
+      background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05);
+      padding:12px; border-radius:20px; transform-style:preserve-3d;
+      transition:all 0.4s; cursor:pointer;
+    }
+    .grid-card:hover { border-color:var(--neon-cyan); }
+    .card-frame { width:100%; aspect-ratio:4/5; overflow:hidden; border-radius:12px; }
+    .grid-card img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* ── Wishes ── */
+    .vibe-deck { padding:8rem 1.5rem; position:relative; z-index:2; max-width:1200px; margin:0 auto; }
+    .wishes-title { font-family:'Syne',sans-serif; font-size:clamp(24px,4vw,36px); font-weight:800; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:3rem; }
+    .deck-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+    @media (max-width:900px) { .deck-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:500px) { .deck-grid { grid-template-columns:1fr; } }
+    .deck-card {
+      background:#0c0b12; border:1px solid rgba(255,255,255,0.06);
+      padding:3.5rem 2rem; border-radius:24px;
+      transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); cursor:default;
+    }
+    .deck-card:hover { transform:translateY(-10px) skewY(2deg); background:#13121d; border-color:var(--neon-cyan); box-shadow:0 20px 40px rgba(0,240,255,0.15); }
+    .wish-icon { font-size:26px; color:var(--neon-pink); margin-bottom:1.5rem; display:block; }
+    .wish-label { font-size:18px; font-weight:700; margin-bottom:8px; }
+    .wish-sub { font-size:13px; color:var(--text-muted); line-height:1.5; }
+
+    /* ── Signoff ── */
+    .stage-out { padding:12rem 1.5rem; text-align:center; position:relative; z-index:2; }
+    .signoff-msg { font-family:'Syne',sans-serif; font-size:clamp(40px,8vw,80px); text-transform:uppercase; font-weight:800; }
+    .signoff-sub { font-size:13px; font-weight:700; letter-spacing:0.4em; text-transform:uppercase; color:var(--neon-pink); margin-top:1.5rem; }
+
+    /* ── Lightbox ── */
+    .lightbox-overlay {
+      position:fixed; inset:0; z-index:500; background:rgba(3,3,5,0.98);
+      display:flex; align-items:center; justify-content:center; padding:2rem;
+      opacity:0; visibility:hidden; transition:all 0.4s ease;
+    }
+    .lightbox-overlay.open { opacity:1; visibility:visible; }
+    .lightbox-content { position:relative; max-width:min(550px,92vw); }
+    .lightbox-content img { width:100%; height:auto; border-radius:20px; border:2px solid var(--neon-purple); display:block; }
+    .lightbox-close { position:absolute; top:-50px; right:0; background:none; border:none; color:#fff; font-size:28px; cursor:pointer; }
+
+    /* ── Reveal animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .nl { display:inline-block; opacity:0; animation:nl-glitch 0.6s ease var(--d,0s) both; }
+      @keyframes nl-glitch { from { opacity:0; transform:translateY(-30px) scaleY(1.5); filter:blur(2px); } to { opacity:1; transform:none; filter:none; } }
+      [data-r] { opacity:0; transform:translateY(32px); transition:opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1) var(--rd,0ms); }
+      [data-r].vis { opacity:1; transform:none; }
+      .gs-1 { animation: floatGlow 7s infinite alternate; }
+      .gs-2 { animation: floatGlow 11s infinite alternate-reverse; }
+      @keyframes floatGlow { 0% { transform:scale(1) translate(0px,0px); } 100% { transform:scale(1.2) translate(60px,-20px); } }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="party-canvas"></canvas>
+<div class="bg-ticker" id="ticker-text">With Love &nbsp;&nbsp; Mariel &nbsp;&nbsp; With Love &nbsp;&nbsp; Mariel</div>
+<div class="glow-sphere gs-1"></div>
+<div class="glow-sphere gs-2"></div>
+
+<div class="hero">
+  <div class="badge">With Love</div>
+  <h1 class="glitch-title">
+    <span><span class="nl" style="--d:0.00s">M</span><span class="nl" style="--d:0.06s">a</span><span class="nl" style="--d:0.12s">r</span><span class="nl" style="--d:0.18s">i</span><span class="nl" style="--d:0.24s">e</span><span class="nl" style="--d:0.30s">l</span></span>
+    <span class="cursive">The Birthday Issue</span>
+  </h1>
+  <div class="portrait-wrap generic-tilt">
+    <div class="neon-frame lb" data-full="https://picsum.photos/seed/greet1/600/600">
+      <div class="inner-img-box">
+        <img src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="party-msg-wrap" data-r>
+  <div class="party-msg">Happy birthday! Wishing you a day full of joy, laughter, and everything you love. You deserve all the happiness in the world.</div>
+  <div class="msg-from">Your friends</div>
+</div>
+
+
+
+<div class="stream-wrap" data-r>
+  <div class="grid-title">Our Favourite Memories</div>
+  <div class="party-grid">
+    <div class="grid-card generic-tilt lb" data-r style="--rd:0ms" data-full="https://picsum.photos/seed/greet2/600/450">
+      <div class="card-frame"><img src="https://picsum.photos/seed/greet2/600/450" alt="memory" loading="lazy"/></div>
+    </div>
+    <div class="grid-card generic-tilt lb" data-r style="--rd:80ms" data-full="https://picsum.photos/seed/greet3/600/450">
+      <div class="card-frame"><img src="https://picsum.photos/seed/greet3/600/450" alt="memory" loading="lazy"/></div>
+    </div>
+    <div class="grid-card generic-tilt lb" data-r style="--rd:160ms" data-full="https://picsum.photos/seed/greet4/600/450">
+      <div class="card-frame"><img src="https://picsum.photos/seed/greet4/600/450" alt="memory" loading="lazy"/></div>
+    </div>
+    <div class="grid-card generic-tilt lb" data-r style="--rd:240ms" data-full="https://picsum.photos/seed/greet5/600/450">
+      <div class="card-frame"><img src="https://picsum.photos/seed/greet5/600/450" alt="memory" loading="lazy"/></div>
+    </div>
+    <div class="grid-card generic-tilt lb" data-r style="--rd:320ms" data-full="https://picsum.photos/seed/greet6/600/450">
+      <div class="card-frame"><img src="https://picsum.photos/seed/greet6/600/450" alt="memory" loading="lazy"/></div>
+    </div>
+    <div class="grid-card generic-tilt lb" data-r style="--rd:400ms" data-full="https://picsum.photos/seed/greet7/600/450">
+      <div class="card-frame"><img src="https://picsum.photos/seed/greet7/600/450" alt="memory" loading="lazy"/></div>
+    </div>
+  </div>
+</div>
+
+<div class="vibe-deck" data-r>
+  <div class="wishes-title">Our Wishes For You</div>
+  <div class="deck-grid">
+    <div class="deck-card" data-r style="--rd:0ms">
+      <i class="fa-solid fa-sun wish-icon"></i>
+      <div class="wish-label">Joy</div>
+      <div class="wish-sub">Every single day</div>
+    </div>
+    <div class="deck-card" data-r style="--rd:90ms">
+      <i class="fa-solid fa-wand-magic-sparkles wish-icon"></i>
+      <div class="wish-label">Magic</div>
+      <div class="wish-sub">In everything you do</div>
+    </div>
+    <div class="deck-card" data-r style="--rd:180ms">
+      <i class="fa-solid fa-map wish-icon"></i>
+      <div class="wish-label">Adventure</div>
+      <div class="wish-sub">Around every corner</div>
+    </div>
+    <div class="deck-card" data-r style="--rd:270ms">
+      <i class="fa-solid fa-face-smile-beam wish-icon"></i>
+      <div class="wish-label">Laughter</div>
+      <div class="wish-sub">Always and forever</div>
+    </div>
+  </div>
+</div>
+
+<div class="stage-out" data-r>
+  <div class="signoff-msg">Happy Birthday!</div>
+  <div class="signoff-sub">With all our love</div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt=""/>
+    </div>
+  </div>
+<script>
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lb').forEach(function(el){
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ img.src = el.dataset.full || ''; lb.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) lb.classList.remove('open'); });
+  })();
+  </script>
+<script>
+(function(){
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting) { en.target.classList.add('vis'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-r]').forEach(function(el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-r]').forEach(function(el) { el.classList.add('vis'); });
+  }
+
+  window.addEventListener('scroll', function() {
+    var t = document.getElementById('ticker-text');
+    if (t) t.style.transform = 'translateX(' + (-window.scrollY * 0.35) + 'px)';
+  });
+
+  /* ── 3D tilt ── */
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced && !('ontouchstart' in window)) {
+    document.querySelectorAll('.generic-tilt').forEach(function(el) {
+      el.addEventListener('mousemove', function(ev) {
+        var box = el.getBoundingClientRect();
+        var x = (ev.clientX - box.left - box.width/2) / (box.width/2) * 12;
+        var y = (ev.clientY - box.top - box.height/2) / (box.height/2) * -12;
+        el.style.transform = 'rotateX('+y+'deg) rotateY('+x+'deg) scale(1.02)';
+      });
+      el.addEventListener('mouseleave', function() { el.style.transform = ''; });
+    });
+  }
+
+  /* ── Canvas neon particles ── */
+  var canvas = document.getElementById('party-canvas');
+  var ctx = canvas.getContext('2d');
+  var nodes = [];
+  var mouse = { x: null, y: null, vX: 0, vY: 0, lastX: 0, lastY: 0 };
+  function sizeUp() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  window.addEventListener('resize', sizeUp); sizeUp();
+  window.addEventListener('mousemove', function(ev) {
+    mouse.x = ev.clientX; mouse.y = ev.clientY;
+    mouse.vX = mouse.x - mouse.lastX; mouse.vY = mouse.y - mouse.lastY;
+    mouse.lastX = mouse.x; mouse.lastY = mouse.y;
+  });
+  for (var i = 0; i < 60; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+      size: Math.random() * 3 + 1,
+      speedX: (Math.random()-0.5) * 2, speedY: (Math.random()-0.5) * 2,
+      color: Math.random() > 0.5 ? '#ff0055' : '#9d00ff',
+    });
+  }
+  function loop() {
+    ctx.fillStyle = 'rgba(4,4,7,0.2)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+    nodes.forEach(function(n) {
+      n.x += n.speedX; n.y += n.speedY;
+      if (mouse.x) {
+        var dx = n.x - mouse.x, dy = n.y - mouse.y, d = Math.sqrt(dx*dx+dy*dy);
+        if (d < 150) { n.x += (dx/d) * mouse.vX * 0.5; n.y += (dy/d) * mouse.vY * 0.5; }
+      }
+      if (n.x < 0 || n.x > canvas.width) n.speedX *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.speedY *= -1;
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.size, 0, Math.PI*2); ctx.fillStyle = n.color; ctx.fill();
+    });
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+</script>
+</body>
+</html>

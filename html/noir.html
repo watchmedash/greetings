@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mariel — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root{--hp:#FF006E;--eb:#0057FF;--lime:#AAFF00;--purple:#8800CC;--orange:#FF6600;--yellow:#FFE300;--white:#FFFFFF;--ink:#12003A;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Space Grotesk',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;}
+
+    /* ── HERO: split layout, hot pink left + white photo right ── */
+    .hero{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;}
+    @media(max-width:700px){.hero{grid-template-columns:1fr;min-height:auto;}}
+    .hero-left{background:var(--hp);padding:5rem 3.5rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+    /* halftone dots overlay */
+    .hero-left::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.12) 2px,transparent 2px);background-size:24px 24px;pointer-events:none;}
+    .hero-eyebrow{font-family:'Syne',sans-serif;font-size:11px;font-weight:800;letter-spacing:.45em;text-transform:uppercase;color:rgba(255,255,255,.7);display:block;margin-bottom:.5rem;position:relative;z-index:1;}
+    .hero-label2{font-size:11px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.55);display:block;margin-bottom:2.5rem;position:relative;z-index:1;}
+    .name{font-family:'Syne',sans-serif;font-size:clamp(44px,9vw,100px);font-weight:800;line-height:.9;color:#FFFFFF;position:relative;z-index:1;}
+    .hero-sub{font-size:14px;font-weight:500;color:rgba(255,255,255,.7);margin-top:1.75rem;position:relative;z-index:1;letter-spacing:.05em;}
+    /* accent strip at bottom */
+    .hero-stripe{display:flex;margin-top:3rem;gap:8px;position:relative;z-index:1;}
+    .hero-stripe-dot{width:16px;height:16px;border-radius:50%;}
+    /* photo side */
+    .hero-right{background:#FFFFFF;display:flex;align-items:center;justify-content:center;padding:3rem;position:relative;overflow:hidden;}
+    /* big yellow circle bg */
+    .hero-right::before{content:'';position:absolute;width:380px;height:380px;border-radius:50%;background:var(--yellow);top:50%;left:50%;transform:translate(-50%,-50%);}
+    .hero-photo{width:300px;height:300px;border-radius:50%;object-fit:cover;display:block;border:6px solid var(--ink);position:relative;z-index:1;box-shadow:8px 8px 0 var(--ink);}
+    @media(max-width:700px){.hero-photo{width:220px;height:220px;}}
+    @media(max-width:700px){.hero-right{min-height:320px;}}
+    @media(max-width:700px){.hero-left{padding:3.5rem 2rem;}}
+
+    /* ── TICKER ── */
+    .ticker{background:var(--ink);color:var(--yellow);font-family:'Syne',sans-serif;font-size:13px;font-weight:800;letter-spacing:.2em;padding:.5rem 0;overflow:hidden;border-top:3px solid var(--yellow);border-bottom:3px solid var(--yellow);}
+    .ticker-inner{display:flex;gap:4rem;white-space:nowrap;animation:ticker-scroll 16s linear infinite;}
+    .ticker-inner span{flex-shrink:0;}
+    @keyframes ticker-scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+    /* ── MESSAGE: white bg, clear readable text ── */
+    .message-section{background:var(--white);padding:6rem 2rem;border-bottom:4px solid var(--ink);}
+    .message-inner{max-width:820px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:4rem;align-items:start;}
+    @media(max-width:640px){.message-inner{grid-template-columns:1fr;gap:2rem;}}
+    .msg-aside{background:var(--hp);padding:1.5rem;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);min-width:180px;}
+    .msg-label1{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--white);line-height:1.2;}
+    .msg-label2{font-size:11px;font-weight:500;letter-spacing:.15em;color:rgba(255,255,255,.7);margin-top:.5rem;display:block;}
+    .msg-from-side{font-size:11px;color:rgba(255,255,255,.6);margin-top:1rem;letter-spacing:.1em;}
+    .msg-body{font-size:17px;font-weight:400;line-height:1.85;color:var(--ink);}
+    .msg-from{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--hp);margin-top:2rem;}
+
+    /* ── MILESTONE: yellow section ── */
+    .milestone-section{background:var(--yellow);padding:5rem 2rem;text-align:center;border-bottom:4px solid var(--ink);}
+    .milestone-neon{display:inline-flex;flex-direction:column;align-items:center;gap:.5rem;}
+    .milestone-num{font-family:'Syne',sans-serif;font-size:clamp(90px,22vw,180px);font-weight:800;color:var(--ink);line-height:1;}
+    .milestone-lbl{font-size:13px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(18,0,58,.65);}
+
+    /* ── GRID: electric blue full-width ── */
+    .grid-wrap{background:var(--eb);padding:5rem 2rem;}
+    .grid-inner{max-width:1000px;margin:0 auto;}
+    .grid-eyebrow{font-size:11px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6);display:block;margin-bottom:.5rem;}
+    .grid-title{font-family:'Syne',sans-serif;font-size:clamp(26px,6vw,52px);font-weight:800;color:#FFFFFF;margin-bottom:2.5rem;}
+    .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px;}
+    .photo-cell{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:1;border:3px solid transparent;transition:border-color .2s;}
+    .photo-cell:hover{border-color:#FFFFFF;}
+    .photo-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+    .photo-cell:hover img{transform:scale(1.06);}
+
+    /* ── WISHES: ink bg, vivid tiles ── */
+    .wishes-wrap{background:var(--ink);padding:5rem 2rem;}
+    .wishes-inner{max-width:1000px;margin:0 auto;}
+    .wishes-title{font-family:'Syne',sans-serif;font-size:clamp(26px,6vw,52px);font-weight:800;color:#FFFFFF;margin-bottom:2.5rem;}
+    .wishes-flex{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;}
+    .wish{padding:1.75rem 1.25rem;position:relative;overflow:hidden;border:3px solid var(--ink);transition:transform .2s;}
+    .wish:hover{transform:translateY(-4px);}
+    .wish i{font-size:22px;margin-bottom:.9rem;display:block;color:rgba(0,0,0,.6);}
+    .wish-label{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:rgba(0,0,0,.85);margin-bottom:4px;}
+    .wish-sub{font-size:12px;font-weight:400;color:rgba(0,0,0,.6);line-height:1.5;}
+
+    /* ── SIGNOFF: yellow + ink, split layout ── */
+    .signoff{display:grid;grid-template-columns:1fr 1fr;min-height:40vh;}
+    @media(max-width:600px){.signoff{grid-template-columns:1fr;}}
+    .signoff-left{background:var(--hp);display:flex;align-items:center;justify-content:center;padding:4rem 2rem;border-right:4px solid var(--ink);}
+    .signoff-msg{font-family:'Syne',sans-serif;font-size:clamp(32px,7vw,70px);font-weight:800;color:#FFFFFF;line-height:.95;}
+    .signoff-right{background:var(--yellow);display:flex;align-items:center;justify-content:center;padding:4rem 2rem;}
+    .signoff-sub{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--ink);letter-spacing:.06em;}
+
+    .lightbox-overlay{position:fixed;inset:0;z-index:500;background:rgba(18,0,58,.96);display:flex;align-items:center;justify-content:center;padding:2rem 1.25rem;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;}
+    .lightbox-overlay.open{opacity:1;visibility:visible;}
+    .lightbox-content{position:relative;max-width:min(700px,92vw);max-height:88vh;overflow:hidden;border:4px solid var(--hp);}
+    .lightbox-content img{display:block;width:100%;height:100%;max-height:85vh;object-fit:contain;}
+    .lightbox-close{position:absolute;top:-44px;right:0;background:none;color:white;border:none;font-size:22px;cursor:pointer;}
+
+    @media(prefers-reduced-motion:no-preference){
+      .nl{display:inline-block;opacity:0;animation:pop-in .5s cubic-bezier(.34,1.5,.64,1) var(--d,0s) both;}
+      @keyframes pop-in{0%{opacity:0;transform:scale(.4);}100%{opacity:1;transform:none;}}
+      [data-r]{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1) var(--rd,0ms);}
+      [data-r].vis{opacity:1;transform:none;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-left">
+    <span class="hero-eyebrow">With Love</span>
+    <span class="hero-label2">Vol. 1 · Special Edition</span>
+    <h1 class="name"><span class="nl" style="--d:0.00s">M</span><span class="nl" style="--d:0.06s">a</span><span class="nl" style="--d:0.12s">r</span><span class="nl" style="--d:0.18s">i</span><span class="nl" style="--d:0.24s">e</span><span class="nl" style="--d:0.30s">l</span></h1>
+    <div class="hero-sub">Wishing you all the best</div>
+    <div class="hero-stripe">
+      <div class="hero-stripe-dot" style="background:#FFE300;"></div><div class="hero-stripe-dot" style="background:#0057FF;"></div><div class="hero-stripe-dot" style="background:#AAFF00;"></div><div class="hero-stripe-dot" style="background:#FF6600;"></div><div class="hero-stripe-dot" style="background:#8800CC;"></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="lb" data-full="https://picsum.photos/seed/greet1/600/600" style="position:relative;z-index:1;">
+      <img class="hero-photo" src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/>
+    </div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>With Love &nbsp;★&nbsp; Mariel &nbsp;★&nbsp; The Birthday Issue &nbsp;★&nbsp;</span><span>With Love &nbsp;★&nbsp; Mariel &nbsp;★&nbsp; The Birthday Issue &nbsp;★&nbsp;</span><span>With Love &nbsp;★&nbsp; Mariel &nbsp;★&nbsp; The Birthday Issue &nbsp;★&nbsp;</span><span>With Love &nbsp;★&nbsp; Mariel &nbsp;★&nbsp; The Birthday Issue &nbsp;★&nbsp;</span><span>With Love &nbsp;★&nbsp; Mariel &nbsp;★&nbsp; The Birthday Issue &nbsp;★&nbsp;</span><span>With Love &nbsp;★&nbsp; Mariel &nbsp;★&nbsp; The Birthday Issue &nbsp;★&nbsp;</span><span>With Love &nbsp;★&nbsp; Mariel &nbsp;★&nbsp; The Birthday Issue &nbsp;★&nbsp;</span><span>With Love &nbsp;★&nbsp; Mariel &nbsp;★&nbsp; The Birthday Issue &nbsp;★&nbsp;</span>
+  </div>
+</div>
+
+<div class="message-section" data-r>
+  <div class="message-inner">
+    <div class="msg-aside">
+      <div class="msg-label1">The Birthday Issue</div>
+      <span class="msg-label2">Vol. 1 · Special Edition</span>
+      <div class="msg-from-side">— Your friends</div>
+    </div>
+    <div>
+      <div class="msg-body">Happy birthday! Wishing you a day full of joy, laughter, and everything you love. You deserve all the happiness in the world.</div>
+      <div class="msg-from">Your friends</div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="grid-wrap" data-r>
+  <div class="grid-inner">
+    <span class="grid-eyebrow">Vol. 1 · Special Edition</span>
+    <h2 class="grid-title">Our Favourite Memories</h2>
+    <div class="photo-grid">
+      <div class="photo-cell lb" data-full="https://picsum.photos/seed/greet2/600/450"><img src="https://picsum.photos/seed/greet2/600/450" alt="moment" loading="lazy"/></div>
+      <div class="photo-cell lb" data-full="https://picsum.photos/seed/greet3/600/450"><img src="https://picsum.photos/seed/greet3/600/450" alt="moment" loading="lazy"/></div>
+      <div class="photo-cell lb" data-full="https://picsum.photos/seed/greet4/600/450"><img src="https://picsum.photos/seed/greet4/600/450" alt="moment" loading="lazy"/></div>
+      <div class="photo-cell lb" data-full="https://picsum.photos/seed/greet5/600/450"><img src="https://picsum.photos/seed/greet5/600/450" alt="moment" loading="lazy"/></div>
+      <div class="photo-cell lb" data-full="https://picsum.photos/seed/greet6/600/450"><img src="https://picsum.photos/seed/greet6/600/450" alt="moment" loading="lazy"/></div>
+      <div class="photo-cell lb" data-full="https://picsum.photos/seed/greet7/600/450"><img src="https://picsum.photos/seed/greet7/600/450" alt="moment" loading="lazy"/></div>
+    </div>
+  </div>
+</div>
+
+<div class="wishes-wrap">
+  <div class="wishes-inner">
+    <h2 class="wishes-title" data-r>Our Wishes For You</h2>
+    <div class="wishes-flex">
+      <div class="wish" data-r style="--rd:0ms;background:#FF006E;"><i class="fa-solid fa-sun"></i><div class="wish-label">Joy</div><div class="wish-sub">Every single day</div></div>
+      <div class="wish" data-r style="--rd:70ms;background:#0057FF;"><i class="fa-solid fa-wand-magic-sparkles"></i><div class="wish-label">Magic</div><div class="wish-sub">In everything you do</div></div>
+      <div class="wish" data-r style="--rd:140ms;background:#FF6600;"><i class="fa-solid fa-map"></i><div class="wish-label">Adventure</div><div class="wish-sub">Around every corner</div></div>
+      <div class="wish" data-r style="--rd:210ms;background:#8800CC;"><i class="fa-solid fa-face-smile-beam"></i><div class="wish-label">Laughter</div><div class="wish-sub">Always and forever</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="signoff" data-r>
+  <div class="signoff-left"><div class="signoff-msg">Happy Birthday!</div></div>
+  <div class="signoff-right"><div class="signoff-sub">With all our love</div></div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt=""/>
+    </div>
+  </div>
+<script>
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lb').forEach(function(el){
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ img.src = el.dataset.full || ''; lb.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) lb.classList.remove('open'); });
+  })();
+  </script>
+<script>
+(function(){
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('vis');io.unobserve(en.target);}});},{threshold:.1});
+    document.querySelectorAll('[data-r]').forEach(function(el){io.observe(el);});
+  } else document.querySelectorAll('[data-r]').forEach(function(el){el.classList.add('vis');});
+})();
+</script>
+</body>
+</html>

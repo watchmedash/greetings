@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mariel — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root { --bg:#FDF4E7; --card:#F5E9CC; --red:#C8230A; --gold:#C8860A; --ink:#1E140A; --mu:#7A5C3A; --ivory:#FFFAF2; --warm:#F0D9A8; }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;}
+
+    /* art deco divider */
+    .deco{display:flex;align-items:center;gap:12px;justify-content:center;margin:2.5rem 0;}
+    .deco-line{flex:1;max-width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+    .deco-line.r{background:linear-gradient(90deg,var(--gold),transparent);}
+    .deco i{color:var(--gold);font-size:14px;}
+
+    /* HERO: cream bg, big warm poster-style layout */
+    .hero{background:var(--card);position:relative;overflow:hidden;padding:0;}
+    /* top film strip bar */
+    .film-bar{background:var(--ink);padding:.4rem 1rem;display:flex;align-items:center;gap:12px;overflow:hidden;}
+    .film-holes{display:flex;gap:8px;flex:1;}
+    .film-hole{width:20px;height:14px;border-radius:3px;background:var(--card);flex-shrink:0;}
+    .film-label{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.3em;color:var(--warm);}
+    /* main hero area */
+    .hero-main{display:grid;grid-template-columns:1fr 1fr;min-height:90vh;}
+    @media(max-width:700px){.hero-main{grid-template-columns:1fr;min-height:auto;}}
+    .hero-left{padding:5rem 3rem;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1;}
+    /* art deco corner ornament */
+    .hero-left::before{content:'';position:absolute;top:20px;left:20px;width:60px;height:60px;border-top:3px solid var(--gold);border-left:3px solid var(--gold);}
+    .hero-left::after{content:'';position:absolute;bottom:20px;right:20px;width:60px;height:60px;border-bottom:3px solid var(--gold);border-right:3px solid var(--gold);}
+    .eyebrow{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.35em;color:var(--red);margin-bottom:1rem;display:block;text-transform:uppercase;}
+    .name{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,110px);line-height:.9;letter-spacing:.04em;color:var(--ink);}
+    .name-rule{width:80px;height:3px;background:var(--gold);margin:1.5rem 0;}
+    .name-sub{font-size:14px;font-weight:300;color:var(--mu);letter-spacing:.15em;text-transform:uppercase;}
+    .hero-right{position:relative;overflow:hidden;}
+    .hero-right img{width:100%;height:100%;min-height:400px;object-fit:cover;display:block;filter:sepia(.2) contrast(1.05);}
+    /* letterbox bars */
+    .hero-right::before,.hero-right::after{content:'';position:absolute;left:0;right:0;height:60px;background:var(--card);z-index:2;}
+    .hero-right::before{top:0;}
+    .hero-right::after{bottom:0;}
+    @media(max-width:700px){.hero-right img{min-height:300px;}}
+    @media(max-width:700px){.hero-left{padding:4rem 2rem;}}
+
+    /* bottom film strip */
+    .film-bar-bot{background:var(--ink);padding:.4rem 1rem;display:flex;align-items:center;gap:12px;overflow:hidden;}
+
+    /* message: ivory, screenplay style */
+    .message-section{background:var(--ivory);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);}
+    .message-inner{max-width:780px;margin:0 auto;padding:5rem 2rem;}
+    .scene-tag{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:.35em;color:var(--gold);margin-bottom:1.5rem;display:block;text-transform:uppercase;}
+    .msg-body{font-size:18px;font-weight:300;line-height:1.9;color:var(--ink);}
+    .msg-from{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.2em;color:var(--mu);margin-top:2rem;}
+
+    /* milestone: film counter with sprocket holes */
+    .milestone-wrap{background:var(--card);text-align:center;padding:5rem 2rem;border-bottom:2px solid var(--warm);}
+    .film-counter{display:inline-flex;align-items:center;gap:2rem;}
+    .film-sprocket{display:flex;flex-direction:column;gap:8px;}
+    .sprocket-hole{width:14px;height:20px;border-radius:3px;background:var(--ink);}
+    .milestone-reel{text-align:center;}
+    .milestone-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,18vw,150px);color:var(--gold);line-height:1;letter-spacing:.02em;}
+    .milestone-lbl{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.2em;color:var(--mu);}
+
+    /* grid: warm bg, widescreen strips */
+    .grid-wrap{background:var(--bg);padding:5rem 2rem;}
+    .grid-inner{max-width:1000px;margin:0 auto;}
+    .grid-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,6vw,52px);color:var(--ink);letter-spacing:.05em;margin-bottom:2rem;}
+    .grid-strips{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px;}
+    .grid-strip{position:relative;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:border-color .3s;}
+    .grid-strip:hover{border-color:var(--gold);}
+    .grid-strip img{width:100%;height:220px;object-fit:cover;display:block;filter:sepia(.15) contrast(1.05);transition:filter .4s,transform .5s;}
+    .grid-strip:hover img{filter:sepia(0) contrast(1);transform:scale(1.04);}
+    .grid-strip-label{position:absolute;bottom:8px;left:12px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.2em;color:var(--warm);background:rgba(30,20,10,.5);padding:2px 8px;}
+    @media(max-width:500px){.grid-strip img{height:180px;}}
+
+    /* wishes: credits style on card bg */
+    .wishes-wrap{background:var(--card);padding:5rem 2rem;}
+    .wishes-inner{max-width:780px;margin:0 auto;}
+    .wishes-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,5vw,40px);color:var(--ink);letter-spacing:.08em;margin-bottom:.5rem;}
+    .wishes-rule{width:100%;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:1.5rem 0 2.5rem;}
+    .credits-list{display:flex;flex-direction:column;gap:0;}
+    .credit-row{display:flex;align-items:center;padding:1.25rem 0;border-bottom:1px solid rgba(200,134,10,.25);}
+    .credit-row:last-child{border-bottom:none;}
+    .credit-icon{width:44px;font-size:18px;color:var(--gold);flex-shrink:0;}
+    .credit-role{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.08em;color:var(--ink);flex:1;padding:0 1rem;}
+    .credit-name{font-size:13px;font-weight:300;color:var(--mu);text-align:right;flex:1;}
+
+    /* signoff: warm ink section, art deco frame */
+    .signoff{background:var(--ink);padding:8rem 2rem;text-align:center;position:relative;overflow:hidden;}
+    .signoff::before{content:'';position:absolute;inset:16px;border:1px solid rgba(200,134,10,.2);pointer-events:none;}
+    .signoff::after{content:'';position:absolute;inset:24px;border:1px solid rgba(200,134,10,.08);pointer-events:none;}
+    .signoff-msg{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,11vw,100px);color:var(--warm);letter-spacing:.06em;line-height:.95;position:relative;z-index:1;}
+    .signoff-deco{position:relative;z-index:1;}
+    .signoff-sub{font-size:11px;font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:rgba(240,217,168,.6);margin-top:.5rem;}
+
+    .lightbox-overlay{position:fixed;inset:0;z-index:500;background:rgba(30,20,10,.95);display:flex;align-items:center;justify-content:center;padding:2rem 1.25rem;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;}
+    .lightbox-overlay.open{opacity:1;visibility:visible;}
+    .lightbox-content{position:relative;max-width:min(700px,92vw);max-height:88vh;border:2px solid var(--gold);}
+    .lightbox-content img{display:block;width:100%;height:100%;max-height:85vh;object-fit:contain;}
+    .lightbox-close{position:absolute;top:-44px;right:0;background:none;color:var(--warm);border:none;font-size:22px;cursor:pointer;}
+
+    @media(prefers-reduced-motion:no-preference){
+      .nl{display:inline-block;opacity:0;animation:fade-wide .8s ease var(--d,0s) both;}
+      @keyframes fade-wide{0%{opacity:0;transform:scaleX(.4) translateY(10px);filter:blur(4px);}100%{opacity:1;transform:none;filter:none;}}
+      [data-r]{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1) var(--rd,0ms);}
+      [data-r].vis{opacity:1;transform:none;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="film-bar">
+    <div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+    <div class="film-label">With Love</div>
+    <div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+  </div>
+  <div class="hero-main">
+    <div class="hero-left">
+      <span class="eyebrow">With Love</span>
+      <h1 class="name"><span class="nl" style="--d:0.00s">M</span><span class="nl" style="--d:0.10s">a</span><span class="nl" style="--d:0.20s">r</span><span class="nl" style="--d:0.30s">i</span><span class="nl" style="--d:0.40s">e</span><span class="nl" style="--d:0.50s">l</span></h1>
+      <div class="name-rule"></div>
+      <div class="name-sub">Wishing you all the best</div>
+    </div>
+    <div class="hero-right lb" data-full="https://picsum.photos/seed/greet1/600/600">
+      <img src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/>
+    </div>
+  </div>
+  <div class="film-bar-bot">
+    <div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+    <div class="film-label">Wishing you all the best</div>
+    <div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+  </div>
+</div>
+
+<div class="message-section" data-r>
+  <div class="message-inner">
+    <span class="scene-tag">The Birthday Issue</span>
+    <div class="msg-body">Happy birthday! Wishing you a day full of joy, laughter, and everything you love. You deserve all the happiness in the world.</div>
+    <div class="msg-from">— Your friends</div>
+  </div>
+</div>
+
+
+
+<div class="grid-wrap" data-r>
+  <div class="grid-inner">
+    <h2 class="grid-title">Our Favourite Memories</h2>
+    <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:300;letter-spacing:.2em;color:var(--mu);text-transform:uppercase;margin-bottom:2rem;">Vol. 1 · Special Edition</p>
+    <div class="grid-strips">
+      <div class="grid-strip lb" data-full="https://picsum.photos/seed/greet2/600/450"><img src="https://picsum.photos/seed/greet2/600/450" alt="memory" loading="lazy"/><div class="grid-strip-label">SCENE 01</div></div>
+      <div class="grid-strip lb" data-full="https://picsum.photos/seed/greet3/600/450"><img src="https://picsum.photos/seed/greet3/600/450" alt="memory" loading="lazy"/><div class="grid-strip-label">SCENE 02</div></div>
+      <div class="grid-strip lb" data-full="https://picsum.photos/seed/greet4/600/450"><img src="https://picsum.photos/seed/greet4/600/450" alt="memory" loading="lazy"/><div class="grid-strip-label">SCENE 03</div></div>
+      <div class="grid-strip lb" data-full="https://picsum.photos/seed/greet5/600/450"><img src="https://picsum.photos/seed/greet5/600/450" alt="memory" loading="lazy"/><div class="grid-strip-label">SCENE 04</div></div>
+      <div class="grid-strip lb" data-full="https://picsum.photos/seed/greet6/600/450"><img src="https://picsum.photos/seed/greet6/600/450" alt="memory" loading="lazy"/><div class="grid-strip-label">SCENE 05</div></div>
+      <div class="grid-strip lb" data-full="https://picsum.photos/seed/greet7/600/450"><img src="https://picsum.photos/seed/greet7/600/450" alt="memory" loading="lazy"/><div class="grid-strip-label">SCENE 06</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wishes-wrap">
+  <div class="wishes-inner">
+    <h2 class="wishes-title" data-r>Our Wishes For You</h2>
+    <div class="wishes-rule"></div>
+    <div class="credits-list">
+      <div class="credit-row" data-r style="--rd:0ms"><div class="credit-icon"><i class="fa-solid fa-sun"></i></div><div class="credit-role">Joy</div><div class="credit-name">Every single day</div></div>
+      <div class="credit-row" data-r style="--rd:80ms"><div class="credit-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div class="credit-role">Magic</div><div class="credit-name">In everything you do</div></div>
+      <div class="credit-row" data-r style="--rd:160ms"><div class="credit-icon"><i class="fa-solid fa-map"></i></div><div class="credit-role">Adventure</div><div class="credit-name">Around every corner</div></div>
+      <div class="credit-row" data-r style="--rd:240ms"><div class="credit-icon"><i class="fa-solid fa-face-smile-beam"></i></div><div class="credit-role">Laughter</div><div class="credit-name">Always and forever</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="signoff" data-r>
+  <div class="signoff-msg">Happy Birthday!</div>
+  <div class="signoff-deco">
+    <div class="deco" style="margin:1.5rem 0 .5rem;"><div class="deco-line" style="background:linear-gradient(90deg,transparent,rgba(200,134,10,.4));"></div><i class="fa-solid fa-star" style="color:rgba(200,134,10,.6);font-size:12px;"></i><div class="deco-line r" style="background:linear-gradient(90deg,rgba(200,134,10,.4),transparent);"></div></div>
+    <div class="signoff-sub">With all our love</div>
+  </div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt=""/>
+    </div>
+  </div>
+<script>
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lb').forEach(function(el){
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ img.src = el.dataset.full || ''; lb.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) lb.classList.remove('open'); });
+  })();
+  </script>
+<script>
+(function(){
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('vis');io.unobserve(en.target);}});},{threshold:.1});
+    document.querySelectorAll('[data-r]').forEach(function(el){io.observe(el);});
+  } else document.querySelectorAll('[data-r]').forEach(function(el){el.classList.add('vis');});
+})();
+</script>
+</body>
+</html>

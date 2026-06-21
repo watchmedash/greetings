@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mariel — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-dark: #0a0b10;
+      --panel-dark: #121420;
+      --neon-cyan: #00f0ff;
+      --neon-magenta: #ff0055;
+      --neon-green: #39ff14;
+      --text-gray: #8f9cae;
+      --text-light: #e2e8f0;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Share Tech Mono', monospace;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .matrix-bg { position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:1; opacity:0.15; overflow:hidden; }
+    .data-stream { position:absolute; color:var(--neon-cyan); font-size:14px; top:-20px; writing-mode:vertical-rl; text-orientation:upright; }
+
+    /* ── Hero ── */
+    .hero { text-align:center; padding:6rem 1rem 3rem; position:relative; z-index:2; }
+    .eyebrow {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(0,240,255,0.1); border:1px solid var(--neon-cyan);
+      color:var(--neon-cyan); padding:4px 12px; border-radius:4px;
+      font-size:0.85rem; text-transform:uppercase; margin-bottom:1.5rem;
+      box-shadow:0 0 10px rgba(0,240,255,0.2);
+    }
+    .eyebrow::before {
+      content:''; display:block; width:8px; height:8px;
+      background:var(--neon-green); border-radius:50%;
+    }
+    .name {
+      font-family:'Orbitron',sans-serif; font-size:clamp(2.5rem,8vw,5.5rem); font-weight:900;
+      color:#fff; text-transform:uppercase; letter-spacing:4px; margin-bottom:1rem;
+      text-shadow:2px 2px 0px var(--neon-magenta), -2px -2px 0px var(--neon-cyan);
+    }
+    .name-tag { font-size:clamp(0.9rem,1.8vw,1.2rem); color:var(--text-gray); max-width:650px; margin:0 auto 3rem; }
+    .hero-photo-wrap { display:flex; justify-content:center; margin-bottom:4rem; }
+    .vogue-polaroid {
+      background:var(--panel-dark); padding:8px; border:2px solid var(--neon-cyan);
+      position:relative; cursor:pointer; box-shadow:0 0 20px rgba(0,240,255,0.15);
+    }
+    .vogue-polaroid::before, .vogue-polaroid::after {
+      content:''; position:absolute; width:15px; height:15px; border-color:var(--neon-magenta); border-style:solid;
+    }
+    .vogue-polaroid::before { top:-5px; left:-5px; border-width:3px 0 0 3px; }
+    .vogue-polaroid::after { bottom:-5px; right:-5px; border-width:0 3px 3px 0; }
+    .vogue-polaroid .frame { width:min(320px,75vw); height:320px; overflow:hidden; filter:grayscale(20%) contrast(110%); transition:filter 0.3s ease; }
+    .vogue-polaroid:hover .frame { filter:grayscale(0%) contrast(100%); }
+    .vogue-polaroid img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* ── Message ── */
+    .message-section {
+      max-width:800px; margin:2rem auto 5rem;
+      background:var(--panel-dark); border-left:4px solid var(--neon-magenta);
+      padding:2.5rem 1.5rem; position:relative; z-index:2;
+      box-shadow:inset 0 0 20px rgba(0,0,0,0.5);
+    }
+    .editorial-label {
+      display:flex; justify-content:space-between;
+      border-bottom:1px solid rgba(143,156,174,0.2); padding-bottom:0.75rem; margin-bottom:1.5rem;
+      color:var(--neon-cyan); font-size:0.9rem; font-weight:normal; text-transform:uppercase;
+    }
+    .message-body { font-size:1.1rem; line-height:1.8; color:var(--text-light); }
+    .message-from { margin-top:1.5rem; color:var(--neon-green); font-weight:bold; display:block; }
+
+    /* ── Milestone ── */
+    .milestone-wrap { padding:4rem 1.5rem; text-align:center; border-top:1px solid rgba(0,240,255,0.1); border-bottom:1px solid rgba(0,240,255,0.1); position:relative; z-index:2; }
+    .milestone-sys {
+      display:inline-flex; flex-direction:column; align-items:center; gap:8px;
+      border:1px solid var(--neon-cyan); padding:2rem 4rem; border-radius:4px;
+      box-shadow:0 0 25px rgba(0,240,255,0.15);
+    }
+    .milestone-num { font-family:'Orbitron',sans-serif; font-size:80px; font-weight:900; color:var(--neon-cyan); line-height:1; }
+    .milestone-lbl { font-size:11px; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-gray); }
+
+    /* ── Grid ── */
+    .grid-title { font-family:'Orbitron',sans-serif; font-size:1.7rem; text-align:center; letter-spacing:3px; text-transform:uppercase; color:#fff; margin:5rem auto 3rem; }
+    .memory-grid { max-width:1100px; margin:0 auto 5rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; padding:0 1rem; position:relative; z-index:2; }
+    .grid-polaroid {
+      background:var(--panel-dark); padding:6px;
+      border:1px solid rgba(255,255,255,0.1); position:relative; cursor:pointer;
+      transition:all 0.3s ease;
+    }
+    .grid-polaroid:hover { border-color:var(--neon-cyan); transform:translateY(-4px); box-shadow:0 5px 15px rgba(0,240,255,0.1); }
+    .grid-polaroid .frame { width:100%; height:220px; overflow:hidden; }
+    .grid-polaroid img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* ── Wishes ── */
+    .wishes-title { font-family:'Orbitron',sans-serif; font-size:1.7rem; text-align:center; letter-spacing:3px; text-transform:uppercase; color:#fff; margin:5rem auto 3rem; position:relative; z-index:2; }
+    .wishes-grid { max-width:1100px; margin:0 auto 6rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; padding:0 1rem; position:relative; z-index:2; }
+    .wish { background:var(--panel-dark); border:1px solid rgba(143,156,174,0.15); padding:2rem 1.5rem; position:relative; text-align:left; cursor:default; }
+    .wish::before { content:''; position:absolute; top:0; left:0; width:100%; height:2px; background:linear-gradient(90deg, var(--neon-cyan), transparent); }
+    .wish-icon { font-size:1.5rem; color:var(--neon-cyan); margin-bottom:1rem; display:block; }
+    .wish-label { font-family:'Orbitron',sans-serif; font-size:1.1rem; margin-bottom:0.5rem; color:#fff; text-transform:uppercase; }
+    .wish-sub { font-size:0.9rem; color:var(--text-gray); line-height:1.4; }
+
+    /* ── Signoff ── */
+    .signoff { border-top:1px solid rgba(0,240,255,0.2); background:#0d0f17; text-align:center; padding:4rem 1rem; position:relative; z-index:2; }
+    .signoff-msg { font-family:'Orbitron',sans-serif; font-size:1.5rem; letter-spacing:5px; color:var(--neon-cyan); margin-bottom:0.5rem; text-transform:uppercase; }
+    .signoff-sub { font-size:0.9rem; color:var(--text-gray); text-transform:uppercase; }
+
+    /* ── Lightbox ── */
+    .lightbox-overlay {
+      position:fixed; inset:0; z-index:500; background:rgba(10,11,16,0.95);
+      backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center;
+      opacity:0; visibility:hidden; transition:all 0.2s ease; padding:1rem;
+    }
+    .lightbox-overlay.open { opacity:1; visibility:visible; }
+    .lightbox-content { background:var(--panel-dark); padding:8px; border:1px solid var(--neon-cyan); max-width:600px; width:100%; position:relative; }
+    .lightbox-content img { width:100%; max-height:65vh; object-fit:contain; display:block; }
+    .lightbox-close { position:absolute; top:-40px; right:0; background:transparent; color:var(--neon-magenta); border:none; font-family:inherit; font-size:1rem; cursor:pointer; letter-spacing:1px; }
+
+    /* ── Reveal animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .nl { display:inline-block; opacity:0; animation:nl-scan 0.6s ease var(--d,0s) both; }
+      @keyframes nl-scan { from { opacity:0; transform:translateY(-20px); filter:blur(6px); color:var(--neon-cyan); } to { opacity:1; transform:none; filter:none; } }
+      .eyebrow::before { animation: blink 1s infinite steps(2); }
+      @keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:0; } }
+      [data-r] { opacity:0; transform:translateY(28px); transition:opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1) var(--rd,0ms); }
+      [data-r].vis { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="matrix-bg" id="matrixContainer"></div>
+
+<div class="hero">
+  <span class="eyebrow">With Love</span>
+  <h1 class="name"><span class="nl" style="--d:0.00s">M</span><span class="nl" style="--d:0.07s">a</span><span class="nl" style="--d:0.14s">r</span><span class="nl" style="--d:0.21s">i</span><span class="nl" style="--d:0.28s">e</span><span class="nl" style="--d:0.35s">l</span></h1>
+  <div class="name-tag">&gt; Wishing you all the best</div>
+  <div class="hero-photo-wrap">
+    <div class="vogue-polaroid lb" data-full="https://picsum.photos/seed/greet1/600/600">
+      <div class="frame">
+        <img src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="message-section" data-r>
+  <div class="editorial-label">
+    <span>The Birthday Issue</span>
+    <span>Vol. 1 · Special Edition</span>
+  </div>
+  <div class="message-body">Happy birthday! Wishing you a day full of joy, laughter, and everything you love. You deserve all the happiness in the world.</div>
+  <div class="message-from">root@system:~# echo "Your friends"</div>
+</div>
+
+
+
+<h2 class="grid-title" data-r>// Our Favourite Memories</h2>
+<div class="memory-grid">
+  <div class="grid-polaroid lb" data-r style="--rd:0ms" data-full="https://picsum.photos/seed/greet2/600/450">
+    <div class="frame"><img src="https://picsum.photos/seed/greet2/600/450" alt="memory" loading="lazy"/></div>
+  </div>
+  <div class="grid-polaroid lb" data-r style="--rd:80ms" data-full="https://picsum.photos/seed/greet3/600/450">
+    <div class="frame"><img src="https://picsum.photos/seed/greet3/600/450" alt="memory" loading="lazy"/></div>
+  </div>
+  <div class="grid-polaroid lb" data-r style="--rd:160ms" data-full="https://picsum.photos/seed/greet4/600/450">
+    <div class="frame"><img src="https://picsum.photos/seed/greet4/600/450" alt="memory" loading="lazy"/></div>
+  </div>
+  <div class="grid-polaroid lb" data-r style="--rd:240ms" data-full="https://picsum.photos/seed/greet5/600/450">
+    <div class="frame"><img src="https://picsum.photos/seed/greet5/600/450" alt="memory" loading="lazy"/></div>
+  </div>
+  <div class="grid-polaroid lb" data-r style="--rd:320ms" data-full="https://picsum.photos/seed/greet6/600/450">
+    <div class="frame"><img src="https://picsum.photos/seed/greet6/600/450" alt="memory" loading="lazy"/></div>
+  </div>
+  <div class="grid-polaroid lb" data-r style="--rd:400ms" data-full="https://picsum.photos/seed/greet7/600/450">
+    <div class="frame"><img src="https://picsum.photos/seed/greet7/600/450" alt="memory" loading="lazy"/></div>
+  </div>
+</div>
+
+<h2 class="wishes-title" data-r>// Our Wishes For You</h2>
+<div class="wishes-grid">
+  <div class="wish" data-r style="--rd:0ms">
+    <i class="fa-solid fa-sun wish-icon"></i>
+    <div class="wish-label">Joy</div>
+    <div class="wish-sub">Every single day</div>
+  </div>
+  <div class="wish" data-r style="--rd:90ms">
+    <i class="fa-solid fa-wand-magic-sparkles wish-icon"></i>
+    <div class="wish-label">Magic</div>
+    <div class="wish-sub">In everything you do</div>
+  </div>
+  <div class="wish" data-r style="--rd:180ms">
+    <i class="fa-solid fa-map wish-icon"></i>
+    <div class="wish-label">Adventure</div>
+    <div class="wish-sub">Around every corner</div>
+  </div>
+  <div class="wish" data-r style="--rd:270ms">
+    <i class="fa-solid fa-face-smile-beam wish-icon"></i>
+    <div class="wish-label">Laughter</div>
+    <div class="wish-sub">Always and forever</div>
+  </div>
+</div>
+
+<div class="signoff" data-r>
+  <h2 class="signoff-msg">Happy Birthday!</h2>
+  <div class="signoff-sub">With all our love</div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt=""/>
+    </div>
+  </div>
+<script>
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lb').forEach(function(el){
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ img.src = el.dataset.full || ''; lb.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) lb.classList.remove('open'); });
+  })();
+  </script>
+<script>
+(function(){
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting) { en.target.classList.add('vis'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-r]').forEach(function(el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-r]').forEach(function(el) { el.classList.add('vis'); });
+  }
+
+  /* ── Matrix stream ── */
+  var container = document.getElementById('matrixContainer');
+  if (container) {
+    var streamCount = 35;
+    for (var i = 0; i < streamCount; i++) {
+      var stream = document.createElement('div');
+      stream.className = 'data-stream';
+      stream.style.left = Math.random() * 100 + 'vw';
+      var textStream = '';
+      var streamLength = Math.floor(Math.random() * 15 + 10);
+      for (var j = 0; j < streamLength; j++) { textStream += Math.random() > 0.5 ? '1' : '0'; }
+      stream.innerText = textStream;
+      var dur = (Math.random() * 4 + 3).toFixed(1) + 's';
+      var delay = (Math.random() * 5).toFixed(1) + 's';
+      stream.style.animation = 'streamFall ' + dur + ' linear ' + delay + ' infinite';
+      container.appendChild(stream);
+    }
+  }
+  var style = document.createElement('style');
+  style.textContent = '@keyframes streamFall{0%{transform:translateY(-20vh);opacity:1;}100%{transform:translateY(110vh);opacity:0;}}';
+  document.head.appendChild(style);
+})();
+</script>
+</body>
+</html>

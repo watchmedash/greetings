@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mariel — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root { --cream:#F5E6C8; --sepia:#8B6914; --red:#C4390A; --navy:#2B4A6F; --ink:#2A1F0E; --paper:#FFFDF6; }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+
+    /* postmark header bar */
+    .postmark-bar{background:var(--ink);color:var(--cream);padding:.6rem 2rem;display:flex;align-items:center;justify-content:space-between;font-family:'Special Elite',serif;font-size:12px;letter-spacing:.1em;}
+    .postmark-left{display:flex;align-items:center;gap:.5rem;}
+    .postmark-dot{width:6px;height:6px;border-radius:50%;background:var(--red);}
+    .postmark-right{font-size:10px;opacity:.7;}
+
+    /* hero: centered, cream bg, stamp-bordered photo */
+    .hero{background:var(--paper);padding:4rem 2rem;text-align:center;border-bottom:3px double var(--sepia);}
+    .eyebrow{font-family:'Special Elite',serif;font-size:13px;letter-spacing:.2em;color:var(--red);margin-bottom:1.5rem;display:block;text-transform:uppercase;}
+    .name{font-family:'Special Elite',serif;font-size:clamp(44px,12vw,100px);line-height:1;color:var(--ink);margin-bottom:1rem;}
+    .name-sub{font-size:14px;font-weight:300;color:var(--sepia);letter-spacing:.15em;font-style:italic;}
+    .stamp-frame{display:inline-block;margin-top:3rem;position:relative;}
+    .stamp{background:var(--paper);padding:12px;border:1px solid var(--sepia);position:relative;box-shadow:3px 3px 10px rgba(0,0,0,.15);}
+    /* perforated edge via repeating radial gradient */
+    .stamp::before,.stamp::after{content:'';position:absolute;left:0;right:0;height:10px;background:radial-gradient(circle at 50% 100%,var(--cream) 6px,transparent 6px) 0 0/18px 10px;}
+    .stamp::before{top:-10px;}
+    .stamp::after{bottom:-10px;transform:rotate(180deg);}
+    .stamp img{width:240px;height:280px;object-fit:cover;display:block;filter:sepia(.25);}
+    .stamp-label{font-family:'Special Elite',serif;font-size:10px;color:var(--sepia);letter-spacing:.15em;text-align:center;margin-top:.75rem;}
+    @media(max-width:500px){.stamp img{width:180px;height:210px;}}
+
+    /* message: lined paper card */
+    .message-section{max-width:780px;margin:0 auto;padding:4rem 2rem;}
+    .lined-card{background:var(--paper);padding:3rem;position:relative;box-shadow:2px 2px 8px rgba(0,0,0,.12);}
+    .lined-card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(transparent,transparent 27px,rgba(0,80,160,.12) 27px,rgba(0,80,160,.12) 28px);pointer-events:none;}
+    .margin-line{position:absolute;top:0;left:60px;bottom:0;width:1px;background:rgba(196,57,10,.2);}
+    .msg-inner{padding-left:1rem;position:relative;}
+    .msg-heading{font-family:'Special Elite',serif;font-size:22px;color:var(--ink);margin-bottom:1.5rem;border-bottom:1px solid var(--sepia);padding-bottom:.75rem;}
+    .msg-body{font-size:16px;font-weight:300;line-height:2;color:var(--ink);}
+    .msg-from{font-family:'Special Elite',serif;font-size:15px;color:var(--red);margin-top:2rem;}
+
+    /* postage corner decor */
+    .postage-corner{position:absolute;top:12px;right:12px;width:52px;height:64px;border:2px solid var(--sepia);display:flex;align-items:center;justify-content:center;}
+    .postage-corner i{color:var(--red);font-size:20px;}
+
+    /* milestone: red wax seal */
+    .milestone-wrap{text-align:center;padding:4rem 2rem;}
+    .milestone-stamp{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:180px;height:180px;border-radius:50%;border:6px double var(--red);background:var(--paper);position:relative;gap:4px;box-shadow:0 4px 16px rgba(0,0,0,.2);}
+    .milestone-stamp::before{content:'';position:absolute;inset:-14px;border-radius:50%;border:2px dashed var(--red);opacity:.4;}
+    .milestone-num{font-family:'Special Elite',serif;font-size:52px;color:var(--red);line-height:1;}
+    .milestone-lbl{font-family:'Special Elite',serif;font-size:10px;color:var(--sepia);letter-spacing:.1em;text-align:center;padding:0 1rem;}
+
+    /* grid: stamp-bordered 3-col */
+    .grid-wrap{background:var(--ink);padding:4rem 2rem;}
+    .grid-title{font-family:'Special Elite',serif;font-size:clamp(22px,5vw,36px);color:var(--cream);margin-bottom:2.5rem;text-align:center;letter-spacing:.05em;}
+    .grid-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    @media(max-width:700px){.grid-cards{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:440px){.grid-cards{grid-template-columns:1fr;}}
+    .grid-stamp{background:var(--paper);padding:8px;border:1px solid var(--sepia);position:relative;cursor:pointer;transition:transform .3s ease;box-shadow:2px 2px 8px rgba(0,0,0,.3);}
+    .grid-stamp:hover{transform:rotate(0deg) scale(1.04) !important;}
+    .grid-stamp img{width:100%;height:220px;object-fit:cover;display:block;filter:sepia(.2);}
+    .grid-stamp-edge{position:absolute;bottom:0;left:0;right:0;height:8px;background:radial-gradient(circle at 50% 0%,var(--ink) 5px,transparent 5px) 0 0/16px 8px;}
+    @media(max-width:440px){.grid-stamp img{height:200px;}}
+
+    /* wishes */
+    .wishes-wrap{max-width:900px;margin:0 auto;padding:4rem 2rem;}
+    .wishes-title{font-family:'Special Elite',serif;font-size:clamp(20px,5vw,32px);color:var(--ink);margin-bottom:2.5rem;border-bottom:2px solid var(--sepia);padding-bottom:1rem;}
+    .wishes-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+    @media(max-width:800px){.wishes-row{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:440px){.wishes-row{grid-template-columns:1fr;}}
+    .wish-mini{background:var(--paper);border:1px solid var(--sepia);padding:1.25rem .75rem;text-align:center;position:relative;box-shadow:1px 1px 4px rgba(0,0,0,.1);}
+    .wish-mini::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(transparent,transparent 21px,rgba(0,80,160,.07) 21px,rgba(0,80,160,.07) 22px);pointer-events:none;}
+    .wish-mini i{font-size:18px;color:var(--red);display:block;margin-bottom:.6rem;}
+    .wish-mini-label{font-family:'Special Elite',serif;font-size:12px;color:var(--ink);margin-bottom:4px;}
+    .wish-mini-sub{font-size:11px;font-weight:300;color:var(--sepia);line-height:1.5;}
+
+    /* signoff: rubber stamp */
+    .signoff{background:var(--paper);border-top:3px double var(--sepia);padding:5rem 2rem;text-align:center;position:relative;}
+    .signoff::before{content:'';position:absolute;inset:12px;border:1px dashed rgba(139,105,20,.3);pointer-events:none;}
+    .signoff-msg{font-family:'Special Elite',serif;font-size:clamp(28px,7vw,60px);color:var(--ink);line-height:1.1;position:relative;}
+    .stamp-overlay{font-family:'Special Elite',serif;font-size:clamp(36px,9vw,72px);color:var(--red);opacity:.12;transform:rotate(-12deg);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;letter-spacing:.08em;text-transform:uppercase;}
+    .signoff-sub{font-size:12px;font-weight:300;color:var(--sepia);margin-top:1.5rem;letter-spacing:.15em;font-style:italic;}
+
+    .lightbox-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;padding:2rem 1.25rem;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;}
+    .lightbox-overlay.open{opacity:1;visibility:visible;}
+    .lightbox-content{position:relative;max-width:min(700px,92vw);max-height:88vh;}
+    .lightbox-content img{display:block;width:100%;height:100%;max-height:85vh;object-fit:contain;}
+    .lightbox-close{position:absolute;top:-44px;right:0;background:none;color:#fff;border:none;font-size:22px;cursor:pointer;}
+
+    @media(prefers-reduced-motion:no-preference){
+      .nl{display:inline-block;opacity:0;animation:type-in .35s steps(2,end) var(--d,0s) both;}
+      @keyframes type-in{0%{opacity:0;transform:translateY(3px);}60%{opacity:1;}100%{opacity:1;transform:none;}}
+      [data-r]{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease var(--rd,0ms);}
+      [data-r].vis{opacity:1;transform:none;}
+      .grid-stamp{animation:deal-in .4s ease var(--di,0s) both;}
+      @keyframes deal-in{0%{opacity:0;transform:rotate(var(--dr,-2deg)) translateY(30px);}100%{opacity:1;transform:rotate(var(--dr,-2deg));}}
+      .grid-stamp:nth-child(odd){--dr:-1.5deg;}
+      .grid-stamp:nth-child(even){--dr:1.2deg;}
+      .grid-stamp:nth-child(3n){--dr:-.5deg;}
+      .grid-stamp:nth-child(1){--di:.05s;} .grid-stamp:nth-child(2){--di:.12s;}
+      .grid-stamp:nth-child(3){--di:.19s;} .grid-stamp:nth-child(4){--di:.26s;}
+      .grid-stamp:nth-child(5){--di:.33s;} .grid-stamp:nth-child(6){--di:.40s;}
+      .grid-stamp:nth-child(7){--di:.47s;} .grid-stamp:nth-child(8){--di:.54s;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="postmark-bar">
+  <div class="postmark-left"><div class="postmark-dot"></div>With Love</div>
+  <div class="postmark-right">Wishing you all the best</div>
+</div>
+
+<div class="hero">
+  <span class="eyebrow">With Love</span>
+  <h1 class="name"><span class="nl" style="--d:0.00s">M</span><span class="nl" style="--d:0.06s">a</span><span class="nl" style="--d:0.12s">r</span><span class="nl" style="--d:0.18s">i</span><span class="nl" style="--d:0.24s">e</span><span class="nl" style="--d:0.30s">l</span></h1>
+  <div class="name-sub">Wishing you all the best</div>
+  <div class="stamp-frame">
+    <div class="stamp lb" data-full="https://picsum.photos/seed/greet1/600/600">
+      <img src="https://picsum.photos/seed/greet1/600/600" alt="Mariel"/>
+    </div>
+    <div class="stamp-label">The Birthday Issue</div>
+  </div>
+</div>
+
+<div class="message-section" data-r>
+  <div class="lined-card">
+    <div class="margin-line"></div>
+    <div class="postage-corner"><i class="fa-solid fa-stamp"></i></div>
+    <div class="msg-inner">
+      <div class="msg-heading">The Birthday Issue, Mariel</div>
+      <div class="msg-body">Happy birthday! Wishing you a day full of joy, laughter, and everything you love. You deserve all the happiness in the world.</div>
+      <div class="msg-from">— Your friends</div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="grid-wrap" data-r>
+  <h2 class="grid-title">Our Favourite Memories</h2>
+  <p style="font-family:'Special Elite',serif;font-size:13px;color:var(--cream);letter-spacing:.12em;margin-bottom:2rem;opacity:.75;">Vol. 1 · Special Edition</p>
+  <div class="grid-cards">
+    <div class="grid-stamp lb" data-full="https://picsum.photos/seed/greet2/600/450"><img src="https://picsum.photos/seed/greet2/600/450" alt="memory" loading="lazy"/><div class="grid-stamp-edge"></div></div>
+    <div class="grid-stamp lb" data-full="https://picsum.photos/seed/greet3/600/450"><img src="https://picsum.photos/seed/greet3/600/450" alt="memory" loading="lazy"/><div class="grid-stamp-edge"></div></div>
+    <div class="grid-stamp lb" data-full="https://picsum.photos/seed/greet4/600/450"><img src="https://picsum.photos/seed/greet4/600/450" alt="memory" loading="lazy"/><div class="grid-stamp-edge"></div></div>
+    <div class="grid-stamp lb" data-full="https://picsum.photos/seed/greet5/600/450"><img src="https://picsum.photos/seed/greet5/600/450" alt="memory" loading="lazy"/><div class="grid-stamp-edge"></div></div>
+    <div class="grid-stamp lb" data-full="https://picsum.photos/seed/greet6/600/450"><img src="https://picsum.photos/seed/greet6/600/450" alt="memory" loading="lazy"/><div class="grid-stamp-edge"></div></div>
+    <div class="grid-stamp lb" data-full="https://picsum.photos/seed/greet7/600/450"><img src="https://picsum.photos/seed/greet7/600/450" alt="memory" loading="lazy"/><div class="grid-stamp-edge"></div></div>
+  </div>
+</div>
+
+<div class="wishes-wrap">
+  <h2 class="wishes-title" data-r>Our Wishes For You</h2>
+  <div class="wishes-row">
+    <div class="wish-mini" data-r style="--rd:0ms"><i class="fa-solid fa-sun"></i><div class="wish-mini-label">Joy</div><div class="wish-mini-sub">Every single day</div></div>
+    <div class="wish-mini" data-r style="--rd:70ms"><i class="fa-solid fa-wand-magic-sparkles"></i><div class="wish-mini-label">Magic</div><div class="wish-mini-sub">In everything you do</div></div>
+    <div class="wish-mini" data-r style="--rd:140ms"><i class="fa-solid fa-map"></i><div class="wish-mini-label">Adventure</div><div class="wish-mini-sub">Around every corner</div></div>
+    <div class="wish-mini" data-r style="--rd:210ms"><i class="fa-solid fa-face-smile-beam"></i><div class="wish-mini-label">Laughter</div><div class="wish-mini-sub">Always and forever</div></div>
+  </div>
+</div>
+
+<div class="signoff">
+  <div class="stamp-overlay">The Birthday Issue</div>
+  <div class="signoff-msg" data-r>Happy Birthday!</div>
+  <div class="signoff-sub" data-r>With all our love</div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt=""/>
+    </div>
+  </div>
+<script>
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    document.querySelectorAll('.lb').forEach(function(el){
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ img.src = el.dataset.full || ''; lb.classList.add('open'); });
+    });
+    document.getElementById('lightboxClose').addEventListener('click', function(){ lb.classList.remove('open'); });
+    lb.addEventListener('click', function(e){ if(e.target === lb) lb.classList.remove('open'); });
+  })();
+  </script>
+<script>
+(function(){
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('vis');io.unobserve(en.target);}});},{threshold:.1});
+    document.querySelectorAll('[data-r]').forEach(function(el){io.observe(el);});
+  } else document.querySelectorAll('[data-r]').forEach(function(el){el.classList.add('vis');});
+})();
+</script>
+</body>
+</html>
