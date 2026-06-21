@@ -193,6 +193,7 @@
     .nav-logo {
       font-size:20px; font-weight:900; color:var(--ink);
       display:flex; align-items:center; gap:6px;
+      text-decoration:none; cursor:pointer;
     }
     .nav-logo-badge {
       background:var(--yellow);
@@ -435,8 +436,8 @@
     .price-per { font-size:12px; font-weight:700; color:var(--ink3); align-self:flex-end; padding-bottom:3px; }
 
     /* FOOTER LINKS */
-    .footer-links { display:flex; justify-content:center; gap:24px; margin-bottom:1rem; flex-wrap:wrap; }
-    .footer-links a { font-size:12px; font-weight:700; color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.15s; }
+    .footer-links { background:none; border:none; height:auto; padding:0; position:static; z-index:auto; display:flex; justify-content:center; gap:24px; margin-bottom:1rem; flex-wrap:wrap; }
+    .footer-links a { font-size:12px; font-weight:700; color:rgba(255,255,255,0.72); text-decoration:none; transition:color 0.15s; }
     .footer-links a:hover { color:var(--yellow); }
     .footer-copy { font-size:11px; color:rgba(255,255,255,0.25); margin-top:0.75rem; }
 
@@ -570,10 +571,10 @@
 <body>
 
 <nav>
-  <div class="nav-logo">
+  <a href="#" class="nav-logo" aria-label="Back to top">
     <div class="nav-logo-badge">77-36</div>
     <span>.top</span>
-  </div>
+  </a>
   <a href="#contact" class="nav-btn">
     <i class="fa-regular fa-envelope"></i> Order now
   </a>
@@ -797,6 +798,9 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
     <a href="#faq">FAQ</a>
     <a href="#contact">Order now</a>
     <a href="mailto:support@77-36.top">support@77-36.top</a>
+    <a href="/about">About</a>
+    <a href="/tos">Terms</a>
+    <a href="/privacy">Privacy</a>
   </nav>
   <div class="footer-copy">© <span id="yr"></span> 77-36.top · All rights reserved</div>
 </footer>
