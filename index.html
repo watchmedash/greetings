@@ -147,11 +147,7 @@
       font-size:15px; font-weight:600; color:var(--ink2);
       max-width:340px; margin:0 auto 0.5rem; line-height:1.6;
     }
-    .hero-mystery {
-      font-size:12px; color:var(--ink2); margin-bottom:2rem;
-      font-style:italic; opacity:0.7;
-    }
-    .hero-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+    .hero-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:1.75rem; }
     .btn-primary {
       background:var(--ink);
       color:var(--yellow);
@@ -166,6 +162,20 @@
       font-family:'Nunito',sans-serif;
     }
     .btn-primary:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 rgba(0,0,0,0.2); }
+    .btn-cta {
+      background:var(--orange);
+      color:var(--white);
+      border:2px solid var(--ink);
+      border-radius:50px;
+      padding:13px 28px;
+      font-size:15px; font-weight:800;
+      text-decoration:none;
+      box-shadow:4px 4px 0 rgba(0,0,0,0.2);
+      transition:transform 0.1s, box-shadow 0.1s;
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:'Nunito',sans-serif;
+    }
+    .btn-cta:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 rgba(0,0,0,0.2); }
     /* THEMES GRID */
     .themes-grid {
       display:grid;
@@ -183,13 +193,34 @@
       overflow:hidden;
       box-shadow:4px 4px 0 var(--ink);
       cursor:pointer;
+      position:relative;
       transition:transform 0.1s, box-shadow 0.1s;
     }
     .theme-card:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
-    .theme-card img {
-      width:100%; aspect-ratio:3/4; object-fit:cover; object-position:top;
-      display:block; background:#f0ece6;
+
+    /* Spinner shown while image loads */
+    .theme-card .img-wrap {
+      position:relative; aspect-ratio:3/4; background:#f0ece6; overflow:hidden;
     }
+    .theme-card .img-wrap::after {
+      content:'';
+      position:absolute; top:50%; left:50%;
+      width:22px; height:22px; margin:-11px 0 0 -11px;
+      border:2.5px solid rgba(26,18,9,0.12);
+      border-top-color:var(--ink);
+      border-radius:50%;
+      animation:spin .75s linear infinite;
+      transition:opacity .25s;
+    }
+    .theme-card.loaded .img-wrap::after { opacity:0; pointer-events:none; }
+    .theme-card img {
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover; object-position:top;
+      display:block;
+      opacity:0; transition:opacity .35s ease;
+    }
+    .theme-card.loaded img { opacity:1; }
     .theme-card-label {
       font-size:11px; font-weight:800; color:var(--ink2);
       padding:6px 10px;
@@ -267,7 +298,38 @@
     .section-h { font-size:clamp(22px,5vw,30px); font-weight:900; color:var(--ink); line-height:1.2; margin-bottom:0.5rem; }
     .section-p { font-size:14px; font-weight:600; color:var(--ink2); line-height:1.7; margin-bottom:2rem; }
 
-    /* OCCASIONS */
+    /* PROOF STRIP */
+    .proof-strip {
+      background:var(--ink); border-top:3px solid var(--ink);
+      padding:1.1rem 1.25rem;
+      display:flex; justify-content:center; flex-wrap:wrap; gap:0;
+    }
+    .proof-item {
+      display:flex; align-items:center; gap:8px;
+      padding:0.5rem 1.5rem;
+      font-size:13px; font-weight:800; color:var(--yellow);
+      border-right:1px solid rgba(255,255,255,0.12);
+    }
+    .proof-item:last-child { border-right:none; }
+    .proof-item i { font-size:14px; color:var(--teal); }
+
+    /* PRICE BADGE */
+    .price-badge {
+      display:inline-flex; align-items:baseline; gap:4px;
+      background:var(--yellow); border:2.5px solid var(--ink);
+      border-radius:14px; padding:8px 18px;
+      box-shadow:4px 4px 0 var(--ink);
+      margin-bottom:1.25rem;
+    }
+    .price-amount { font-size:42px; font-weight:900; color:var(--ink); line-height:1; }
+    .price-currency { font-size:16px; font-weight:900; color:var(--ink2); }
+    .price-per { font-size:12px; font-weight:700; color:var(--ink3); align-self:flex-end; padding-bottom:3px; }
+
+    /* FOOTER LINKS */
+    .footer-links { display:flex; justify-content:center; gap:24px; margin-bottom:1rem; flex-wrap:wrap; }
+    .footer-links a { font-size:12px; font-weight:700; color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.15s; }
+    .footer-links a:hover { color:var(--yellow); }
+    .footer-copy { font-size:11px; color:rgba(255,255,255,0.25); margin-top:0.75rem; }
 
     /* HOW */
     .how-section { background:var(--white); border-top:3px solid var(--ink); border-bottom:3px solid var(--ink); }
@@ -284,71 +346,6 @@
     }
     .step h3 { font-size:15px; font-weight:800; color:var(--ink); margin-bottom:4px; }
     .step p { font-size:13px; font-weight:600; color:var(--ink2); line-height:1.6; }
-
-    /* PACKAGE */
-    .package-section { background:var(--bg); }
-    .package-card {
-      background:var(--white);
-      border:3px solid var(--ink);
-      border-radius:20px;
-      padding:2rem 1.5rem;
-      box-shadow:6px 6px 0 var(--ink);
-      position:relative;
-      overflow:hidden;
-    }
-    .pkg-price {
-      display:flex; align-items:baseline; gap:6px;
-      margin:0.5rem 0 0.25rem;
-    }
-    .pkg-currency { font-size:18px; font-weight:900; color:var(--ink2); }
-    .pkg-amount { font-size:64px; font-weight:900; color:var(--ink); line-height:1; }
-    .pkg-period { font-size:13px; font-weight:700; color:var(--ink3); }
-    .pkg-tagline { font-size:13px; font-weight:600; color:var(--ink2); margin-bottom:1.5rem; }
-    .pkg-features { list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:1.75rem; }
-    .pkg-features li { display:flex; align-items:center; gap:10px; font-size:14px; font-weight:700; color:var(--ink); }
-    .pkg-features li i { color:var(--teal); font-size:14px; width:16px; }
-    .pkg-btn {
-      display:flex; align-items:center; justify-content:center; gap:8px;
-      background:var(--orange);
-      color:var(--white);
-      border:2.5px solid var(--ink);
-      border-radius:50px;
-      padding:14px;
-      font-size:15px; font-weight:800;
-      text-decoration:none;
-      box-shadow:4px 4px 0 var(--ink);
-      transition:transform 0.1s, box-shadow 0.1s;
-      font-family:'Nunito',sans-serif;
-      cursor:pointer; width:100%;
-    }
-    .pkg-btn:hover { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
-
-    /* SAMPLES */
-    .samples-section { background:var(--yellow); border-top:3px solid var(--ink); border-bottom:3px solid var(--ink); }
-    .sample-list { display:flex; flex-direction:column; gap:10px; }
-    .sample-item {
-      background:var(--white);
-      border:2px solid var(--ink);
-      border-radius:14px;
-      padding:14px 16px;
-      display:flex; align-items:center; justify-content:space-between;
-      box-shadow:3px 3px 0 var(--ink);
-    }
-    .sample-left { display:flex; align-items:center; gap:12px; }
-    .sample-icon-wrap {
-      width:40px; height:40px;
-      border-radius:10px;
-      border:2px solid var(--ink);
-      display:flex; align-items:center; justify-content:center;
-      font-size:18px; flex-shrink:0;
-    }
-    .si-bday { background:#FFE4F0; }
-    .si-anniv { background:#FFF5E0; }
-    .si-grad { background:#E8FFF5; }
-    .si-baby { background:#E8F0FF; }
-    .sample-name { font-size:14px; font-weight:800; color:var(--ink); }
-    .sample-type { font-size:11px; font-weight:600; color:var(--ink3); margin-top:1px; }
-    .sample-url { font-size:12px; font-weight:700; color:var(--orange); }
 
     /* CONTACT */
     .contact-section { background:var(--bg); }
@@ -391,21 +388,36 @@
       padding:2.5rem 1.25rem;
       text-align:center;
     }
-    .footer-logo { font-size:24px; font-weight:900; color:var(--yellow); margin-bottom:0.5rem; }
-    .footer-tagline { font-size:13px; font-weight:600; color:rgba(255,255,255,0.4); margin-bottom:1rem; }
-    .footer-mystery {
-      display:inline-block;
-      background:rgba(255,255,255,0.07);
-      border:1px solid rgba(255,255,255,0.12);
-      border-radius:8px;
-      padding:8px 16px;
-      font-size:11px; font-weight:600; color:rgba(255,255,255,0.3);
-      font-style:italic;
-    }
+    .footer-logo { font-size:24px; font-weight:900; color:var(--yellow); margin-bottom:0.25rem; }
+    .footer-tagline { font-size:13px; font-weight:600; color:rgba(255,255,255,0.4); margin-bottom:1.25rem; }
 
     @media(min-width:600px){
       .hero { padding:5rem 2rem 4rem; }
       .section { padding:4.5rem 2rem; }
+    }
+
+    /* ── ANIMATIONS ─────────────────────────────────────────────── */
+    @keyframes fadeUp  { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
+    @keyframes slideIn { from{opacity:0;transform:translateX(-22px)} to{opacity:1;transform:none} }
+    @keyframes popIn   { from{opacity:0;transform:scale(.88)} to{opacity:1;transform:none} }
+    @keyframes navDown { from{transform:translateY(-110%)} to{transform:none} }
+
+    /* Page-load entrances */
+    nav        { animation:navDown .55s cubic-bezier(.22,1,.36,1) both }
+    .hero-tag  { animation:fadeUp  .5s  ease both .15s }
+    .hero h1   { animation:fadeUp  .65s ease both .27s }
+    .hero-sub  { animation:fadeUp  .65s ease both .4s  }
+    .hero-btns { animation:fadeUp  .65s ease both .52s }
+
+    /* Scroll-reveal base states */
+    [data-v]            { opacity:0 }
+    [data-v].vis        { animation:fadeUp  .6s  ease                       forwards; animation-delay:calc(var(--d,0)*1ms) }
+    [data-v="left"].vis { animation:slideIn .55s ease                       forwards; animation-delay:calc(var(--d,0)*1ms) }
+    [data-v="pop"].vis  { animation:popIn   .55s cubic-bezier(.34,1.56,.64,1) forwards; animation-delay:calc(var(--d,0)*1ms) }
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after { animation:none!important; transition-duration:.01ms!important }
+      [data-v] { opacity:1!important }
     }
   </style>
 </head>
@@ -427,13 +439,17 @@
   <div class="hero-tag">Pages for special people</div>
   <h1>They deserve a page<br>that's <span>truly theirs</span> 🎉</h1>
   <p class="hero-sub">We build beautiful, animated greeting pages with their own unique link, done in 24 hours.</p>
+  <div class="hero-btns">
+    <a href="#themes" class="btn-primary"><i class="fa-solid fa-eye"></i> Browse themes</a>
+    <a href="#contact" class="btn-cta">Order now — 20 AED <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
 </section>
 
-<section class="section">
+<section class="section" id="themes">
   <div class="section-inner" style="max-width:960px">
-    <span class="eyebrow"><i class="fa-solid fa-sparkles" style="margin-right:5px"></i> What we make</span>
-    <h2 class="section-h">18 themes.<br>One beautiful link.</h2>
-    <p class="section-p">Click any style to preview it full size — then hit "View Demo" to see it live.</p>
+    <span class="eyebrow" data-v><i class="fa-solid fa-sparkles" style="margin-right:5px"></i> What we make</span>
+    <h2 class="section-h" data-v style="--d:100">18 themes.<br>One beautiful link.</h2>
+    <p class="section-p" data-v style="--d:180">Click any style to preview it full size — then hit "View Demo" to see it live.</p>
     <div class="themes-grid" id="themesGrid"></div>
   </div>
 </section>
@@ -476,16 +492,25 @@ const THEMES = [
   { key:'cinema',     name:'Cinematic',         emoji:'🎬' },
 ];
 
-document.getElementById('themesGrid').innerHTML = THEMES.map(t =>
-  `<div class="theme-card" onclick="openModal('${t.key}','${t.name}','${t.emoji}')">
-    <img src="screenshots/${t.key}.png" alt="${t.name}" loading="lazy"/>
+document.getElementById('themesGrid').innerHTML = THEMES.map((t, i) =>
+  `<div class="theme-card" data-v style="--d:${i * 45}" onclick="openModal('${t.key}','${t.name}','${t.emoji}')">
+    <div class="img-wrap">
+      <img src="screenshots/${t.key}.webp" alt="${t.name}" loading="lazy"
+           onload="this.closest('.theme-card').classList.add('loaded')"
+           onerror="this.closest('.theme-card').classList.add('loaded')"/>
+    </div>
     <div class="theme-card-label">${t.emoji} ${t.name}</div>
   </div>`
 ).join('');
 
+// Mark already-cached images as loaded immediately
+document.querySelectorAll('.theme-card img').forEach(img => {
+  if (img.complete) img.closest('.theme-card').classList.add('loaded');
+});
+
 function openModal(key, name, emoji) {
   document.getElementById('modalTitle').textContent = emoji + ' ' + name;
-  document.getElementById('modalImg').src = 'screenshots/' + key + '.png';
+  document.getElementById('modalImg').src = 'screenshots/' + key + '.webp';
   document.getElementById('modalImg').alt = name;
   document.getElementById('modalDemoBtn').href = 'html/' + key + '.html';
   document.getElementById('themeModal').classList.add('open');
@@ -506,26 +531,33 @@ function onModalBgClick(e) {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 
-<section class="section how-section">
+<div class="proof-strip">
+  <div class="proof-item" data-v style="--d:0"  ><i class="fa-solid fa-palette"></i> 18 unique themes</div>
+  <div class="proof-item" data-v style="--d:80" ><i class="fa-solid fa-bolt"></i> Delivered in 24h</div>
+  <div class="proof-item" data-v style="--d:160"><i class="fa-solid fa-mobile-screen"></i> Works on any device</div>
+  <div class="proof-item" data-v style="--d:240"><i class="fa-solid fa-link"></i> Live while service is active</div>
+</div>
+
+<section class="section how-section" id="how">
   <div class="section-inner">
-    <span class="eyebrow teal"><i class="fa-solid fa-wand-magic-sparkles" style="margin-right:5px"></i> How it works</span>
-    <h2 class="section-h">From email to animated page<br>in three easy steps</h2>
+    <span class="eyebrow teal" data-v><i class="fa-solid fa-wand-magic-sparkles" style="margin-right:5px"></i> How it works</span>
+    <h2 class="section-h" data-v style="--d:100">From email to animated page<br>in three easy steps</h2>
     <div class="steps">
-      <div class="step">
+      <div class="step" data-v="left" style="--d:50">
         <div class="step-num">1</div>
         <div>
           <h3>Drop us an email</h3>
-          <p>Tell us their name, the occasion, your message, and any photos(max 7).</p>
+          <p>Tell us their name, the occasion, your message, and any photos (max 7).</p>
         </div>
       </div>
-      <div class="step">
+      <div class="step" data-v="left" style="--d:150">
         <div class="step-num">2</div>
         <div>
           <h3>We build the magic</h3>
           <p>We hand-craft an animated page at a unique link like <strong>77-36.top/them</strong></p>
         </div>
       </div>
-      <div class="step">
+      <div class="step" data-v="left" style="--d:250">
         <div class="step-num">3</div>
         <div>
           <h3>Share the secret link</h3>
@@ -538,9 +570,9 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 <section class="section contact-section" id="contact">
   <div class="section-inner">
-    <div class="contact-card">
-      <h3>Send us everything</h3>
-      <p>Include their name, the occasion, your message, and any photos you want on the page. We'll build it and send you the link!</p>
+    <div class="contact-card" data-v="pop">
+      <h3>Ready to order?</h3>
+      <p>Send us their name, the occasion, your message, and any photos (up to 7). We'll build the page and send you the link!</p>
       <div class="contact-pills">
         <a href="https://wa.me/971509275404" class="email-pill whatsapp-pill" target="_blank" rel="noopener">
           <i class="fa-brands fa-whatsapp"></i>
@@ -561,9 +593,31 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 </section>
 
 <footer>
-  <div class="footer-logo">77-36</div>
+  <div class="footer-logo">77-36.top</div>
   <div class="footer-tagline">Making moments memorable, one link at a time</div>
+  <nav class="footer-links" aria-label="Footer">
+    <a href="#themes">Themes</a>
+    <a href="#how">How it works</a>
+    <a href="#contact">Order now</a>
+    <a href="mailto:support@77-36.top">support@77-36.top</a>
+  </nav>
+  <div class="footer-copy">© <span id="yr"></span> 77-36.top · All rights reserved</div>
 </footer>
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Scroll-reveal via IntersectionObserver
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.classList.add('vis');
+      observer.unobserve(el.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('[data-v]').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
